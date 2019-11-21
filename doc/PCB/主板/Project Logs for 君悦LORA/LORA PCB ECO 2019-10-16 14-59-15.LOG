@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=DGND Pin=C30-1
+Removed Member From Class: ClassName=lora Member=C30
+Change Component Footprint: Designator=R10 Old Footprint=1206R New Footprint=0603R
+Change Component Footprint: Designator=R11 Old Footprint=1206R New Footprint=0603R
+Change Component Footprint: Designator=R12 Old Footprint=1206R New Footprint=0603R
+Change Component Comment : Designator=R10 Old Comment=0_1206 New Comment=0_0603
+Change Component Comment : Designator=R11 Old Comment=0_1206 New Comment=0_0603
+Change Component Comment : Designator=R12 Old Comment=0_1206 New Comment=0_0603
+Added Net: Name=NetEGND1_0

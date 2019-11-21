@@ -1,0 +1,14 @@
+Added Component: Designator=U3(LM78)
+Added Pin To Net: NetName=ESP32_GND Pin=U3-1
+Added Pin To Net: NetName=ESP32_VCC Pin=U3-6
+Added Pin To Net: NetName=ESP32_GND Pin=U3-7
+Added Pin To Net: NetName=ESP32_GND Pin=U3-10
+Added Pin To Net: NetName=ESP32_GND Pin=U3-15
+Added Pin To Net: NetName=TXD0 Pin=U3-17
+Added Pin To Net: NetName=RXD0 Pin=U3-18
+Added Pin To Net: NetName=485-DE Pin=U3-19
+Added Pin To Net: NetName=ESP32_GND Pin=U3-23
+Added Pin To Net: NetName=ESP32_GND Pin=U3-29
+Added Pin To Net: NetName=ANT Pin=U3-30
+Added Pin To Net: NetName=ESP32_GND Pin=U3-31
+Added Member To Class: ClassName=lora Member=Component U3 LM78

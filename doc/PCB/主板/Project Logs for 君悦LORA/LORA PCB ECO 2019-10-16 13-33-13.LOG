@@ -1,0 +1,8 @@
+Added Component: Designator=EGND1(M2.5x4)
+Added Component: Designator=EGND2(M2.5x4)
+Added Component: Designator=EGND3(M2.5x4)
+Added Component: Designator=EGND4(M2.5x4)
+Added Member To Class: ClassName=lora Member=Component EGND1 EGND
+Added Member To Class: ClassName=lora Member=Component EGND2 EGND
+Added Member To Class: ClassName=lora Member=Component EGND3 EGND
+Added Member To Class: ClassName=lora Member=Component EGND4 EGND

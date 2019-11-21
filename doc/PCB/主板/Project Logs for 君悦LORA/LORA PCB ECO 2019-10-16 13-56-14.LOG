@@ -1,0 +1,6 @@
+Added Component: Designator=P1(HDR2.0-LI-4P)
+Added Pin To Net: NetName=DVCC_3V3 Pin=P1-1
+Added Pin To Net: NetName=DGND Pin=P1-2
+Added Pin To Net: NetName=USART2_RX Pin=P1-3
+Added Pin To Net: NetName=USART2_TX Pin=P1-4
+Added Member To Class: ClassName=lora Member=Component P1 Header 4

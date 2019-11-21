@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=ESP32_VCC Pin=C6-1
+Removed Pin From Net: NetName=ESP32_GND Pin=C6-2
+Removed Member From Class: ClassName=lora Member=C6

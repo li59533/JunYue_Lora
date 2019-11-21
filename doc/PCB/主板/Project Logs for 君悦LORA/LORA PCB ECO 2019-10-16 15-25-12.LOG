@@ -1,0 +1,12 @@
+Added Component: Designator=P2(HDR2.0-LI-4P)
+Added Pin To Net: NetName=DGND Pin=P2-4
+Added Pin To Net: NetName=LM_SWCLK Pin=P2-2
+Added Pin To Net: NetName=LM_SWCLK Pin=U3-25
+Added Net: Name=LM_SWCLK
+Added Pin To Net: NetName=LM_SWDIO Pin=P2-1
+Added Pin To Net: NetName=LM_SWDIO Pin=U3-24
+Added Net: Name=LM_SWDIO
+Added Pin To Net: NetName=REST Pin=P2-3
+Added Pin To Net: NetName=REST Pin=U3-5
+Added Net: Name=REST
+Added Member To Class: ClassName=lora Member=Component P2 Header 4

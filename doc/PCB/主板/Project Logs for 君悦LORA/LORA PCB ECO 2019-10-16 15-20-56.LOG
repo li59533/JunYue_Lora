@@ -1,0 +1,33 @@
+Removed Pin From Net: NetName=ESP32_VCC Pin=C24-1
+Removed Pin From Net: NetName=ESP32_GND Pin=C24-2
+Removed Pin From Net: NetName=ESP32_VCC Pin=P2-1
+Removed Pin From Net: NetName=TXD0 Pin=P2-2
+Removed Pin From Net: NetName=RXD0 Pin=P2-3
+Removed Pin From Net: NetName=ESP32_GND Pin=P2-4
+Removed Pin From Net: NetName=ESP32_VCC Pin=R7-1
+Removed Pin From Net: NetName=TXD0 Pin=R7-2
+Removed Pin From Net: NetName=RXD0 Pin=R8-1
+Removed Pin From Net: NetName=ESP32_VCC Pin=R8-2
+Removed Member From Class: ClassName=lora Member=C24
+Removed Member From Class: ClassName=lora Member=P2
+Removed Member From Class: ClassName=lora Member=R7
+Removed Member From Class: ClassName=lora Member=R8
+Added Component: Designator=D2(LED 1206B)
+Added Component: Designator=R2(0603R)
+Added Component: Designator=R4(0603R)
+Added Component: Designator=R9(0603R)
+Added Pin To Net: NetName=LED Pin=D2-1
+Added Pin To Net: NetName=ESP32_VCC Pin=R2-1
+Added Pin To Net: NetName=RXD0 Pin=R2-2
+Added Pin To Net: NetName=ESP32_VCC Pin=R4-1
+Added Pin To Net: NetName=TXD0 Pin=R4-2
+Added Pin To Net: NetName=DGND Pin=R9-2
+Added Pin To Net: NetName=RXD0 Pin=U11-C10
+Added Pin To Net: NetName=TXD0 Pin=U11-D10
+Added Pin To Net: NetName=NetD2_2 Pin=D2-2
+Added Pin To Net: NetName=NetD2_2 Pin=R9-1
+Added Net: Name=NetD2_2
+Added Member To Class: ClassName=lora Member=Component D2 REG
+Added Member To Class: ClassName=lora Member=Component R2 1M_5%_0603
+Added Member To Class: ClassName=lora Member=Component R4 1M_5%_0603
+Added Member To Class: ClassName=lora Member=Component R9 510_5%_0603

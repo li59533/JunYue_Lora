@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=Z-AXIS Pin=P2-3
+Removed Pin From Net: NetName=X-AXIS Pin=P2-4
+Removed Pin From Net: NetName=Y-AXIS Pin=P2-5
+Added Pin To Net: NetName=Z_OUT Pin=P2-3
+Added Pin To Net: NetName=X-OUT Pin=P2-4
+Added Net: Name=X-OUT
+Added Pin To Net: NetName=Y-OUT Pin=P2-5
+Added Net: Name=Y-OUT

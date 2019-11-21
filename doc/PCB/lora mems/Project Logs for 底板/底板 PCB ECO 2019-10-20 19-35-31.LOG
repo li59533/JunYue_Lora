@@ -1,0 +1,2 @@
+Removed Pin From Net: NetName=SEN_IN Pin=P2-6
+Added Pin To Net: NetName=SEN_OUT Pin=P2-6

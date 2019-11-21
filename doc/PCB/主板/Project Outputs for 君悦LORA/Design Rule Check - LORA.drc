@@ -1,0 +1,83 @@
+Protel Design System Design Rule Check
+PCB File : F:\陈尧\自己\君岳伟信\君悦V2.0111\LORA\主板\LORA.PcbDoc
+Date     : 2019/10/20
+Time     : 15:46:34
+
+Processing Rule : Net Antennae (Tolerance=0mil) (All)
+Rule Violations :0
+
+Processing Rule : Silk to Silk (Clearance=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silkscreen Over Component Pads (Clearance=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=1mil) (Max=10000mil) (All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Direct Connect )(Expansion=10mil) (Conductor Width=6mil) (Air Gap=8mil) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Matched Net Lengths(Tolerance=90000mil) (InDifferentialPair ('RXP'))
+Rule Violations :0
+
+Processing Rule : Matched Net Lengths(Tolerance=90009mil) (InDifferentialPair ('TXP'))
+Rule Violations :0
+
+Processing Rule : Matched Net Lengths(Tolerance=90000mil) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=60mil) (Preferred=3.5mil) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=10mil) (Preferred=3.5mil) (InNetClass('MCU'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=10mil) (Preferred=3.5mil) (InNetClass('485'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=10mil) (Preferred=5.78mil) (InNetClass('无线'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=4.9mil) (Preferred=4.9mil) (InNetClass('网口'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=60mil) (Preferred=3.5mil) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=4.9mil) (Preferred=3.5mil) (InDifferentialPair('RXP'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=3.5mil) (Max=4.9mil) (Preferred=4.9mil) (InDifferentialPair('TXP'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=4.9mil) (Max=10000mil) (Preferred=49mil) (All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=3.5mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=9mil) (All),(INPOLY)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=5mil) (ISVIA),(INPOLY)
+Rule Violations :0
+
+
+Violations Detected : 0
+Time Elapsed        : 00:00:05

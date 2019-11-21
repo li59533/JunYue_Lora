@@ -1,0 +1,22 @@
+Removed Pin From Net: NetName=LMT+3V0 Pin=P5-1
+Removed Pin From Net: NetName=VN Pin=P5-2
+Removed Pin From Net: NetName=Z_OUT Pin=P5-3
+Removed Pin From Net: NetName=X_OUT Pin=P5-4
+Removed Pin From Net: NetName=Y_OUT Pin=P5-5
+Removed Pin From Net: NetName=SEN_IN Pin=P5-6
+Removed Pin From Net: NetName=AVCC_3V3 Pin=P5-7
+Removed Pin From Net: NetName=AGND Pin=P5-8
+Added Component: Designator=P2(HDR2.0-LI-4P)
+Added Pin To Net: NetName=LM_SWDIO Pin=P2-1
+Added Pin To Net: NetName=LM_SWCLK Pin=P2-2
+Added Pin To Net: NetName=REST Pin=P2-3
+Added Pin To Net: NetName=DGND Pin=P2-4
+Added Pin To Net: NetName=AGND Pin=P5-1
+Added Pin To Net: NetName=AVCC_3V3 Pin=P5-2
+Added Pin To Net: NetName=SEN_IN Pin=P5-3
+Added Pin To Net: NetName=Y_OUT Pin=P5-4
+Added Pin To Net: NetName=X_OUT Pin=P5-5
+Added Pin To Net: NetName=Z_OUT Pin=P5-6
+Added Pin To Net: NetName=VN Pin=P5-7
+Added Pin To Net: NetName=LMT+3V0 Pin=P5-8
+Added Member To Class: ClassName=lora Member=Component P2 Header 4
