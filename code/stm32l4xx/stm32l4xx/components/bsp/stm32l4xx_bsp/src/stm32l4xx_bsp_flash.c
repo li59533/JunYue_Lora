@@ -67,7 +67,7 @@
  * @brief         
  * @{  
  */
-
+static uint8_t bsp_flash_writebuf_space[FLASH_PAGE_SIZE];
 /**
  * @}
  */
@@ -87,6 +87,7 @@
  * @brief         
  * @{  
  */
+static int8_t bsp_flash_writeinto_assignbuf(uint8_t * assignbuf , uint16_t assign_addr,uint8_t * buf,uint16_t len );
 
 /**
  * @}
@@ -97,60 +98,102 @@
  * @brief         
  * @{  
  */
+/*
+00> FLASH_BANK_SIZE:0x100000
+00> FLASH_SIZE:		0x200000
+00> FLASH_PAGE_SIZE:0x1000
+00> FLASH_BASE      0x08000000
+*/ 
+ 
 
 
-HAL_StatusTypeDef BSP_Flash_WriteBytes(uint32_t addr_start,uint8_t * buf,uint16_t len)
+void BSP_Flash_Test(void)
+{
+	DEBUG("FLASH_BANK_SIZE:0x%X\r\n",FLASH_BANK_SIZE);
+	DEBUG("FLASH_SIZE:0x%X\r\n",FLASH_SIZE);
+	DEBUG("FLASH_PAGE_SIZE:0x%X\r\n",FLASH_PAGE_SIZE);
+}
+
+static int8_t bsp_flash_writeinto_assignbuf(uint8_t * assignbuf , uint16_t assign_addr,uint8_t * buf,uint16_t len )
+{
+	if((len + assign_addr) >  FLASH_PAGE_SIZE)
+	{
+		return -1;
+	}
+	
+	memcpy(assignbuf + assign_addr , buf , len);
+	return 0;
+}
+
+HAL_StatusTypeDef BSP_Flash_WriteBytes(uint32_t addr_start , uint8_t * buf , uint16_t len)
 {
 	FLASH_EraseInitTypeDef pEraseInit = { 0 };
+
 	uint32_t PageError = 0;
-	uint16_t start_offset = 0;
-	uint16_t page_lostspace = 0;
+	uint16_t real_write_len = 0 ;
+	uint32_t real_write_startaddr = 0;
 	HAL_StatusTypeDef hal_status ;
+	uint8_t * buf_ptr = 0; 
+	uint16_t i = 0;
 	
-	uint32_t addr_offset = 0;
-	addr_offset = addr_start - BSP_FLASH_HEAD_ADDR;
-	pEraseInit.Page = addr_offset / BSP_FLASH_SECTOR_SIZE;
-	start_offset = addr_offset % BSP_FLASH_SECTOR_SIZE;
-	start_offset = 1044480 % 2048;
-	DEBUG("start_offset:%d\r\n",start_offset);
-	page_lostspace = BSP_FLASH_SECTOR_SIZE - start_offset;
+	addr_start -=  FLASH_BASE;   //get real start addr
+	buf_ptr = buf;
 	
-	if(page_lostspace > len )
+	while(1)
 	{
-		pEraseInit.NbPages = 1;
-	}
-	else
-	{
-		if(((len - page_lostspace) / BSP_FLASH_SECTOR_SIZE) == 0)
+		real_write_startaddr = addr_start % FLASH_PAGE_SIZE ; 				// real write start addr
+		real_write_len = FLASH_PAGE_SIZE - real_write_startaddr;  	// real write in flash
+		
+		
+		if(addr_start < FLASH_BANK_SIZE)
 		{
-			pEraseInit.NbPages = (len - page_lostspace) / BSP_FLASH_SECTOR_SIZE;
+			pEraseInit.Banks = FLASH_BANK_1;
+			pEraseInit.Page = addr_start / FLASH_PAGE_SIZE;
+			BSP_Flash_ReadBytes(bsp_flash_writebuf_space , pEraseInit.Page * FLASH_PAGE_SIZE + FLASH_BASE, FLASH_PAGE_SIZE);
 		}
 		else
 		{
-			pEraseInit.NbPages = (len - page_lostspace) / BSP_FLASH_SECTOR_SIZE +1;
-		}	
-	}
-	pEraseInit.Banks = FLASH_BANK_BOTH;
-	
-	pEraseInit.TypeErase = FLASH_TYPEERASE_PAGES;
+			pEraseInit.Banks = FLASH_BANK_2;
+			pEraseInit.Page = (addr_start - FLASH_BANK_SIZE)/ FLASH_PAGE_SIZE;
+			BSP_Flash_ReadBytes(bsp_flash_writebuf_space , pEraseInit.Page * FLASH_PAGE_SIZE + FLASH_BASE + FLASH_BANK_SIZE, FLASH_PAGE_SIZE);
+		}
+		
+		pEraseInit.NbPages = 1;
+		pEraseInit.TypeErase = FLASH_TYPEERASE_PAGES;
+		
 
-	HAL_FLASH_Unlock();
-	
-	hal_status = HAL_FLASHEx_Erase( &pEraseInit, &PageError);
-	while(__HAL_FLASH_GET_FLAG(FLASH_FLAG_BSY) == SET)
-	{
-		DEBUG("Flash is busy\r\n");
-	}	
-	for(uint16_t i = 0; i < len; i += 8)
-	{
-		hal_status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD,addr_start, *(uint64_t *)(buf + i));
-		addr_start += 2;
+		bsp_flash_writeinto_assignbuf(bsp_flash_writebuf_space , real_write_startaddr , buf_ptr , real_write_len);
+		buf_ptr += real_write_len;
+		
+		
+		HAL_FLASH_Unlock();
+		
+		hal_status = HAL_FLASHEx_Erase( &pEraseInit, &PageError);
+
+		for( i = 0; i < FLASH_PAGE_SIZE ;)
+		{
+			if(pEraseInit.Banks == FLASH_BANK_1)
+			{
+				hal_status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD,pEraseInit.Page * FLASH_PAGE_SIZE + FLASH_BASE + i, *(uint64_t *)(bsp_flash_writebuf_space + i));
+			}
+			else
+			{
+				hal_status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD,pEraseInit.Page * FLASH_PAGE_SIZE + FLASH_BASE + FLASH_BANK_SIZE + i, *(uint64_t *)(bsp_flash_writebuf_space + i));
+			}
+			i += 8;
+		}
+		
+
+		HAL_FLASH_Lock();
+		
+		addr_start += real_write_len;
+
+		if((buf_ptr - buf) >= len )
+		{
+			break;
+		}
 	}
-	while(__HAL_FLASH_GET_FLAG(FLASH_FLAG_BSY) == SET)
-	{
-		DEBUG("Flash is busy\r\n");
-	}
-	HAL_FLASH_Lock();
+
 	return hal_status;
 }
 

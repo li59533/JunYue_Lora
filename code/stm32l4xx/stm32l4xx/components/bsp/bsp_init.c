@@ -125,7 +125,6 @@ void SystemClock_Config(void)
 {
 	  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
 	  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-	  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
 	  /** Configure the main internal regulator output voltage 
 	  */

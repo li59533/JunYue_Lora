@@ -104,7 +104,8 @@
 
 void System_Load()
 {
-		BSP_Init();
+	SystemParam_Init();
+	BSP_Init();
     /* init param module,read and apply params */
     
 }

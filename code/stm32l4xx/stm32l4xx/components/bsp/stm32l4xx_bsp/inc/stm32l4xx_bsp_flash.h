@@ -67,6 +67,7 @@
  */
 uint16_t BSP_Flash_ReadBytes(uint8_t *buf,uint32_t addr,uint16_t len);
 HAL_StatusTypeDef BSP_Flash_WriteBytes(uint32_t addr_start,uint8_t * buf,uint16_t len);
+void BSP_Flash_Test(void);
 /**
  * @}
  */

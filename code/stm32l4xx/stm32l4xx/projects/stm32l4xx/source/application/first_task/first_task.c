@@ -109,6 +109,7 @@ void First_Task(void * pvParameter)
 {
 	DEBUG("First Task Enter\r\n");
 	UBaseType_t firsttask_ramainheap = 0;
+	BSP_Flash_Test();
 	while(1)
 	{
 		DEBUG("First Task Looping\r\n");
