@@ -1,8 +1,8 @@
 /**
  **************************************************************************************************
- * @file        version.h
+ * @file        dataprocess_task.h
  * @author
- * @version
+ * @version    v0.1.0
  * @date        
  * @brief
  **************************************************************************************************
@@ -10,32 +10,21 @@
  *
  **************************************************************************************************
  */
-#ifndef _VERSION_H_
-#define _VERSION_H_
+#ifndef _DATAPROCESS_TASK_H_
+#define _DATAPROCESS_TASK_H_
 
 /**
  * @addtogroup    XXX 
  * @{ 
  */
-#include "self_def.h"
+
 /**
- * @addtogroup    version_Modules 
+ * @addtogroup    dataprocess_task_Modules 
  * @{  
  */
 
 /**
- * @defgroup      version_Exported_Macros 
- * @{  
- */
-#define VERSION_MAJOR		1   // 0~255
-#define VERSION_MINOR		2   // 0~255
-#define VERSION_LITE		9	// 0~255
-/**
- * @}
- */
-
-/**
- * @defgroup      version_Exported_Constants
+ * @defgroup      dataprocess_task_Exported_Macros 
  * @{  
  */
 
@@ -44,7 +33,16 @@
  */
 
 /**
- * @defgroup      version_Exported_Types 
+ * @defgroup      dataprocess_task_Exported_Constants
+ * @{  
+ */
+
+/**
+ * @}
+ */
+ 
+/**
+ * @defgroup      dataprocess_task_Exported_Types 
  * @{  
  */
 
@@ -53,7 +51,7 @@
  */
 
 /**
- * @defgroup      version_Exported_Variables 
+ * @defgroup      dataprocess_task_Exported_Variables 
  * @{  
  */
 
@@ -62,11 +60,11 @@
  */
 
 /**
- * @defgroup      version_Exported_Functions 
+ * @defgroup      dataprocess_task_Exported_Functions 
  * @{  
  */
-uint32_t Version_Get_Bin(void);
-char * Version_Get_Str(void);
+
+void DataProcess_Task(void * pvParameter);
 /**
  * @}
  */

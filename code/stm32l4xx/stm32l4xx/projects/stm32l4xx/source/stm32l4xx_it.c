@@ -22,8 +22,7 @@
 #include "main.h"
 #include "stm32l4xx_it.h"
 #include "clog.h"
-#include "stm32l4xx.h"
-#include "stm32l4xx_bsp_systick.h"
+#include "stm32_bsp_conf.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -202,9 +201,22 @@ void TIM8_UP_IRQHandler(void)
   /* USER CODE END TIM8_UP_IRQn 1 */
 }
 /* USER CODE BEGIN 1 */
-//void SysTick_Handler(void)
-//{
-//	HAL_IncTick();
-//}
+void SPI1_IRQHandler(void)
+{
+	BSP_SPI1_IRQHandler();
+}
+
+void TIM2_IRQHandler(void)
+{
+	BSP_TIM2_IRQHandler();
+}
+
+void TIM3_IRQHandler(void)
+{
+	BSP_TIM3_IRQHandler();
+}
+
+
+
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

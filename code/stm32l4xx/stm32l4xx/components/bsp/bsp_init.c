@@ -19,6 +19,7 @@
  * @{  
  */
 #include "bsp_led.h"
+#include "app_power.h"
 /**
  * @addtogroup    bsp_init_Modules 
  * @{  
@@ -119,6 +120,7 @@ void Board_Init(void)
 void BSP_Init(void)
 {
 	Bsp_LedInit();
+	APP_Power_Init();
 }
 
 void SystemClock_Config(void)

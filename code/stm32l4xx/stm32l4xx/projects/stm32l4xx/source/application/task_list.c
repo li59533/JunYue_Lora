@@ -21,6 +21,10 @@
 
 #include "first_task.h"
 #include "second_task.h"
+#include "bsp_led.h"
+#include "stm32l4xx_hal.h"
+#include "clog.h"
+#include "dataprocess_task.h"
 /**
  * @addtogroup    task_list_Modules 
  * @{  
@@ -101,7 +105,7 @@
  * @brief         
  * @{  
  */
- 
+
 void RTOS_Init(void)
 {
 	BaseType_t basetype = { 0 };
@@ -119,12 +123,27 @@ void RTOS_Init(void)
 							2,
 							(TaskHandle_t *)NULL);
 	
+	basetype = xTaskCreate(DataProcess_Task,\
+						"DataProcess_Task",\
+						1024,
+						NULL,
+						4,
+						(TaskHandle_t *)NULL);
 	
 	
 	
 	if(pdPASS == basetype)
 	{
 		vTaskStartScheduler();
+	}
+	else
+	{
+		while(1)
+		{
+			HAL_Delay(1000);
+			Bsp_LedToggle(BSP_LED_TEST);
+			DEBUG("RTOS is not start\r\n");
+		}
 	}
 	
 }

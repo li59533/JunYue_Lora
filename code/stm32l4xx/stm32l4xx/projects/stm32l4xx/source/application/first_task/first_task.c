@@ -22,8 +22,8 @@
 #include "stm32_bsp_conf.h"
 #include "system_param.h"
 #include "bsp_led.h"
-
-
+#include "bsp_ad7682.h"
+#include "app_power.h"
 /**
  * @addtogroup    first_task_Modules 
  * @{  
@@ -110,10 +110,13 @@ void First_Task(void * pvParameter)
 	DEBUG("First Task Enter\r\n");
 	UBaseType_t firsttask_ramainheap = 0;
 	BSP_Flash_Test();
+	APP_Power_AV3_3_ON();
+	BSP_AD7682_Init();
+	BSP_AD7682_StartSample();
 	while(1)
 	{
 		DEBUG("First Task Looping\r\n");
-		Bsp_LedToggle(BSP_LED_TEST);
+		
         
 		firsttask_ramainheap = uxTaskGetStackHighWaterMark(NULL);
         

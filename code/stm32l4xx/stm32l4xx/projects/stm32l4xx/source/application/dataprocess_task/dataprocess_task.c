@@ -1,8 +1,8 @@
 /**
  **************************************************************************************************
- * @file        version.c
+ * @file        dataprocess_task.c
  * @author
- * @version
+ * @version   v0.1.0
  * @date        
  * @brief
  **************************************************************************************************
@@ -10,19 +10,22 @@
  *
  **************************************************************************************************
  */
-
+#include "dataprocess_task.h"
+#include "stm32_bsp_conf.h"
 /**
  * @addtogroup    XXX 
  * @{  
  */
-#include "version.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "clog.h"
 /**
- * @addtogroup    version_Modules 
+ * @addtogroup    dataprocess_task_Modules 
  * @{  
  */
 
 /**
- * @defgroup      version_IO_Defines 
+ * @defgroup      dataprocess_task_IO_Defines 
  * @brief         
  * @{  
  */
@@ -32,7 +35,17 @@
  */
 
 /**
- * @defgroup       version_Macros_Defines 
+ * @defgroup      dataprocess_task_Macros_Defines 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+ 
+/**
+ * @defgroup      dataprocess_task_Constants_Defines 
  * @brief         
  * @{  
  */
@@ -42,7 +55,27 @@
  */
 
 /**
- * @defgroup      version_Constants_Defines 
+ * @defgroup      dataprocess_task_Private_Types
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+ 
+/**
+ * @defgroup      dataprocess_task_Private_Variables 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+ 
+/**
+ * @defgroup      dataprocess_task_Public_Variables 
  * @brief         
  * @{  
  */
@@ -52,7 +85,7 @@
  */
 
 /**
- * @defgroup       version_Private_Types
+ * @defgroup      dataprocess_task_Private_FunctionPrototypes 
  * @brief         
  * @{  
  */
@@ -62,53 +95,20 @@
  */
 
 /**
- * @defgroup      version_Private_Variables 
+ * @defgroup      dataprocess_task_Functions 
  * @brief         
  * @{  
  */
-static char version_buf[30] = {0};
-/**
- * @}
- */
-
-/**
- * @defgroup      version_Public_Variables 
- * @brief         
- * @{  
- */
-
-/**
- * @}
- */
-
-/**
- * @defgroup      version_Private_FunctionPrototypes 
- * @brief         
- * @{  
- */
-
-/**
- * @}
- */
-
-/**
- * @defgroup      version_Functions 
- * @brief         
- * @{  
- */
-uint32_t Version_Get_Bin(void)
+ 
+void DataProcess_Task(void * pvParameter)
 {
-	uint32_t version = 0;
-	version = VERSION_MAJOR * 256 * 256 | VERSION_MINOR * 256 | VERSION_LITE;
-	return version;
-}
 
-char * Version_Get_Str(void)
-{
-	snprintf(version_buf,30,"%d.%d.%d",VERSION_MAJOR,VERSION_MINOR,VERSION_LITE);
-	return version_buf;
+	while(1)
+	{
+        vTaskDelay(pdMS_TO_TICKS(1000));
+	}
+	
 }
-
 
 /**
  * @}

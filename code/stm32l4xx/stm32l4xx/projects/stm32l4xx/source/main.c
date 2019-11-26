@@ -18,6 +18,7 @@
 #include "SEGGER_RTT.h"
 #include "task_list.h"
 #include "bsp_led.h"
+#include "clog.h"
 /**
  * @addtogroup    XXX 
  * @{  
@@ -126,7 +127,7 @@ void Error_Handler(void)
 {
 	while(1)
 	{
-		SEGGER_RTT_WriteString(0,"Error_Handler\r\n");
+		DEBUG(0,"Error_Handler\r\n");
 	};
 }
 
