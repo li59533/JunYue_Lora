@@ -21,6 +21,7 @@
 #include "task.h"
 #include "stm32_bsp_conf.h"
 #include "system_param.h"
+#include "first_task.h"
 /**
  * @addtogroup    second_task_Modules 
  * @{  
@@ -108,7 +109,9 @@ void Second_Task(void * pvParameter)
 	while(1)
 	{
 		DEBUG("Second Task Looping\r\n");
-		vTaskDelay(pdMS_TO_TICKS(1000));
+		vTaskDelay(pdMS_TO_TICKS(3000));
+		First_Task_Event_Start(FIRST_TASK_TEST2_EVENT |FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
+		//First_Task_Event_Start(FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
 	}
 	
 }

@@ -50,6 +50,13 @@
 #define BIT14   0x4000
 #define BIT15   0x8000
 
+
+typedef enum
+{
+	EVENT_FROM_ISR = 1,
+	EVENT_FROM_TASK = 2,
+}Event_From_e;
+
 #ifndef NULL
     #define NULL    0
 #endif

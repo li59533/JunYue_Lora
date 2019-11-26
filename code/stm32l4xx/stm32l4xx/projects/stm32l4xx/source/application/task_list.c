@@ -25,6 +25,7 @@
 #include "stm32l4xx_hal.h"
 #include "clog.h"
 #include "dataprocess_task.h"
+#include "semphr.h"
 /**
  * @addtogroup    task_list_Modules 
  * @{  
@@ -109,12 +110,7 @@
 void RTOS_Init(void)
 {
 	BaseType_t basetype = { 0 };
-	basetype = xTaskCreate(First_Task,\
-							"First Task",\
-							1024,
-							NULL,
-							3,
-							(TaskHandle_t *)NULL);
+	basetype = First_Task_Init();
 
 	basetype = xTaskCreate(Second_Task,\
 							"Second Task",\
