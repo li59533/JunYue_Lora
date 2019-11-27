@@ -54,7 +54,7 @@
  * @defgroup      stm32l4xx_bsp_systick_Exported_Variables 
  * @{  
  */
-extern TIM_HandleTypeDef        htim8; 
+extern TIM_HandleTypeDef        htim7; 
 /**
  * @}
  */

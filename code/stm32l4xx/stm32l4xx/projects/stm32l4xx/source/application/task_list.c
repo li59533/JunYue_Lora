@@ -110,24 +110,11 @@
 void RTOS_Init(void)
 {
 	BaseType_t basetype = { 0 };
+	
 	basetype = First_Task_Init();
+	basetype = Second_Task_Init();
+	basetype = Dataprocess_Task_Init();
 
-	basetype = xTaskCreate(Second_Task,\
-							"Second Task",\
-							1024,
-							NULL,
-							2,
-							(TaskHandle_t *)NULL);
-	
-	basetype = xTaskCreate(DataProcess_Task,\
-						"DataProcess_Task",\
-						1024,
-						NULL,
-						4,
-						(TaskHandle_t *)NULL);
-	
-	
-	
 	if(pdPASS == basetype)
 	{
 		vTaskStartScheduler();
@@ -136,7 +123,7 @@ void RTOS_Init(void)
 	{
 		while(1)
 		{
-			HAL_Delay(1000);
+			HAL_Delay(30);
 			Bsp_LedToggle(BSP_LED_TEST);
 			DEBUG("RTOS is not start\r\n");
 		}

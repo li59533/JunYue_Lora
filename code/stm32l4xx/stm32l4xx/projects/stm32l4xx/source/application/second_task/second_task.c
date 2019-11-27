@@ -22,6 +22,7 @@
 #include "stm32_bsp_conf.h"
 #include "system_param.h"
 #include "first_task.h"
+#include "dataprocess_task.h"
 /**
  * @addtogroup    second_task_Modules 
  * @{  
@@ -82,7 +83,7 @@
  * @brief         
  * @{  
  */
-
+TaskHandle_t  Second_Task_Handle = NULL;
 /**
  * @}
  */
@@ -103,6 +104,19 @@
  * @{  
  */
 
+
+uint32_t Second_Task_Init(void)
+{
+	BaseType_t basetype = { 0 };
+	basetype = xTaskCreate(Second_Task,\
+							"Second_Task",\
+							1024,
+							NULL,
+							4,
+							&Second_Task_Handle);
+	return basetype;
+}
+
 void Second_Task(void * pvParameter)
 {
 	DEBUG("Second Task Enter\r\n");
@@ -111,6 +125,7 @@ void Second_Task(void * pvParameter)
 		DEBUG("Second Task Looping\r\n");
 		vTaskDelay(pdMS_TO_TICKS(3000));
 		First_Task_Event_Start(FIRST_TASK_TEST2_EVENT |FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
+		//Dataprocess_Task_Event_Start(DATAPEOCESS_TASK_FILTER_EVENT, EVENT_FROM_TASK);
 		//First_Task_Event_Start(FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
 	}
 	

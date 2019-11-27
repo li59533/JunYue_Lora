@@ -27,6 +27,9 @@
  * @defgroup      bsp_ad7682_Exported_Macros 
  * @{  
  */
+#define BSP_AD7682_ADCHS		0X04
+#define BSP_AD7682_SAMPLE_ADCH   		8
+#define BSP_AD7682_SAMPLEPOINTS 		128
 
 /**
  * @}
@@ -66,6 +69,11 @@
 void BSP_AD7682_Init(void);
 void BSP_AD7682_StartGetValue_InConf(void);
 void BSP_AD7682_GetValue(void);
+void BSP_AD7682_ClearData(void);
+uint16_t BSP_AD7682_Getcurvalue(uint8_t channel);
+uint16_t * BSP_AD7682_GetDataBuf_Ptr(void);
+uint8_t BSP_AD7682_GetRealCH(uint8_t location);
+
 /**
  * @}
  */

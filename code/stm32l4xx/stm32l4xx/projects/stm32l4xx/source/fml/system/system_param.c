@@ -156,6 +156,7 @@ const SystemParam_Config_t SystemParam_Config_Default =
  * @{  
  */
 SystemParam_Config_t g_SystemParam_Config;
+SystemParam_Param_t g_SystemParam_Param;
 /**
  * @}
  */

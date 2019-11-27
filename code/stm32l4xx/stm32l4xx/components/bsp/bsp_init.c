@@ -121,6 +121,10 @@ void BSP_Init(void)
 {
 	Bsp_LedInit();
 	APP_Power_Init();
+	
+//	BSP_TIM_Init();
+//BSP_SPI_Init();	
+//	BSP_TIM8_Start();
 }
 
 void SystemClock_Config(void)

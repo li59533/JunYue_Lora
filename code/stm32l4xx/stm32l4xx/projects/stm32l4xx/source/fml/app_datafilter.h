@@ -1,6 +1,6 @@
 /**
  **************************************************************************************************
- * @file        second_task.h
+ * @file        app_datafilter.h
  * @author
  * @version    v0.1.0
  * @date        
@@ -10,8 +10,8 @@
  *
  **************************************************************************************************
  */
-#ifndef _SECOND_TASK_H_
-#define _SECOND_TASK_H_
+#ifndef _APP_DATAFILTER_H_
+#define _APP_DATAFILTER_H_
 
 /**
  * @addtogroup    XXX 
@@ -19,12 +19,12 @@
  */
 #include "self_def.h"
 /**
- * @addtogroup    second_task_Modules 
+ * @addtogroup    app_datafilter_Modules 
  * @{  
  */
 
 /**
- * @defgroup      second_task_Exported_Macros 
+ * @defgroup      app_datafilter_Exported_Macros 
  * @{  
  */
 
@@ -33,7 +33,7 @@
  */
 
 /**
- * @defgroup      second_task_Exported_Constants
+ * @defgroup      app_datafilter_Exported_Constants
  * @{  
  */
 
@@ -42,7 +42,7 @@
  */
  
 /**
- * @defgroup      second_task_Exported_Types 
+ * @defgroup      app_datafilter_Exported_Types 
  * @{  
  */
 
@@ -51,7 +51,7 @@
  */
 
 /**
- * @defgroup      second_task_Exported_Variables 
+ * @defgroup      app_datafilter_Exported_Variables 
  * @{  
  */
 
@@ -60,12 +60,13 @@
  */
 
 /**
- * @defgroup      second_task_Exported_Functions 
+ * @defgroup      app_datafilter_Exported_Functions 
  * @{  
  */
-
-void Second_Task(void * pvParameter);	
-uint32_t Second_Task_Init(void);
+void APP_DataFilter_Process(void);
+void APP_DataFilter_SpraseIndex(void);
+void APP_DataFilter_Init(void);
+void APP_DataFilter_UpdateAccData(int16_t data , uint8_t channel , uint32_t DataIndex);
 /**
  * @}
  */
@@ -78,5 +79,3 @@ uint32_t Second_Task_Init(void);
  * @}
  */
 #endif
-
-

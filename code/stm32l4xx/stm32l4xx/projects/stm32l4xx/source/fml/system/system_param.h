@@ -195,6 +195,106 @@ typedef struct
                                  crc校验和存储，用户在保存参数时不用关心该值数值。*/
 }SystemParam_Config_t;
 #pragma pack()
+
+// --------------Param
+typedef  struct 
+{
+	uint16_t vaildsign;
+	int32_t int_v[12];
+	int32_t int_av[12];
+	int64_t s[12]; // 累积
+	int64_t as[12]; // 累积
+	uint32_t sparse_index[12];
+	float v[12];
+	float fv[12];
+	float vs[12];  //速度累加和，浮点型
+	float av[12];
+	float adate;                //加速度
+	float vdate;                 //速度
+	float xdate;                  //位移
+	float pdate;                   //温度
+	float scale_v[12];
+	int32_t gate[12];
+	int32_t backlash[12];
+	uint8_t alarm[12]; // 报警标志
+	uint16_t din;  // 低8位对应 8个通道输入
+	uint16_t dout; // 低4位对应 4个输出通道 
+	uint32_t status;
+	int32_t ch1_int_max,ch2_int_max;
+	int32_t ch1_int_max1,ch2_int_max2;
+	float ch1_max,ch2_max;
+	int32_t vibrate_gate1,vibrate_gate2,vibrate_backlash1,vibrate_backlash2;
+	int32_t force_gate,force_backlash;
+	int16_t selfpgaallow;
+	uint16_t daytime;
+	uint16_t minutetime;
+	uint16_t selffangda;
+  uint16_t alarmminutetime;
+	uint8_t Esp32TransmissionMode;
+	uint32_t sleeptime;
+	uint8_t wakeupsourec;
+	float Abs_average[12];
+	float ReciprocalofADfrequence[16];
+	float Inter_Skew[12]; //歪度
+	float InterIIMarginIndex[12];//裕度指标中间变量
+	float InterMAX[12];
+	float InterMIN[12];
+	float S_sum[12];
+	float SS_sum[12];
+	float SSS_sum[12];
+	float SSSS_sum[12];
+	float Abs_S_average[12];
+	float PeakValue[12];  //峰峰值
+	float EffectiveValue[12]; //有效值
+	float Skew[12]; //歪度
+	float MaxValue[12]; //峰值
+	float Kurtosis[12]; //峭度
+	float Mean[12]; //均值
+	float WaveformIndex[12]; //波形指标
+	float PeakIndex[12];//峰值指标
+	float PulseIndex[12];//脉冲指标
+	float MarginIndex[12];//裕度指标
+	float KurtosisIndex[12];//峭度指标
+	float Inter_MarginIndex[12]; //峭度
+	float S_average[12]; //平均值总值
+	float average[12]; //平均值
+	float ReciprocalofEMUnumber[16]; //采样频率的倒数，采样周期
+	float ReciprocalofRange[16];//量程的倒数
+	float Arms[12];
+	float Vrms[12];
+	float Drms[12];
+	float Envelop[12];
+	//
+	float F_sum[12];     //s(k)之和
+	float FS_sum[12];   //f(k)s(k)的和
+	float FFS_sum[12];  //F(K)F(K)S(K)
+	float FFFFS_sum[12];  //F(K)F(K)S(K)
+	float F2_sum[12];     //feature2的中间和
+	float F3_sum[12];     //feature3的中间和
+	float F4_sum[12];     //feature4的中间和
+	float F6_sum[12];     //feature6的中间和
+	float F11_sum[12];     //feature11的中间和
+	float F12_sum[12];     //feature12的中间和
+	float F13_sum[12];     //feature12的中间和
+	float F_feature1[12];
+	float F_feature2[12];
+	float F_feature3[12];
+	float F_feature4[12];
+	float F_feature5[12];
+	float F_feature6[12];
+	float F_feature7[12];
+	float F_feature8[12];
+	float F_feature9[12];
+	float F_feature10[12];
+	float F_feature11[12];
+	float F_feature12[12];
+	float F_feature13[12];
+	uint32_t IapDataLength;
+	uint32_t PeroidWaveTransmissionCounter;
+	uint32_t AutoPeriodTransmissonCounter;
+	uint64_t DeviceKey;
+}SystemParam_Param_t;
+
 /**
  * @}
  */
@@ -204,6 +304,7 @@ typedef struct
  * @{  
  */
 extern SystemParam_Config_t g_SystemParam_Config;
+extern SystemParam_Param_t g_SystemParam_Param;
 /**
  * @}
  */

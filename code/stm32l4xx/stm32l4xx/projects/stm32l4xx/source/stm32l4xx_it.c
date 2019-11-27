@@ -195,7 +195,7 @@ void TIM8_UP_IRQHandler(void)
   /* USER CODE BEGIN TIM8_UP_IRQn 0 */
 
   /* USER CODE END TIM8_UP_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim8);
+	BSP_TIM8_IRQHandler();
   /* USER CODE BEGIN TIM8_UP_IRQn 1 */
 
   /* USER CODE END TIM8_UP_IRQn 1 */
@@ -206,9 +206,11 @@ void SPI1_IRQHandler(void)
 	BSP_SPI1_IRQHandler();
 }
 
-void TIM2_IRQHandler(void)
+void TIM7_IRQHandler(void)
 {
-	BSP_TIM2_IRQHandler();
+	
+	HAL_TIM_IRQHandler(&htim7);
+	HAL_IncTick();
 }
 
 void TIM3_IRQHandler(void)

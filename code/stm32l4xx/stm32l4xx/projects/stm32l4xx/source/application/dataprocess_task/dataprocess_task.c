@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "dataprocess_task.h"
+#include "limits.h"
 #include "stm32_bsp_conf.h"
 /**
  * @addtogroup    XXX 
@@ -19,6 +19,9 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "clog.h"
+#include "dataprocess_task.h"
+#include "app_datafilter.h"
+#include "bsp_ad7682.h"
 /**
  * @addtogroup    dataprocess_task_Modules 
  * @{  
@@ -69,7 +72,7 @@
  * @brief         
  * @{  
  */
-
+TaskHandle_t  Dataprocess_Task_Handle = NULL;
 /**
  * @}
  */
@@ -99,16 +102,76 @@
  * @brief         
  * @{  
  */
- 
-void DataProcess_Task(void * pvParameter)
-{
 
+
+uint32_t Dataprocess_Task_Init(void)
+{
+	BaseType_t basetype = { 0 };
+	basetype = xTaskCreate(Dataprocess_Task,\
+							"Dataprocess_Task",\
+							1024,
+							NULL,
+							5,
+							&Dataprocess_Task_Handle);
+	return basetype;
+}
+
+
+void Dataprocess_Task(void * pvParameter)
+{
+	uint32_t event_flag = 0;
+	
+	DEBUG("Dataprocess_Task Enter\r\n");
+//	BSP_AD7682_Init();
+//	APP_DataFilter_Init();
+	BSP_TIM_Init();
+	BSP_SPI_Init();	
+	BSP_TIM8_Start();
+//	
 	while(1)
 	{
-        vTaskDelay(pdMS_TO_TICKS(1000));
+		xTaskNotifyWait(0x00,ULONG_MAX,&event_flag , portMAX_DELAY);
+		
+		if((event_flag & DATAPEOCESS_TASK_CALC_EVENT) != 0x00)
+		{
+			DEBUG("DATAPEOCESS_TASK_CALC_EVENT\r\n");
+
+			//vTaskDelay(pdMS_TO_TICKS(10000));			
+		}
+		
+		if((event_flag & DATAPEOCESS_TASK_FILTER_EVENT) != 0x00)
+		{
+			DEBUG("DATAPEOCESS_TASK_FILTER_EVENT\r\n");
+			APP_DataFilter_Process();
+			//vTaskDelay(pdMS_TO_TICKS(10000));			
+		}
 	}
 	
 }
+
+
+void Dataprocess_Task_Event_Start(uint32_t events, uint8_t event_from)
+{
+	BaseType_t HigherPriorityTaskWoken = pdFALSE;
+	switch(event_from)
+	{
+		case EVENT_FROM_TASK:
+		{
+			xTaskNotify(Dataprocess_Task_Handle , events , eSetBits);
+		}
+		break;
+		case EVENT_FROM_ISR:
+		{
+			xTaskNotifyFromISR(Dataprocess_Task_Handle, events, eSetBits , &HigherPriorityTaskWoken);
+		}
+		break;
+		default:break;
+	}
+}
+			
+
+
+
 
 /**
  * @}

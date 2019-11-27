@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>ICCARM</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\compoents\CMSIS\Device\ST\STM32L4xx\Include;..\..\..\..\compoents\CMSIS\Include;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc\Legacy;..\..\..\..\compoents\Utilities;..\..\..\components\bsp\stm32l4xx_bsp\inc;..\..\..\components\mdl\clog;..\..\..\components\mdl\cshell;..\..\..\components\mdl\header;..\..\..\components\mdl\osal\ports;..\..\..\components\mdl\rttviewer;..\source;..\source\application\hal_task;..\source\application\user_task;..\source\fml\system;..\..\..\components\bsp;..\..\..\components\mdl\osal\src;..\..\..\components\bsp;..\..\..\components\bsp\stm32l4xx_bsp;..\..\..\components\bsp;..\..\..\components\mdl\freertos\inc;..\..\..\components\mdl\freertos\portable;..\source\application\first_task;..\source\application;..\..\..\components\mdl\freertos\inc;..\source\application\second_task;..\source\application\dataprocess_task;..\source\fml</IncludePath>
+              <IncludePath>..\..\..\..\compoents\CMSIS\Device\ST\STM32L4xx\Include;..\..\..\..\compoents\CMSIS\Include;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc\Legacy;..\..\..\..\compoents\Utilities;..\..\..\components\bsp\stm32l4xx_bsp\inc;..\..\..\components\mdl\clog;..\..\..\components\mdl\cshell;..\..\..\components\mdl\header;..\..\..\components\mdl\osal\ports;..\..\..\components\mdl\rttviewer;..\source;..\source\application\hal_task;..\source\application\user_task;..\source\fml\system;..\..\..\components\bsp;..\..\..\components\mdl\osal\src;..\..\..\components\bsp;..\..\..\components\bsp\stm32l4xx_bsp;..\..\..\components\bsp;..\..\..\components\mdl\freertos\inc;..\..\..\components\mdl\freertos\portable;..\source\application\first_task;..\source\application;..\..\..\components\mdl\freertos\inc;..\source\application\second_task;..\source\application\dataprocess_task;..\source\fml;..\..\..\components\mdl\freertos</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -485,6 +485,11 @@
               <FileName>app_power.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\fml\app_power.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_datafilter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\fml\app_datafilter.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4678,6 +4683,11 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\components\mdl\freertos\portable\heap_4.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtos_tools.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\mdl\freertos\rtos_tools.c</FilePath>
             </File>
           </Files>
         </Group>

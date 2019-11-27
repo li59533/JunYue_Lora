@@ -118,12 +118,12 @@ void BSP_AD7682_Tim_Init(void)
 
 void BSP_AD7682_StopSample(void)
 {
-	BSP_TIM2_Stop();
+	BSP_TIM8_Stop();
 }
 
 void BSP_AD7682_StartSample(void)
 {
-	BSP_TIM2_Start();
+	BSP_TIM8_Start();
 }
 
 void BSP_AD7682_StartCONV(void)

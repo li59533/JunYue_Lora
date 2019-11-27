@@ -18,7 +18,7 @@
  * @addtogroup    XXX 
  * @{  
  */
-
+#include "dataprocess_task.h"
 /**
  * @addtogroup    bsp_ad7682_Modules 
  * @{  
@@ -50,8 +50,7 @@
  * @{  
  */
 #define BSP_AD7682_CH_QUEUE_LEN 		12
-const uint16_t bsp_ad7682_ch_queue[BSP_AD7682_CH_QUEUE_LEN] = {2 ,3, 2, 1, 2, 3, 2, 1} ; //{2 ,3, 2, 1, 2, 3, 2, 1} ;  // real sample fre is 32768 ,so this ch can be 16384 ,8192
-
+const uint8_t bsp_ad7682_ch_queue[BSP_AD7682_CH_QUEUE_LEN] = {2 ,3, 2, 1, 2, 3, 2, 1} ; //{2 ,3, 2, 1, 2, 3, 2, 1} ;  // real sample fre is 32768 ,so this ch can be 16384 ,8192
 
 
 
@@ -74,14 +73,14 @@ const uint16_t bsp_ad7682_ch_queue[BSP_AD7682_CH_QUEUE_LEN] = {2 ,3, 2, 1, 2, 3,
  * @brief         
  * @{  
  */
- #define SAMPLE_ADCH   		8
- #define SAMPLEPOINTS 		128
+
 uint16_t bsp_ad7682_rec[8] = { 0 };
-uint16_t bsp_ad7682_data[SAMPLE_ADCH*SAMPLEPOINTS*2] = { 0 };
+uint16_t bsp_ad7682_data[BSP_AD7682_SAMPLE_ADCH * BSP_AD7682_SAMPLEPOINTS*2] = { 0 };
 uint16_t bsp_ad7982_cur_ad_index = 0;
 uint16_t bsp_ad7682_cur_ad_ch = 0;
 uint16_t bsp_ad7682_CurrentAD7682DataCounter = 0;
 uint8_t  bsp_ad7682_datareadyprocess = 0 ;
+
 /**
  * @}
  */
@@ -137,27 +136,55 @@ void BSP_AD7682_GetValue(void)
 	BSP_AD7682_StopCONV();
 		
 	bsp_ad7682_data[bsp_ad7982_cur_ad_index ++ ] = bsp_ad7682_rec[bsp_ad7682_cur_ad_ch];
-	if(bsp_ad7982_cur_ad_index == SAMPLE_ADCH*SAMPLEPOINTS)	
+	if(bsp_ad7982_cur_ad_index == BSP_AD7682_SAMPLE_ADCH * BSP_AD7682_SAMPLEPOINTS)	
 	{
 
 		bsp_ad7682_CurrentAD7682DataCounter = 0;
 		bsp_ad7682_datareadyprocess = 1;
+		
+		//Dataprocess_Task_Event_Start(DATAPEOCESS_TASK_FILTER_EVENT, EVENT_FROM_ISR);
 	}
-	else if(bsp_ad7982_cur_ad_index >= SAMPLE_ADCH*SAMPLEPOINTS*2)
+	else if(bsp_ad7982_cur_ad_index >= BSP_AD7682_SAMPLE_ADCH * BSP_AD7682_SAMPLEPOINTS * 2)
 	{
 		bsp_ad7982_cur_ad_index = 0;			
-		bsp_ad7682_CurrentAD7682DataCounter = SAMPLE_ADCH*SAMPLEPOINTS;
+		bsp_ad7682_CurrentAD7682DataCounter = BSP_AD7682_SAMPLE_ADCH * BSP_AD7682_SAMPLEPOINTS;
 		bsp_ad7682_datareadyprocess = 1;
+		//Dataprocess_Task_Event_Start(DATAPEOCESS_TASK_FILTER_EVENT, EVENT_FROM_ISR);
 	}
 
 	bsp_ad7682_cur_ad_ch ++;
-	bsp_ad7682_cur_ad_ch = bsp_ad7682_cur_ad_ch % SAMPLE_ADCH;
-	if(((bsp_ad7982_cur_ad_index - bsp_ad7682_cur_ad_ch) % SAMPLE_ADCH)!=0)  //串包的话，这包丢掉
+	bsp_ad7682_cur_ad_ch = bsp_ad7682_cur_ad_ch % BSP_AD7682_SAMPLE_ADCH;
+	if(((bsp_ad7982_cur_ad_index - bsp_ad7682_cur_ad_ch) % BSP_AD7682_SAMPLE_ADCH)!=0)  //串包的话，这包丢掉
 	{
 		bsp_ad7682_cur_ad_ch = 0;
 		bsp_ad7982_cur_ad_index = 0;
 	} 
 }
+
+
+void BSP_AD7682_ClearData(void)
+{
+	bsp_ad7982_cur_ad_index = 0;
+	bsp_ad7682_cur_ad_ch = 0;
+	bsp_ad7682_CurrentAD7682DataCounter = 0;
+	bsp_ad7682_datareadyprocess = 0 ;
+}
+
+
+uint16_t BSP_AD7682_Getcurvalue(uint8_t channel)
+{
+	return bsp_ad7682_rec[channel];
+}
+	
+uint16_t * BSP_AD7682_GetDataBuf_Ptr(void)
+{
+	return &bsp_ad7682_data[bsp_ad7682_CurrentAD7682DataCounter];
+}
+uint8_t BSP_AD7682_GetRealCH(uint8_t location)
+{
+	return bsp_ad7682_ch_queue[location];
+}
+
 
 /**
  * @}

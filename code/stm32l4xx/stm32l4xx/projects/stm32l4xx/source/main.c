@@ -106,13 +106,15 @@
  */
 int main(void)
 {
-    Board_Init(); // init systick and system clock
+	Board_Init(); // init systick and system clock
     
     __enable_irq(); // open irq
     
     System_Load();  // init bsp peripheral and load system param
     
 	RTOS_Init();
+//	BSP_AD7682_Init();
+//	APP_DataFilter_Init();
 	
     while(1)
 	{

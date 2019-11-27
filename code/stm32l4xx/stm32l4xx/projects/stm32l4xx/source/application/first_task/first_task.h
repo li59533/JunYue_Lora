@@ -64,7 +64,7 @@
  * @defgroup      first_task_Exported_Functions 
  * @{  
  */
-BaseType_t First_Task_Init(void); 
+uint32_t First_Task_Init(void); 
 void First_Task(void * pvParameter);
 void First_Task_Event_Start(uint32_t events, uint8_t event_from);
 

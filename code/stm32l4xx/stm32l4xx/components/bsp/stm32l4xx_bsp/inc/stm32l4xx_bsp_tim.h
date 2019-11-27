@@ -65,10 +65,10 @@
  */
 void BSP_TIM_Init(void);
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base);
-void BSP_TIM2_IRQHandler(void);
+void BSP_TIM8_IRQHandler(void);
 void BSP_TIM3_IRQHandler(void);
-void BSP_TIM2_Start(void);
-void BSP_TIM2_Stop(void);
+void BSP_TIM8_Start(void);
+void BSP_TIM8_Stop(void);
 void BSP_TIM3_Start(void);
 void BSP_TIM3_Stop(void);
 /**
