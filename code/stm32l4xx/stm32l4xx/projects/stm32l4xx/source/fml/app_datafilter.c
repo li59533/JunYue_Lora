@@ -20,6 +20,9 @@
 #include "system_param.h"
 #include "rtos_tools.h"
 #include "clog.h"
+#include "dataprocess_task.h"
+#include "bsp_led.h"
+#include "first_task.h"
 /**
  * @addtogroup    app_datafilter_Modules 
  * @{  
@@ -109,7 +112,7 @@ int32_t filtercounter[BSP_AD7682_ADCHS];
 uint8_t app_datafilter_checksum[12] = {0};
 uint32_t sprase_counter[12];
 uint32_t StoreDateIndex[12];
-int16_t wave_jscope[BSP_AD7682_SAMPLE_ADCH];
+int32_t wave_jscope[BSP_AD7682_SAMPLE_ADCH];
 
 int16_t piz_emu_data[2][32768];
 int16_t  mems_emu_data[2][3][8192]; //3轴mems数据存放
@@ -125,7 +128,7 @@ void APP_DataFilter_SpraseIndex(void)
 	uint8_t ch[4]={0,1,2,3};
 	for(i = 0;i < BSP_AD7682_ADCHS ; i ++){  //某方面限制了基准采样率为51200，因为8通道必须同步采样，所以8个通道只能一个基准采样率
 			
-		  g_SystemParam_Param.sparse_index[i]=ADfrequence[i] / g_SystemParam_Config.channel_freq[ch[i]];
+		  g_SystemParam_Param.sparse_index[i] = (uint32_t)(ADfrequence[i] / g_SystemParam_Config.channel_freq[ch[i]]);
 		}
 }
 
@@ -145,19 +148,20 @@ void APP_DataFilter_Init(void)
 		sprase_counter[i]=0;
 		StoreDateIndex[i]=0;
 	}
-	//RTOS_Delay_ms(50);//负载开关有个电压稳定时间，所以需要这部分
+	RTOS_Delay_ms(50);//负载开关有个电压稳定时间，所以需要这部分
 
 	BSP_AD7682_StartSample();
 	//HAL_Delay(1);
-//	RTOS_Delay_ms(1);
-//	BSP_AD7682_StopSample();
+	RTOS_Delay_ms(1);
+	BSP_AD7682_StopSample();
 	
 	BSP_AD7682_ClearData();
 
 	AD_ZERO[0]=32768*4096;   //压电有稳定时间，但基准电压是OK的，所以可以直接取值，省的等他稳定
 	AD_ZERO[1]= BSP_AD7682_Getcurvalue(1) * 8192;   //如果是压电，这个很好去确定初值，可是mems跟重力方向有关，有必要重新采集确定初值
-	AD_ZERO[2]= BSP_AD7682_Getcurvalue(2) * 8192;  //两个采样率不一样
+	AD_ZERO[2]= BSP_AD7682_Getcurvalue(3) * 8192;  //两个采样率不一样
 	APP_DataFilter_SpraseIndex();
+	BSP_AD7682_StartSample();
 }
 
 void APP_DataFilter_Process(void)
@@ -283,7 +287,7 @@ void APP_DataFilter_Process(void)
 			}
 
 
-			app_real_data ++;
+			app_data_ptr ++;
 			ActualIndex++;   //原则上应该加个中断锁的，特别是当特征值模式下，写这个下标参数为0时，后来改了一个方案				
 
 		}
@@ -301,19 +305,22 @@ void APP_DataFilter_Process(void)
 			ActualIndex=0;
 			currentSAMPLEblock=(currentSAMPLEblock+1)%2;
 			//osSemaphoreRelease(seconds_sample_data_readyHandle);
+			//Dataprocess_Task_Event_Start( DATAPEOCESS_TASK_CALC_EVENT, EVENT_FROM_TASK);
+			First_Task_Event_Start(FIRST_TASK_TEST2_EVENT, EVENT_FROM_TASK);
 			DEBUG("Sample Complete\r\n");
 		}
 	}
 	//			bsp_LedStatue(1,1);
 
 }
-
+int16_t test_wave = 0;
 
 void APP_DataFilter_UpdateAccData(int16_t data , uint8_t channel , uint32_t DataIndex)
 {
 	switch(channel){
 		case 0:
-			piz_emu_data[currentSAMPLEblock][DataIndex] = data;
+			piz_emu_data[currentSAMPLEblock][DataIndex]=data;
+			//test_wave = data;
 		break;
 		case 1:
 			mems_emu_data[currentSAMPLEblock][0][DataIndex] = data;

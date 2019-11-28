@@ -17,6 +17,7 @@
  * @{  
  */
 #include "bsp_ad7682.h"
+#include "bsp_led.h"
 /**
  * @addtogroup    stm32l4xx_bsp_spi_Modules 
  * @{  
@@ -194,10 +195,11 @@ void BSP_SPI1_IRQHandler(void)
 	HAL_SPI_IRQHandler(&hspi); // clear some flag
 	if(HAL_SPI_GetState(&hspi) == HAL_SPI_STATE_READY)
 	{
+		
 		BSP_AD7682_GetValue();
 	}		
 	
-	DEBUG("SPI IRQ\r\n");
+	//DEBUG("SPI IRQ\r\n");
 }
 
 

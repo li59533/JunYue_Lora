@@ -54,7 +54,20 @@
  * @defgroup      app_datafilter_Exported_Variables 
  * @{  
  */
+extern int32_t AD_ZERO[];
+extern int32_t AD_ZEROlowpass[];
+extern int32_t AD_INTER[];
+extern int32_t lastdata[];
+extern int32_t filtercounter[];
+extern uint8_t app_datafilter_checksum[] ;
+extern uint32_t sprase_counter[];
+extern uint32_t StoreDateIndex[];
+extern int32_t wave_jscope[];
 
+extern int16_t piz_emu_data[2][32768];
+extern int16_t  mems_emu_data[2][3][8192]; //3ÖámemsÊý¾Ý´æ·Å
+extern uint8_t currentSAMPLEblock ;
+extern uint32_t ActualIndex ;
 /**
  * @}
  */

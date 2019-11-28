@@ -51,7 +51,7 @@
  */
 #define BSP_AD7682_CH_QUEUE_LEN 		12
 const uint8_t bsp_ad7682_ch_queue[BSP_AD7682_CH_QUEUE_LEN] = {2 ,3, 2, 1, 2, 3, 2, 1} ; //{2 ,3, 2, 1, 2, 3, 2, 1} ;  // real sample fre is 32768 ,so this ch can be 16384 ,8192
-
+const uint8_t bsp_ad7682_ch_data_queue[12]={0,1,0,2,0,1,0,2};
 
 
 /**
@@ -160,7 +160,14 @@ void BSP_AD7682_GetValue(void)
 		bsp_ad7982_cur_ad_index = 0;
 	} 
 }
-
+void BSP_AD7682_CheckFilterStatus(void)
+{
+	if(bsp_ad7682_datareadyprocess == 1)
+	{
+		Dataprocess_Task_Event_Start(DATAPEOCESS_TASK_FILTER_EVENT, EVENT_FROM_ISR);
+		bsp_ad7682_datareadyprocess = 0;
+	}
+}
 
 void BSP_AD7682_ClearData(void)
 {
@@ -182,7 +189,7 @@ uint16_t * BSP_AD7682_GetDataBuf_Ptr(void)
 }
 uint8_t BSP_AD7682_GetRealCH(uint8_t location)
 {
-	return bsp_ad7682_ch_queue[location];
+	return bsp_ad7682_ch_data_queue[location];
 }
 
 

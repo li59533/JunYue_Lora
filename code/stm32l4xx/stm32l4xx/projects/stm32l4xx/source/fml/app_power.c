@@ -16,7 +16,7 @@
  * @addtogroup    XXX 
  * @{  
  */
-
+#include "clog.h"
 /**
  * @addtogroup    app_power_Modules 
  * @{  
@@ -114,11 +114,13 @@ void APP_Power_Init(void)
 
 void APP_Power_AV3_3_ON(void)
 {
+	DEBUG("APP_Power AV3.3V ON\r\n");
 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
 }
 
 void APP_Power_AV3_3_OFF(void)
 {
+	DEBUG("APP_Power AV3.3V ON\r\n");
 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
 }
 

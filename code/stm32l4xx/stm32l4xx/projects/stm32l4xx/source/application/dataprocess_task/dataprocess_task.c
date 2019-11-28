@@ -22,6 +22,8 @@
 #include "dataprocess_task.h"
 #include "app_datafilter.h"
 #include "bsp_ad7682.h"
+#include "app_power.h"
+#include "app_dataemu.h"
 /**
  * @addtogroup    dataprocess_task_Modules 
  * @{  
@@ -120,28 +122,36 @@ uint32_t Dataprocess_Task_Init(void)
 void Dataprocess_Task(void * pvParameter)
 {
 	uint32_t event_flag = 0;
+	UBaseType_t dataprocess_ramainheap = 0;
 	
 	DEBUG("Dataprocess_Task Enter\r\n");
-//	BSP_AD7682_Init();
-//	APP_DataFilter_Init();
-	BSP_TIM_Init();
-	BSP_SPI_Init();	
-	BSP_TIM8_Start();
+	APP_Power_AV3_3_ON();
+	BSP_AD7682_Init();
+	APP_DataFilter_Init();
+	
+//	BSP_TIM_Init();
+//	BSP_SPI_Init();	
+//	BSP_TIM8_Start();
 //	
 	while(1)
 	{
 		xTaskNotifyWait(0x00,ULONG_MAX,&event_flag , portMAX_DELAY);
 		
+		
+		
+		
 		if((event_flag & DATAPEOCESS_TASK_CALC_EVENT) != 0x00)
 		{
+			dataprocess_ramainheap = uxTaskGetStackHighWaterMark(NULL);
+			DEBUG("Dataprocess_Task ramain heap:%d %%\r\n",dataprocess_ramainheap);
 			DEBUG("DATAPEOCESS_TASK_CALC_EVENT\r\n");
-
+			//
 			//vTaskDelay(pdMS_TO_TICKS(10000));			
 		}
 		
 		if((event_flag & DATAPEOCESS_TASK_FILTER_EVENT) != 0x00)
 		{
-			DEBUG("DATAPEOCESS_TASK_FILTER_EVENT\r\n");
+			//DEBUG("DATAPEOCESS_TASK_FILTER_EVENT\r\n");
 			APP_DataFilter_Process();
 			//vTaskDelay(pdMS_TO_TICKS(10000));			
 		}

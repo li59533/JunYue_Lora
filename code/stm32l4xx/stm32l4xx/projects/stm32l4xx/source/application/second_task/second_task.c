@@ -124,7 +124,7 @@ void Second_Task(void * pvParameter)
 	{
 		DEBUG("Second Task Looping\r\n");
 		vTaskDelay(pdMS_TO_TICKS(3000));
-		First_Task_Event_Start(FIRST_TASK_TEST2_EVENT |FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
+		//First_Task_Event_Start(FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
 		//Dataprocess_Task_Event_Start(DATAPEOCESS_TASK_FILTER_EVENT, EVENT_FROM_TASK);
 		//First_Task_Event_Start(FIRST_TASK_TEST_EVENT, EVENT_FROM_TASK);
 	}

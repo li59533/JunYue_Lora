@@ -25,6 +25,7 @@
 #include "bsp_ad7682.h"
 #include "app_power.h"
 #include "first_task.h"
+#include "app_dataemu.h"
 /**
  * @addtogroup    first_task_Modules 
  * @{  
@@ -140,13 +141,13 @@ void First_Task(void * pvParameter)
 			DEBUG("First Task Looping\r\n");
 			firsttask_ramainheap = uxTaskGetStackHighWaterMark(NULL);
 			DEBUG("First Task ramain heap:%d %%\r\n",firsttask_ramainheap);
-			Bsp_LedToggle(BSP_LED_TEST);
+			//Bsp_LedToggle(BSP_LED_TEST);
 			//vTaskDelay(pdMS_TO_TICKS(10000));			
 		}
 		if((event_flag & FIRST_TASK_TEST2_EVENT) != 0x00)
 		{
 			DEBUG("First Task FIRST_TASK_TEST2_EVENT\r\n");
-			
+			APP_DataEmu_Process();
 		}		
 		
 		

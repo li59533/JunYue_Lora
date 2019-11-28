@@ -159,7 +159,7 @@ void BSP_TIM_Init(void)
 	}	
 	
 	
-
+	BSP_TIM3_Start();
 	DEBUG("TIM8 TIM3 Init\r\n");
 	
 }	
@@ -202,30 +202,26 @@ void BSP_TIM3_Stop(void)
 void BSP_TIM8_IRQHandler(void)
 {
 	
-if (TIM8->SR & TIM_IT_UPDATE) 
-	{
-		TIM8->SR &= (uint16_t)~TIM_IT_UPDATE;
-		
-	BSP_AD7682_StartGetValue_InConf();
-	//DEBUG("TIM8 IRQ\r\n");
-	}	
+	if (TIM8->SR & TIM_IT_UPDATE) 
+		{
+			TIM8->SR &= (uint16_t)~TIM_IT_UPDATE;
+			
+		BSP_AD7682_StartGetValue_InConf();
+		//DEBUG("TIM8 IRQ\r\n");
+		}	
 	
 	
 	
 	//HAL_TIM_IRQHandler(&htim8);
-
-
-
-
-
 	//HAL_TIM_Base_Stop_IT(&htim2);
 
 }
 void BSP_TIM3_IRQHandler(void)
 {
 	HAL_TIM_IRQHandler(&htim3);
-	HAL_TIM_Base_Stop_IT(&htim3);
-	DEBUG("TIM3 IRQ\r\n");
+	BSP_AD7682_CheckFilterStatus();
+	//HAL_TIM_Base_Stop_IT(&htim3);
+	//DEBUG("TIM3 IRQ\r\n");
 }
 
 /**
