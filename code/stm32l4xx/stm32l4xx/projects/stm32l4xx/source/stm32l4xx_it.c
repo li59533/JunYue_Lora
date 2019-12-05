@@ -23,6 +23,7 @@
 #include "stm32l4xx_it.h"
 #include "clog.h"
 #include "stm32_bsp_conf.h"
+#include "bsp_lmt01.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -218,7 +219,19 @@ void TIM3_IRQHandler(void)
 	BSP_TIM3_IRQHandler();
 }
 
+void USART1_IRQHandler(void)
+{
+	BSP_Usart1_IRQHandler();
+}
+void EXTI9_5_IRQHandler(void)
+{
+	BSP_LMT01_EXTI_IRQHandler();
+}
 
+void TIM4_IRQHandler(void)
+{
+	BSP_LMT01_TIM4_IRQHandler();
+}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

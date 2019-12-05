@@ -22,7 +22,7 @@
 #include "clog.h"
 #include "dataprocess_task.h"
 #include "bsp_led.h"
-#include "first_task.h"
+#include "dataemu_task.h"
 /**
  * @addtogroup    app_datafilter_Modules 
  * @{  
@@ -306,30 +306,34 @@ void APP_DataFilter_Process(void)
 			currentSAMPLEblock=(currentSAMPLEblock+1)%2;
 			//osSemaphoreRelease(seconds_sample_data_readyHandle);
 			//Dataprocess_Task_Event_Start( DATAPEOCESS_TASK_CALC_EVENT, EVENT_FROM_TASK);
-			First_Task_Event_Start(FIRST_TASK_TEST2_EVENT, EVENT_FROM_TASK);
+			
+			DataEmu_Task_Event_Start(DATAEMU_TASK_EMU_EVENT , EVENT_FROM_TASK);
 			DEBUG("Sample Complete\r\n");
 		}
 	}
 	//			bsp_LedStatue(1,1);
 
 }
-int16_t test_wave = 0;
-
+//int16_t test_wave[4] = {0};
 void APP_DataFilter_UpdateAccData(int16_t data , uint8_t channel , uint32_t DataIndex)
 {
 	switch(channel){
 		case 0:
-			piz_emu_data[currentSAMPLEblock][DataIndex]=data;
+			piz_emu_data[currentSAMPLEblock][DataIndex] = data;
+			//test_wave[0] = data;
 			//test_wave = data;
 		break;
 		case 1:
 			mems_emu_data[currentSAMPLEblock][0][DataIndex] = data;
+			//test_wave[1] = data;
 		break;
 		case 2:
 			mems_emu_data[currentSAMPLEblock][1][DataIndex] = data;
+			//test_wave[2] = data;
 		break;
 		case 3:
 			mems_emu_data[currentSAMPLEblock][2][DataIndex] = data;
+			//test_wave[3] = data;
 		break;
 		default:
 			break;

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>ICCARM,ARM_MATH_CM4,__FPU_PRESENT =1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\compoents\CMSIS\Device\ST\STM32L4xx\Include;..\..\..\..\compoents\CMSIS\Include;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc\Legacy;..\..\..\..\compoents\Utilities;..\..\..\components\bsp\stm32l4xx_bsp\inc;..\..\..\components\mdl\clog;..\..\..\components\mdl\cshell;..\..\..\components\mdl\header;..\..\..\components\mdl\osal\ports;..\..\..\components\mdl\rttviewer;..\source;..\source\application\hal_task;..\source\application\user_task;..\source\fml\system;..\..\..\components\bsp;..\..\..\components\mdl\osal\src;..\..\..\components\bsp;..\..\..\components\bsp\stm32l4xx_bsp;..\..\..\components\bsp;..\..\..\components\mdl\freertos\inc;..\..\..\components\mdl\freertos\portable;..\source\application\first_task;..\source\application;..\..\..\components\mdl\freertos\inc;..\source\application\second_task;..\source\application\dataprocess_task;..\source\fml;..\..\..\components\mdl\freertos;..\..\..\..\compoents\CMSIS\DSP\Include</IncludePath>
+              <IncludePath>..\..\..\..\compoents\CMSIS\Device\ST\STM32L4xx\Include;..\..\..\..\compoents\CMSIS\Include;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc\Legacy;..\..\..\..\compoents\Utilities;..\..\..\components\bsp\stm32l4xx_bsp\inc;..\..\..\components\mdl\clog;..\..\..\components\mdl\cshell;..\..\..\components\mdl\header;..\..\..\components\mdl\osal\ports;..\..\..\components\mdl\rttviewer;..\source;..\source\application\hal_task;..\source\application\user_task;..\source\fml\system;..\..\..\components\bsp;..\..\..\components\mdl\osal\src;..\..\..\components\bsp;..\..\..\components\bsp\stm32l4xx_bsp;..\..\..\components\bsp;..\..\..\components\mdl\freertos\inc;..\..\..\components\mdl\freertos\portable;..\source\application\first_task;..\source\application;..\..\..\components\mdl\freertos\inc;..\source\application\second_task;..\source\application\dataprocess_task;..\source\fml;..\..\..\components\mdl\freertos;..\..\..\..\compoents\CMSIS\DSP\Include;..\source\application\net_task;..\source\application\dataemu_task;..\source\application\tempareture_task;..\source\application\datasend_task</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -457,6 +457,11 @@
               <FilePath>..\source\application\first_task\first_task.c</FilePath>
             </File>
             <File>
+              <FileName>datasend_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\application\datasend_task\datasend_task.c</FilePath>
+            </File>
+            <File>
               <FileName>second_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\application\second_task\second_task.c</FilePath>
@@ -465,6 +470,21 @@
               <FileName>dataprocess_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\application\dataprocess_task\dataprocess_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>net_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\application\net_task\net_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>dataemu_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\application\dataemu_task\dataemu_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>temperature_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\application\tempareture_task\temperature_task.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -496,6 +516,11 @@
               <FileType>1</FileType>
               <FilePath>..\source\fml\app_dataemu.c</FilePath>
             </File>
+            <File>
+              <FileName>app_datasend.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\fml\app_datasend.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -510,6 +535,11 @@
               <FileName>stm32_bsp_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\components\bsp\stm32_bsp_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_bsp_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\components\bsp\stm32l4xx_bsp\stm32l4xx_bsp_conf.h</FilePath>
             </File>
             <File>
               <FileName>stm32l4xx_bsp_systick.c</FileName>
@@ -527,19 +557,9 @@
               <FilePath>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_exti.c</FilePath>
             </File>
             <File>
-              <FileName>stm32l4xx_bsp_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\components\bsp\stm32l4xx_bsp\stm32l4xx_bsp_conf.h</FilePath>
-            </File>
-            <File>
               <FileName>stm32l4xx_bsp_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\bsp\bsp_led.c</FilePath>
             </File>
             <File>
               <FileName>stm32l4xx_bsp_usart.c</FileName>
@@ -567,9 +587,34 @@
               <FilePath>..\..\..\components\bsp\bsp_ad7682_port.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_lm78.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\bsp\bsp_lm78.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lm78_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\bsp\bsp_lm78_port.c</FilePath>
+            </File>
+            <File>
               <FileName>double_integral.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\components\bsp\double_integral.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\bsp\bsp_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\bsp\bsp_queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lmt01.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\bsp\bsp_lmt01.c</FilePath>
             </File>
           </Files>
         </Group>

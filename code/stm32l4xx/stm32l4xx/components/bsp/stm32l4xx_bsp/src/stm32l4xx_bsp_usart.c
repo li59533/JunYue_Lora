@@ -18,6 +18,7 @@
  * @{  
  */
 #include "clog.h"
+#include "bsp_queue.h"
 /**
  * @addtogroup    stm32l4xx_bsp_usart_Modules 
  * @{  
@@ -71,8 +72,14 @@
  * @{  
  */
 
+// --- Usart data space ---
+
 static uint8_t bsp_usart1_tx[BSP_USART1_TX_SIZE] = { 0 };
 static uint8_t bsp_usart1_rx[BSP_USART1_RX_SIZE] = { 0 };
+
+// ------------------------
+
+
 
 DMA_HandleTypeDef usart1_dma_tx = 
 {
@@ -106,9 +113,9 @@ BSP_Usart_Instance_t BSP_Usart1 =
     .GPIO_Instance.GPIO_Init.Mode = GPIO_MODE_AF_PP,
     .GPIO_Instance.GPIO_Init.Pull = GPIO_PULLUP,
     .GPIO_Instance.GPIO_Init.Speed = GPIO_SPEED_FREQ_VERY_HIGH,
-    //.GPIO_Instance.GPIO_Init.Alternate
+    .GPIO_Instance.GPIO_Init.Alternate = GPIO_AF7_USART1,
     .USART_Handle.Instance = USART1,
-    .USART_Handle.Init.BaudRate = 115200,
+    .USART_Handle.Init.BaudRate = 9600,
     .USART_Handle.Init.WordLength = USART_WORDLENGTH_8B,
     .USART_Handle.Init.StopBits = USART_STOPBITS_1,
     .USART_Handle.Init.Parity = USART_PARITY_NONE,
@@ -126,6 +133,13 @@ BSP_Usart_Instance_t BSP_Usart1 =
     .USART_Handle.hdmarx = &usart1_dma_rx,
 };
 
+
+
+
+static uint16_t usart1_i = 0;
+
+
+UART_HandleTypeDef husart1 ;
 
 /**
  * @}
@@ -158,58 +172,132 @@ BSP_Usart_Instance_t BSP_Usart1 =
  * @{  
  */
 
+
+
+
 void BSP_Usart_Init(BSP_Usart_Instance_t * BSP_Usart_Instance)
 {
     //--- RCC Enable --- 
-	HAL_GPIO_Init(BSP_Usart_Instance->GPIO_Instance.GPIOx , &BSP_Usart_Instance->GPIO_Instance.GPIO_Init);
-    
-    if(HAL_USART_Init(&BSP_Usart_Instance->USART_Handle) != HAL_OK)
+   
+	husart1.Instance = USART1;
+	husart1.Init.BaudRate = 9600;
+	husart1.Init.WordLength = UART_WORDLENGTH_8B;
+	husart1.Init.StopBits = UART_STOPBITS_1;
+	husart1.Init.Parity = UART_PARITY_NONE;
+	husart1.Init.Mode = UART_MODE_TX_RX;
+	husart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	husart1.Init.OverSampling = UART_OVERSAMPLING_16;
+	husart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+	husart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+	husart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;	
+
+	//USART1->CR2 |= 0x01 << 15;
+	husart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
+	husart1.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
+	if (HAL_UART_Init(&husart1) != HAL_OK)
 	{
-		DEBUG("Hal_Usart Init Err\r\n");
+	DEBUG("Hal_Usart Init Err\r\n");
+	}
+	if (HAL_UARTEx_SetTxFifoThreshold(&husart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+	{
+	DEBUG("Hal_Usart Init Err\r\n");
+	}
+	if (HAL_UARTEx_SetRxFifoThreshold(&husart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+	{
+	DEBUG("Hal_Usart Init Err\r\n");
+	}
+	if (HAL_UARTEx_DisableFifoMode(&husart1) != HAL_OK)
+	{
+	DEBUG("Hal_Usart Init Err\r\n");
+	}
+	//MODIFY_REG(husart1.Instance->CR2, USART_CR2_SWAP, UART_ADVFEATURE_SWAP_ENABLE);
+	
+}
+
+
+
+void BSP_Usart_RevOneByteIT_Conf(BSP_Usart_Instance_t * BSP_Usart_Instance)  // IT in rev 1 byte
+{
+	
+	if( BSP_Usart_Instance->USART_Handle.Instance == USART1)
+	{
+		HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
 	}
 }
 
 
 void BSP_Usart_WriteBytes_Common(BSP_Usart_Instance_t * BSP_Usart_Instance , uint8_t * buf , uint16_t len) // blocking mode
 {
-	HAL_USART_Transmit(&BSP_Usart_Instance->USART_Handle, buf , len , 0);
+	HAL_UART_Transmit(&husart1, buf , len , 1000);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ------------- HAL Will Call This Func ---------------
-void HAL_UART_MspInit(UART_HandleTypeDef * huart)
+void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
     if(huart->Instance == USART1)
     {
         // ----- CLK Enbale -----
-        __HAL_RCC_DMA1_CLK_ENABLE();
+        //__HAL_RCC_DMA1_CLK_ENABLE();
 		__HAL_RCC_GPIOA_CLK_ENABLE();
 		__HAL_RCC_USART1_CLK_ENABLE();
         // ----------------------
+		GPIO_InitTypeDef GPIO_Init;
+		GPIO_Init.Alternate = GPIO_AF7_USART1;
+		GPIO_Init.Mode = GPIO_MODE_AF_PP;
+		GPIO_Init.Pin = GPIO_PIN_9|GPIO_PIN_10;
+		GPIO_Init.Pull = GPIO_NOPULL;
+		GPIO_Init.Speed = GPIO_SPEED_FAST;
+		
+		HAL_GPIO_Init(GPIOA , &GPIO_Init);
+
+		// --------NVIC configuration--------
+
+		__HAL_UART_ENABLE_IT( &husart1, UART_IT_IDLE); 
+		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
+		HAL_NVIC_SetPriority(USART1_IRQn, 7, 0);
+		HAL_NVIC_EnableIRQ(USART1_IRQn);
+		// ----------------------------------
+		
     }
-	
     DEBUG("Enter the hal_uart_mspinit\r\n");
 }
 // -----------------------------------------------------
+
+
+// ------------------USART1_IRQHandler------------------
+void BSP_Usart1_IRQHandler(void)
+{
+	HAL_UART_IRQHandler( &husart1);
+	if(__HAL_UART_GET_IT(&husart1, UART_IT_IDLE) == SET)
+	{
+		BSP_Queue_Enqueue( BSP_QUEUE_UART1_REV , bsp_usart1_rx , usart1_i);
+		
+		usart1_i = 0;
+		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
+		DEBUG("ENTER Uart IDLE \r\n");
+	}
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	
+	if(huart->Instance == USART1)
+	{
+		//HAL_UART_Receive_IT( huart , bsp_usart1_rx + usart1_i , 1);
+		HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
+			
+		usart1_i ++;
+		if(usart1_i >= BSP_USART1_RX_SIZE)
+		{
+			usart1_i = 0;
+		}
+	}
+}
+
+
+
+
 
 /**
  * @}

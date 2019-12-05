@@ -1,6 +1,6 @@
 /**
  **************************************************************************************************
- * @file        first_task.h
+ * @file        bsp_lm78_port.h
  * @author
  * @version    v0.1.0
  * @date        
@@ -10,8 +10,8 @@
  *
  **************************************************************************************************
  */
-#ifndef _FIRST_TASK_H_
-#define _FIRST_TASK_H_
+#ifndef _BSP_LM78_PORT_H_
+#define _BSP_LM78_PORT_H_
 
 /**
  * @addtogroup    XXX 
@@ -19,22 +19,21 @@
  */
 #include "self_def.h"
 /**
- * @addtogroup    first_task_Modules 
+ * @addtogroup    bsp_lm78_port_Modules 
  * @{  
  */
 
 /**
- * @defgroup      first_task_Exported_Macros 
+ * @defgroup      bsp_lm78_port_Exported_Macros 
  * @{  
  */
-#define FIRST_TASK_TEST_EVENT 			(0X01 << 0)
-#define FIRST_TASK_TEST2_EVENT			(0X01 << 1)
+
 /**
  * @}
  */
 
 /**
- * @defgroup      first_task_Exported_Constants
+ * @defgroup      bsp_lm78_port_Exported_Constants
  * @{  
  */
 
@@ -43,7 +42,7 @@
  */
  
 /**
- * @defgroup      first_task_Exported_Types 
+ * @defgroup      bsp_lm78_port_Exported_Types 
  * @{  
  */
 
@@ -52,7 +51,7 @@
  */
 
 /**
- * @defgroup      first_task_Exported_Variables 
+ * @defgroup      bsp_lm78_port_Exported_Variables 
  * @{  
  */
 
@@ -61,15 +60,12 @@
  */
 
 /**
- * @defgroup      first_task_Exported_Functions 
+ * @defgroup      bsp_lm78_port_Exported_Functions 
  * @{  
  */
-uint32_t First_Task_Init(void); 
-void First_Task(void * pvParameter);
-void First_Task_Event_Start(uint32_t events, uint8_t event_from);
-void First_Task_Tim_Init(void);
-void First_Task_StartTim(uint16_t time_count);
 
+void BSP_LM78_Port_Init(void);
+void BSP_LM78_SendBytes(uint8_t * buf, uint16_t len );
 /**
  * @}
  */
@@ -82,5 +78,3 @@ void First_Task_StartTim(uint16_t time_count);
  * @}
  */
 #endif
-
-

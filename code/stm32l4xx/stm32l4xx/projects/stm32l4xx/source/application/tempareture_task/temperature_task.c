@@ -1,6 +1,6 @@
 /**
  **************************************************************************************************
- * @file        second_task.c
+ * @file        temperature_task.c
  * @author
  * @version   v0.1.0
  * @date        
@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "second_task.h"
+#include "temperature_task.h"
 
 /**
  * @addtogroup    XXX 
@@ -21,15 +21,14 @@
 #include "task.h"
 #include "stm32_bsp_conf.h"
 #include "system_param.h"
-#include "first_task.h"
-#include "dataprocess_task.h"
+#include "bsp_lmt01.h"
 /**
- * @addtogroup    second_task_Modules 
+ * @addtogroup    temperature_task_Modules 
  * @{  
  */
 
 /**
- * @defgroup      second_task_IO_Defines 
+ * @defgroup      temperature_task_IO_Defines 
  * @brief         
  * @{  
  */
@@ -39,27 +38,7 @@
  */
 
 /**
- * @defgroup      second_task_Macros_Defines 
- * @brief         
- * @{  
- */
-
-/**
- * @}
- */
- 
-/**
- * @defgroup      second_task_Constants_Defines 
- * @brief         
- * @{  
- */
-
-/**
- * @}
- */
-
-/**
- * @defgroup      second_task_Private_Types
+ * @defgroup      temperature_task_Macros_Defines 
  * @brief         
  * @{  
  */
@@ -69,7 +48,17 @@
  */
  
 /**
- * @defgroup      second_task_Private_Variables 
+ * @defgroup      temperature_task_Constants_Defines 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      temperature_task_Private_Types
  * @brief         
  * @{  
  */
@@ -79,17 +68,7 @@
  */
  
 /**
- * @defgroup      second_task_Public_Variables 
- * @brief         
- * @{  
- */
-TaskHandle_t  Second_Task_Handle = NULL;
-/**
- * @}
- */
-
-/**
- * @defgroup      second_task_Private_FunctionPrototypes 
+ * @defgroup      temperature_task_Private_Variables 
  * @brief         
  * @{  
  */
@@ -97,36 +76,59 @@ TaskHandle_t  Second_Task_Handle = NULL;
 /**
  * @}
  */
+ 
+/**
+ * @defgroup      temperature_task_Public_Variables 
+ * @brief         
+ * @{  
+ */
+TaskHandle_t  Temperature_Task_Handle = NULL;
+/**
+ * @}
+ */
 
 /**
- * @defgroup      second_task_Functions 
+ * @defgroup      temperature_task_Private_FunctionPrototypes 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      temperature_task_Functions 
  * @brief         
  * @{  
  */
 
 
-uint32_t Second_Task_Init(void)
+uint32_t Temperature_Task_Init(void)
 {
 	BaseType_t basetype = { 0 };
-	basetype = xTaskCreate(Second_Task,\
-							"Second_Task",\
-							1024,
+	basetype = xTaskCreate(Temperature_Task,\
+							"Temperature_Task",\
+							512,
 							NULL,
 							4,
-							&Second_Task_Handle);
+							&Temperature_Task_Handle);
 	return basetype;
 }
 
-void Second_Task(void * pvParameter)
+void Temperature_Task(void * pvParameter)
 {
-	DEBUG("Second Task Enter\r\n");
+	char str_temp[30] ;
+	BSP_LMT01_Init();
+	DEBUG("Temperature Task Enter\r\n");
 	while(1)
 	{
-		DEBUG("Second Task Looping\r\n");
-		vTaskDelay(pdMS_TO_TICKS(3000));
-
+		//DEBUG("Temperature Task Looping\r\n");
+		BSP_LMT01_StartGetValue();
+		vTaskDelay(pdMS_TO_TICKS(500));
+		//snprintf(str_temp,30,"%0.3f",g_SystemParam_Param.pdate);
+		//DEBUG("Temperature:%s\r\n",str_temp);
 	}
-	
 }
 							
 

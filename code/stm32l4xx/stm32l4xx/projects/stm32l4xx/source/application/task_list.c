@@ -21,11 +21,15 @@
 
 #include "first_task.h"
 #include "second_task.h"
+#include "net_task.h"
 #include "bsp_led.h"
 #include "stm32l4xx_hal.h"
 #include "clog.h"
 #include "dataprocess_task.h"
 #include "semphr.h"
+#include "dataemu_task.h"
+#include "temperature_task.h"
+#include "datasend_task.h"
 /**
  * @addtogroup    task_list_Modules 
  * @{  
@@ -111,10 +115,14 @@ void RTOS_Init(void)
 {
 	BaseType_t basetype = { 0 };
 	
-	basetype = First_Task_Init();
-	basetype = Second_Task_Init();
+	//basetype = First_Task_Init();
+	//basetype = Second_Task_Init();
 	basetype = Dataprocess_Task_Init();
-
+	basetype = Net_Task_Init();
+	basetype = DataEmu_Task_Init();
+	basetype = Temperature_Task_Init();
+	basetype = DataSend_Task_Init();
+	
 	if(pdPASS == basetype)
 	{
 		vTaskStartScheduler();

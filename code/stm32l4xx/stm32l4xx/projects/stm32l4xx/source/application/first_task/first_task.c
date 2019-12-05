@@ -19,6 +19,7 @@
 #include "clog.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "timers.h"
 #include "stm32_bsp_conf.h"
 #include "system_param.h"
 #include "bsp_led.h"
@@ -76,6 +77,8 @@
  * @brief         
  * @{  
  */
+TimerHandle_t first_task_tim;
+TaskHandle_t  First_Task_Handle = NULL;
 
 /**
  * @}
@@ -96,8 +99,8 @@
  * @brief         
  * @{  
  */
-TaskHandle_t  First_Task_Handle = NULL;
- 
+
+static void first_task_tim_callback(TimerHandle_t xTimer);
 /**
  * @}
  */
@@ -127,11 +130,7 @@ void First_Task(void * pvParameter)
 	
 	DEBUG("First Task Enter\r\n");
 	UBaseType_t firsttask_ramainheap = 0;
-//	BSP_Flash_Test();
-//	APP_Power_AV3_3_ON();
-//	BSP_AD7682_Init();
-//	BSP_AD7682_StartSample();
-	
+
 	while(1)
 	{
 		xTaskNotifyWait(0x00,ULONG_MAX,&event_flag , portMAX_DELAY);
@@ -141,13 +140,11 @@ void First_Task(void * pvParameter)
 			DEBUG("First Task Looping\r\n");
 			firsttask_ramainheap = uxTaskGetStackHighWaterMark(NULL);
 			DEBUG("First Task ramain heap:%d %%\r\n",firsttask_ramainheap);
-			//Bsp_LedToggle(BSP_LED_TEST);
-			//vTaskDelay(pdMS_TO_TICKS(10000));			
+	
 		}
 		if((event_flag & FIRST_TASK_TEST2_EVENT) != 0x00)
 		{
 			DEBUG("First Task FIRST_TASK_TEST2_EVENT\r\n");
-			APP_DataEmu_Process();
 		}		
 		
 		
@@ -173,7 +170,30 @@ void First_Task_Event_Start(uint32_t events, uint8_t event_from)
 		default:break;
 	}
 }
-						
+
+
+
+
+void First_Task_Tim_Init(void)
+{
+	first_task_tim = xTimerCreate(	"FirstTimOUT",			/*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+									pdMS_TO_TICKS(1000),
+									pdTRUE,
+									NULL,
+									first_task_tim_callback );
+}
+
+void First_Task_StartTim(uint16_t time_count)
+{
+	xTimerChangePeriod( first_task_tim,  pdMS_TO_TICKS(time_count) , 0 );
+	xTimerStart( first_task_tim,0);
+}
+static void first_task_tim_callback(TimerHandle_t xTimer)
+{
+	//First_Task_Event_Start(First_TASK_SEND_AT_EVENT, EVENT_FROM_TASK);
+}
+
+
 
 /**
  * @}

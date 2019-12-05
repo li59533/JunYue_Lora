@@ -113,9 +113,7 @@ int main(void)
     System_Load();  // init bsp peripheral and load system param
     
 	RTOS_Init();
-//	BSP_AD7682_Init();
-//	APP_DataFilter_Init();
-	
+
     while(1)
 	{
 		HAL_Delay(1000);

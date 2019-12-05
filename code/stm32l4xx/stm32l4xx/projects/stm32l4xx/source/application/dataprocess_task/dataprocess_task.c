@@ -129,17 +129,12 @@ void Dataprocess_Task(void * pvParameter)
 	BSP_AD7682_Init();
 	APP_DataFilter_Init();
 	
-//	BSP_TIM_Init();
-//	BSP_SPI_Init();	
-//	BSP_TIM8_Start();
+
 //	
 	while(1)
 	{
 		xTaskNotifyWait(0x00,ULONG_MAX,&event_flag , portMAX_DELAY);
-		
-		
-		
-		
+
 		if((event_flag & DATAPEOCESS_TASK_CALC_EVENT) != 0x00)
 		{
 			dataprocess_ramainheap = uxTaskGetStackHighWaterMark(NULL);
