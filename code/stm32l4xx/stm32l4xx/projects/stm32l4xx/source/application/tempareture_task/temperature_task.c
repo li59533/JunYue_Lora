@@ -118,14 +118,22 @@ uint32_t Temperature_Task_Init(void)
 
 void Temperature_Task(void * pvParameter)
 {
-	char str_temp[30] ;
 	BSP_LMT01_Init();
 	DEBUG("Temperature Task Enter\r\n");
+	
+	
+	RTC_T rtc_data ;
+	
 	while(1)
 	{
 		//DEBUG("Temperature Task Looping\r\n");
 		BSP_LMT01_StartGetValue();
-		vTaskDelay(pdMS_TO_TICKS(500));
+		vTaskDelay(pdMS_TO_TICKS(5000));
+		
+		rtc_data = BSP_RTC_Get();
+		
+		DEBUG("RTC: %d ",rtc_data.Sec);
+		
 		//snprintf(str_temp,30,"%0.3f",g_SystemParam_Param.pdate);
 		//DEBUG("Temperature:%s\r\n",str_temp);
 	}

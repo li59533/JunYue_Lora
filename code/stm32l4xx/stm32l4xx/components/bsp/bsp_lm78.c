@@ -84,6 +84,24 @@ typedef struct
 	uint16_t len;
 }LM78_Sendbuf_t;
 
+
+typedef struct 
+{
+	LM78_Sendbuf_t sendbuf[5];
+	uint8_t in ;
+	uint8_t out;
+	uint8_t count ;
+	uint8_t size ;
+}LM78_SendQueue_t;
+
+LM78_SendQueue_t LM78_SendQueue = 
+{
+	.in = 0,
+	.out = 0,
+	.count = 0,
+	.size = sizeof(LM78_SendQueue.sendbuf) / sizeof( LM78_SendQueue.sendbuf[0]),
+};
+
 LM78_Sendbuf_t lm78_sendbuf = 
 {
 	.len = 0,
@@ -126,7 +144,7 @@ typedef enum
 const char LM78_AT_AT[] 				= "\r\nAT\r\n";
 const char LM78_AT_GetVersion[] 		= "\r\nAT+VER=?\r\n";
 const char LM78_AT_GetAddr[] 			= "\r\nAT+DADDR=?\r\n";
-const char LM78_AT_SendOriginalData[] 	= "\r\nAT+SEND=2:";
+const char LM78_AT_SendOriginalData[] 	= "\r\nAT+SENDB=2:";
 const char LM78_AT_SendstrData[] 		= "\r\nAT+SEND=2:";
 const char LM78_AT_Rest[] 				= "\r\nATZ\r\n";
 
@@ -256,7 +274,7 @@ int8_t BSP_LM78_StartSend(uint8_t *buf, uint16_t len)
 	*(lm78_sendbuf.sendbuf + sizeof(LM78_AT_SendOriginalData) - 1 + len  + 1) = '\n';
 	*(lm78_sendbuf.sendbuf + sizeof(LM78_AT_SendOriginalData) - 1 + len  + 2) = 0;
 
-	lm78_sendbuf.len = strlen((const char *)lm78_sendbuf.sendbuf);
+	lm78_sendbuf.len =  sizeof(LM78_AT_SendOriginalData) - 1 + len  + 2 ;//strlen((const char *)lm78_sendbuf.sendbuf);
 	bsp_lm78_statusEnqueue(LM78_STATUS_SEND_BYTES_REQ);
 	
 	return 0 ;
@@ -269,7 +287,9 @@ void BSP_LM78_ReqProcess(void)
 	{
 		if(status == bsp_lm78_getCurStatus())
 		{
+			
 			bsp_lm78_statusDequeue();
+			Net_Task_Event_Start(NET_TASK_SEND_AT_EVENT, EVENT_FROM_TASK);
 			return;
 		}
 		else
@@ -335,6 +355,8 @@ void BSP_LM78_ReqProcess(void)
 }
 
 
+
+
 static void bsp_lm78_statusEnqueue(uint8_t status )
 {
 	LM78_StatusQueue.status_buf[LM78_StatusQueue.in] = status;
@@ -378,6 +400,10 @@ static uint8_t bsp_lm78_getqueueCount(void)
 {
 	return LM78_StatusQueue.count;
 }
+
+
+
+
 
 /**
  * @}

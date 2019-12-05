@@ -120,32 +120,44 @@ void app_datasend_test(void)
 int8_t APP_DataSend_SendCharacteristic(void)
 {
 	char app_databuf[200] = { 0 };
+	char app_datastrbuf[200] = { 0 };
+	uint16_t ptr = 0;
 	uint8_t app_databuf_ptr = 0;
-	
+	uint16_t len = 0 ;
 	app_datasend_test();
+	
+	
 	
 	for(uint8_t i = 0 ; i < 3; i ++)
 	{
-		memcpy(app_databuf + 20*i + 0 , &g_SystemParam_Param.EffectiveValue[i] , 4 );
-		memcpy(app_databuf + 20*i + 4, &g_SystemParam_Param.Vrms[i] , 4 );
-		memcpy(app_databuf + 20*i + 8, &g_SystemParam_Param.Drms[i] , 4 );
-		memcpy(app_databuf + 20*i + 12, &g_SystemParam_Param.KurtosisIndex[i] , 4 );
-		memcpy(app_databuf + 20*i + 16, &g_SystemParam_Param.Envelop[i] , 4 );
+//		memcpy(app_databuf + 20*i + 0 , &g_SystemParam_Param.EffectiveValue[i] , 4 );
+//		memcpy(app_databuf + 20*i + 4, &g_SystemParam_Param.Vrms[i] , 4 );
+//		memcpy(app_databuf + 20*i + 8, &g_SystemParam_Param.Drms[i] , 4 );
+//		memcpy(app_databuf + 20*i + 12, &g_SystemParam_Param.KurtosisIndex[i] , 4 );
+//		memcpy(app_databuf + 20*i + 16, &g_SystemParam_Param.Envelop[i] , 4 );
+//		len = 20*i + 16 + 4;
 		
-		/*
 		app_databuf_ptr += snprintf(app_databuf + app_databuf_ptr, 200 - app_databuf_ptr , "E%0.3fV%0.3fD%0.3fK%0.3fE%0.3f",g_SystemParam_Param.EffectiveValue[i],\
 																										g_SystemParam_Param.Vrms[i],\
 																										g_SystemParam_Param.Drms[i],\
 																										g_SystemParam_Param.KurtosisIndex[i],\
-																										g_SystemParam_Param.Envelop[i]);
-		*/	
+																										g_SystemParam_Param.Envelop[i]);	
 	}
+
+//	for(uint16_t i = 0 ; i < len ; i ++)
+//	{
+//		ptr += snprintf( app_datastrbuf + ptr , 200 - ptr , "%02X",app_databuf[i]);
+//	}
 	
-	app_databuf_ptr += snprintf(app_databuf + app_databuf_ptr, 200 - app_databuf_ptr ,"T%0.3f", g_SystemParam_Param.pdate);
+	//snprintf(app_datastrbuf, 200 , "%0.3f",g_SystemParam_Param.pdate);
+	//memcpy(app_datastrbuf,(uint8_t * )&g_SystemParam_Param.pdate , 4);
+	
+	
 	DEBUG("This Value will send:%s len:%d\r\n",app_databuf,strlen((const char *)app_databuf));
 	
+	uint8_t test_buf[8] = {0x00 , 0x00, 0x34,0x12,0x00,0x00,0x38,0x00};
 	
-	BSP_LM78_StartSend((uint8_t *)app_databuf, strlen((const char *)app_databuf));
+	BSP_LM78_StartSend((uint8_t *)test_buf, 8);
 	return 0 ; 
 }
 
