@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>ICCARM,ARM_MATH_CM4,__FPU_PRESENT =1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\compoents\CMSIS\Device\ST\STM32L4xx\Include;..\..\..\..\compoents\CMSIS\Include;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc\Legacy;..\..\..\..\compoents\Utilities;..\..\..\components\bsp\stm32l4xx_bsp\inc;..\..\..\components\mdl\clog;..\..\..\components\mdl\cshell;..\..\..\components\mdl\header;..\..\..\components\mdl\osal\ports;..\..\..\components\mdl\rttviewer;..\source;..\source\application\hal_task;..\source\application\user_task;..\source\fml\system;..\..\..\components\bsp;..\..\..\components\mdl\osal\src;..\..\..\components\bsp;..\..\..\components\bsp\stm32l4xx_bsp;..\..\..\components\bsp;..\..\..\components\mdl\freertos\inc;..\..\..\components\mdl\freertos\portable;..\source\application\first_task;..\source\application;..\..\..\components\mdl\freertos\inc;..\source\application\second_task;..\source\application\dataprocess_task;..\source\fml;..\..\..\components\mdl\freertos;..\..\..\..\compoents\CMSIS\DSP\Include;..\source\application\net_task;..\source\application\dataemu_task;..\source\application\tempareture_task;..\source\application\datasend_task;..\source\application\idle_task</IncludePath>
+              <IncludePath>..\..\..\..\compoents\CMSIS\Device\ST\STM32L4xx\Include;..\..\..\..\compoents\CMSIS\Include;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc;..\..\..\..\compoents\STM32L4xx_HAL_Driver\Inc\Legacy;..\..\..\..\compoents\Utilities;..\..\..\components\bsp\stm32l4xx_bsp\inc;..\..\..\components\mdl\clog;..\..\..\components\mdl\cshell;..\..\..\components\mdl\header;..\..\..\components\mdl\osal\ports;..\..\..\components\mdl\rttviewer;..\source;..\source\application\hal_task;..\source\application\user_task;..\source\fml\system;..\..\..\components\bsp;..\..\..\components\mdl\osal\src;..\..\..\components\bsp;..\..\..\components\bsp\stm32l4xx_bsp;..\..\..\components\bsp;..\..\..\components\mdl\freertos\inc;..\..\..\components\mdl\freertos\portable;..\source\application\first_task;..\source\application;..\..\..\components\mdl\freertos\inc;..\source\application\second_task;..\source\application\dataprocess_task;..\source\fml;..\..\..\components\mdl\freertos;..\..\..\..\compoents\CMSIS\DSP\Include;..\source\application\net_task;..\source\application\dataemu_task;..\source\application\tempareture_task;..\source\application\datasend_task;..\source\application\idle_task;..\source\application\hal_task</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -490,6 +490,11 @@
               <FileName>idle_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\application\idle_task\idle_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\application\hal_task\hal_task.c</FilePath>
             </File>
           </Files>
         </Group>

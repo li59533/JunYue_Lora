@@ -492,6 +492,16 @@ void RTC_WKUP_IRQHandler(void)
 }
 
 
+void BSP_RTC_SetWakeTime(uint32_t WakeUpCounter, uint32_t WakeUpClock)   // Set Wake time IT
+{
+	HAL_RTCEx_DeactivateWakeUpTimer(&RtcHandle);
+	
+	HAL_RTCEx_SetWakeUpTimer_IT(&RtcHandle, WakeUpCounter, WakeUpClock);
+}
+
+
+
+
 /**
  * @}
  */

@@ -24,6 +24,7 @@
 #include "bsp_ad7682.h"
 #include "app_power.h"
 #include "app_dataemu.h"
+#include "bsp_led.h"
 /**
  * @addtogroup    dataprocess_task_Modules 
  * @{  
@@ -146,6 +147,7 @@ void Dataprocess_Task(void * pvParameter)
 		
 		if((event_flag & DATAPEOCESS_TASK_FILTER_EVENT) != 0x00)
 		{
+			Bsp_LedToggle(BSP_LED_TEST);
 			//DEBUG("DATAPEOCESS_TASK_FILTER_EVENT\r\n");
 			APP_DataFilter_Process();
 			//vTaskDelay(pdMS_TO_TICKS(10000));			

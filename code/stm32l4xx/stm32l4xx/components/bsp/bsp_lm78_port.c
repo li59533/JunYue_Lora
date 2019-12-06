@@ -103,7 +103,7 @@
 void BSP_LM78_Port_Init(void)
 {
 	BSP_Usart_Init( &BSP_Usart1);
-	BSP_Usart_RevOneByteIT_Conf(&BSP_Usart1);
+	//BSP_Usart_RevOneByteIT_Conf(&BSP_Usart1);
 	
 }
 

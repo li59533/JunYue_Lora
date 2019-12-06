@@ -151,6 +151,14 @@ void APP_Power_LMT01_PowerDisable(void)
 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0,GPIO_PIN_RESET);
 }
 
+void APP_Power_EnterStandbyMode(uint32_t WakeUpCounter)
+{
+	__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+	BSP_RTC_SetWakeTime( WakeUpCounter,  RTC_WAKEUPCLOCK_CK_SPRE_16BITS);
+	HAL_PWR_EnterSTANDBYMode();
+}
+
+
 /**
  * @}
  */

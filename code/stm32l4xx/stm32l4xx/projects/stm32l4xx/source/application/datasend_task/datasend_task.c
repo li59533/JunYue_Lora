@@ -126,7 +126,7 @@ uint32_t DataSend_Task_Init(void)
 void DataSend_Task(void * pvParameter)
 {
 	uint32_t event_flag = 0;
-	DataSend_Task_StartTim(60000);
+	DataSend_Task_StartTim(2000);
 	DEBUG("DataSend Task Enter\r\n");
 
 	while(1)

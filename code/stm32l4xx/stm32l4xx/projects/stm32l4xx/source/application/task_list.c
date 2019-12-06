@@ -30,6 +30,7 @@
 #include "dataemu_task.h"
 #include "temperature_task.h"
 #include "datasend_task.h"
+#include "hal_task.h"
 /**
  * @addtogroup    task_list_Modules 
  * @{  
@@ -122,6 +123,7 @@ void RTOS_Init(void)
 	basetype = DataEmu_Task_Init();
 	basetype = Temperature_Task_Init();
 	basetype = DataSend_Task_Init();
+	basetype = Hal_Task_Init();
 	
 	if(pdPASS == basetype)
 	{

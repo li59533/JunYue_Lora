@@ -140,7 +140,7 @@ static uint16_t usart1_i = 0;
 
 
 UART_HandleTypeDef husart1 ;
-
+DMA_HandleTypeDef hdma ; 
 /**
  * @}
  */
@@ -231,6 +231,11 @@ void BSP_Usart_WriteBytes_Common(BSP_Usart_Instance_t * BSP_Usart_Instance , uin
 	HAL_UART_Transmit(&husart1, buf , len , 1000);
 }
 
+void BSP_Usart_WriteBytes_DMA(BSP_Usart_Instance_t * BSP_Usart_Instance , uint8_t * buf , uint16_t len)
+{
+	HAL_UART_Transmit_DMA( &husart1, buf, len);
+}
+
 
 // ------------- HAL Will Call This Func ---------------
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
@@ -251,8 +256,34 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 		
 		HAL_GPIO_Init(GPIOA , &GPIO_Init);
 
+		
+		
+		
+		// --------DMA Conf------------------
+		  __HAL_RCC_DMAMUX1_CLK_ENABLE();
+		__HAL_RCC_DMA1_CLK_ENABLE();
+		//DMA_HandleTypeDef hdma ; 
+		hdma.Instance = DMA1_Channel1 ;
+		hdma.Init.Direction = DMA_MEMORY_TO_PERIPH;
+		hdma.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+		hdma.Init.MemInc = DMA_MINC_ENABLE;
+		hdma.Init.Mode = DMA_NORMAL;
+		hdma.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+		hdma.Init.PeriphInc = DMA_PINC_DISABLE;
+		hdma.Init.Priority = DMA_PRIORITY_MEDIUM;
+		hdma.Init.Request = DMA_REQUEST_USART1_TX;
+		HAL_DMA_Init(&hdma);
+		
+		//__HAL_DMA_ENABLE_IT(hdma, DMA_IT_TC) 
+		HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 3, 0);
+		HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+		
+		
+		__HAL_LINKDMA(huart,hdmatx,hdma);
+		
+		// ----------------------------------
+		
 		// --------NVIC configuration--------
-
 		__HAL_UART_ENABLE_IT( &husart1, UART_IT_IDLE); 
 		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
 		HAL_NVIC_SetPriority(USART1_IRQn, 7, 0);
@@ -277,6 +308,11 @@ void BSP_Usart1_IRQHandler(void)
 		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
 		DEBUG("ENTER Uart IDLE \r\n");
 	}
+}
+
+void BSP_DMA1_IRQHandler(void)
+{
+	HAL_DMA_IRQHandler(&hdma);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)

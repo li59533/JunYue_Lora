@@ -146,12 +146,14 @@ void Net_Task(void * pvParameter)
 	BSP_LM78_Init();
 	//NET_Task_Tim_Init();
 	//NET_Task_StartTim(10000);
+	
 	Net_Task_Event_Start(NET_TASK_SEND_AT_EVENT, EVENT_FROM_TASK);
 	
 	while(1)
 	{
 		DEBUG("Net Task Looping\r\n");
 		Bsp_LedToggle(BSP_LED_TEST);
+		
 		/*
 		char test_lorabuf[] = "\r\nAT+SENDB=2:FF\r\n";
 		BSP_LM78_SendBytes((uint8_t *)test_lorabuf,sizeof(test_lorabuf));

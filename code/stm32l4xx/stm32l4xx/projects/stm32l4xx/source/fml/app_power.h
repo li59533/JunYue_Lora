@@ -17,7 +17,7 @@
  * @addtogroup    XXX 
  * @{ 
  */
-
+#include "self_def.h"
 /**
  * @addtogroup    app_power_Modules 
  * @{  
@@ -69,6 +69,7 @@ void APP_Power_AV3_3_OFF(void);
 void APP_Power_LM78_ON(void);
 void APP_Power_LM78_OFF(void);
 
+void APP_Power_EnterStandbyMode(uint32_t WakeUpCounter);
 /**
  * @}
  */

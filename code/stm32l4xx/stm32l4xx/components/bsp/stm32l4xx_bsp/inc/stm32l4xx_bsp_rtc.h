@@ -80,7 +80,11 @@ void RTC_ReadClock(void);
 void RTC_ConvertSecondsToDatetime(uint32_t seconds, RTC_T *datetime);
 uint32_t RTC_ConvertDatetimeToSeconds(const RTC_T *datetime);
 
-RTC_T BSP_RTC_Get(void);
+
+
+
+RTC_T BSP_RTC_Get(void); // Get Current RTC Value
+void BSP_RTC_SetWakeTime(uint32_t WakeUpCounter, uint32_t WakeUpClock);   // Set Wake time IT
 
 /**
  * @}

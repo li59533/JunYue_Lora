@@ -21,6 +21,7 @@
 #include "clog.h"
 #include "bsp_queue.h"
 #include "net_task.h"
+#include "hal_task.h"
 /**
  * @addtogroup    bsp_lm78_Modules 
  * @{  
@@ -248,6 +249,7 @@ void BSP_LM78_RespProcess(void)
 			{
 				bsp_lm78_statusDequeue();
 				bsp_lm78_statusEnqueue(LM78_STATUS_OK);
+				//Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
 				
 			}
 			else
@@ -326,6 +328,8 @@ void BSP_LM78_ReqProcess(void)
 			{
 //				char test_lorabuf[] = "\r\nAT+SENDB=2:12345678123456781234567812345678123456781234567812345678123456781234567812341234567812345678123456178123FF\r\n";
 //				BSP_LM78_SendBytes((uint8_t *)test_lorabuf,sizeof(test_lorabuf));
+				
+				Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
 				
 				BSP_LM78_SendBytes(lm78_sendbuf.sendbuf , lm78_sendbuf.len );
 				DEBUG("REQ AT+SENDB=%s %d\r\n", lm78_sendbuf.sendbuf ,lm78_sendbuf.len);

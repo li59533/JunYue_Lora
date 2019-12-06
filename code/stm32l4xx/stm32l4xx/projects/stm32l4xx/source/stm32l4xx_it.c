@@ -233,5 +233,11 @@ void TIM4_IRQHandler(void)
 	BSP_LMT01_TIM4_IRQHandler();
 }
 
+void DMA1_Channel1_IRQHandler(void)
+{
+	BSP_DMA1_IRQHandler();
+}
+
+
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

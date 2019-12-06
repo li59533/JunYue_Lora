@@ -77,9 +77,10 @@ extern BSP_Usart_Instance_t BSP_Usart1 ;
  */
 void BSP_Usart_Init(BSP_Usart_Instance_t * BSP_Usart_Instance);
 void BSP_Usart_WriteBytes_Common(BSP_Usart_Instance_t * BSP_Usart_Instance , uint8_t * buf , uint16_t len); // blocking mode
+void BSP_Usart_WriteBytes_DMA(BSP_Usart_Instance_t * BSP_Usart_Instance , uint8_t * buf , uint16_t len);
 void BSP_Usart_RevOneByteIT_Conf(BSP_Usart_Instance_t * BSP_Usart_Instance);
 void BSP_Usart1_IRQHandler(void);
-
+void BSP_DMA1_IRQHandler(void);
 /**
  * @}
  */

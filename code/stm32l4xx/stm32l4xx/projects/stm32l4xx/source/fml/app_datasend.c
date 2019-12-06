@@ -125,39 +125,89 @@ int8_t APP_DataSend_SendCharacteristic(void)
 	uint8_t app_databuf_ptr = 0;
 	uint16_t len = 0 ;
 	app_datasend_test();
+	struct
+	{
+		uint16_t EffectiveValue[4];
+		uint16_t Vrms[4];
+		uint16_t Drms[4];
+		uint16_t KurtosisIndex[4];
+		uint16_t Envelop[4];
+	}character_buf;
 	
+	
+	for( uint8_t i = 0 ; i < 3 ; i ++)
+	{
+		if(g_SystemParam_Param.EffectiveValue[i] <= 6000.0f)
+		{
+			character_buf.EffectiveValue[i] = (uint16_t)(g_SystemParam_Param.EffectiveValue[i] * 10);
+		}
+		else
+		{
+			character_buf.EffectiveValue[i] = 60000;
+		}
+		
+		if(g_SystemParam_Param.Vrms[i] <= 6000.0f)
+		{
+			character_buf.Vrms[i] = (uint16_t)(g_SystemParam_Param.Vrms[i] * 10);
+		}
+		else
+		{
+			character_buf.Vrms[i] = 60000;
+		}
+		
+		if(g_SystemParam_Param.Drms[i] <= 6000.0f)
+		{
+			character_buf.Drms[i] = (uint16_t)(g_SystemParam_Param.Drms[i] * 10);
+		}
+		else
+		{
+			character_buf.Drms[i] = 60000;
+		}
+
+		if(g_SystemParam_Param.KurtosisIndex[i] <= 6000.0f)
+		{
+			character_buf.KurtosisIndex[i] = (uint16_t)(g_SystemParam_Param.KurtosisIndex[i] * 10);
+		}
+		else
+		{
+			character_buf.KurtosisIndex[i] = 60000;
+		}
+		
+		if(g_SystemParam_Param.Envelop[i] <= 6000.0f)
+		{
+			character_buf.Envelop[i] = (uint16_t)(g_SystemParam_Param.Envelop[i] * 10);
+		}
+		else
+		{
+			character_buf.Envelop[i] = 60000;
+		}		
+	}
 	
 	
 	for(uint8_t i = 0 ; i < 3; i ++)
 	{
-//		memcpy(app_databuf + 20*i + 0 , &g_SystemParam_Param.EffectiveValue[i] , 4 );
-//		memcpy(app_databuf + 20*i + 4, &g_SystemParam_Param.Vrms[i] , 4 );
-//		memcpy(app_databuf + 20*i + 8, &g_SystemParam_Param.Drms[i] , 4 );
-//		memcpy(app_databuf + 20*i + 12, &g_SystemParam_Param.KurtosisIndex[i] , 4 );
-//		memcpy(app_databuf + 20*i + 16, &g_SystemParam_Param.Envelop[i] , 4 );
-//		len = 20*i + 16 + 4;
-		
-		app_databuf_ptr += snprintf(app_databuf + app_databuf_ptr, 200 - app_databuf_ptr , "E%0.3fV%0.3fD%0.3fK%0.3fE%0.3f",g_SystemParam_Param.EffectiveValue[i],\
-																										g_SystemParam_Param.Vrms[i],\
-																										g_SystemParam_Param.Drms[i],\
-																										g_SystemParam_Param.KurtosisIndex[i],\
-																										g_SystemParam_Param.Envelop[i]);	
+		memcpy(app_databuf + 10*i + 0 , &character_buf.EffectiveValue[i] , 2 );
+		memcpy(app_databuf + 10*i + 2, &character_buf.Vrms[i] , 2 );
+		memcpy(app_databuf + 10*i + 4, &character_buf.Drms[i] , 2 );
+		memcpy(app_databuf + 10*i + 6, &character_buf.KurtosisIndex[i] , 2 );
+		memcpy(app_databuf + 10*i + 8, &character_buf.Envelop[i] , 2 );
+		len = 10*i + 8 + 2;
 	}
 
-//	for(uint16_t i = 0 ; i < len ; i ++)
-//	{
-//		ptr += snprintf( app_datastrbuf + ptr , 200 - ptr , "%02X",app_databuf[i]);
-//	}
+	for(uint16_t i = 0 ; i < len ; i ++)
+	{
+		ptr += snprintf( app_datastrbuf + ptr , 200 - ptr , "%02X",app_databuf[i]);
+	}
 	
 	//snprintf(app_datastrbuf, 200 , "%0.3f",g_SystemParam_Param.pdate);
 	//memcpy(app_datastrbuf,(uint8_t * )&g_SystemParam_Param.pdate , 4);
 	
 	
-	DEBUG("This Value will send:%s len:%d\r\n",app_databuf,strlen((const char *)app_databuf));
+	DEBUG("This Value will send:%s len:%d\r\n",app_datastrbuf,strlen((const char *)app_datastrbuf));
 	
-	uint8_t test_buf[8] = {0x00 , 0x00, 0x34,0x12,0x00,0x00,0x38,0x00};
+	//uint8_t test_buf[8] = {0x00 , 0x00, 0x34,0x12,0x00,0x00,0x38,0x00};
 	
-	BSP_LM78_StartSend((uint8_t *)test_buf, 8);
+	BSP_LM78_StartSend((uint8_t *)app_datastrbuf, strlen((const char *)app_datastrbuf));
 	return 0 ; 
 }
 

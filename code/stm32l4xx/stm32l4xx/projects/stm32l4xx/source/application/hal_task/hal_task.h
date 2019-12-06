@@ -1,8 +1,8 @@
 /**
  **************************************************************************************************
- * @file        version.h
+ * @file        hal_task.h
  * @author
- * @version
+ * @version    v0.1.0
  * @date        
  * @brief
  **************************************************************************************************
@@ -10,8 +10,8 @@
  *
  **************************************************************************************************
  */
-#ifndef _VERSION_H_
-#define _VERSION_H_
+#ifndef _HAL_TASK_H_
+#define _HAL_TASK_H_
 
 /**
  * @addtogroup    XXX 
@@ -19,41 +19,31 @@
  */
 #include "self_def.h"
 /**
- * @addtogroup    version_Modules 
+ * @addtogroup    hal_task_Modules 
  * @{  
  */
 
 /**
- * @defgroup      version_Exported_Macros 
+ * @defgroup      hal_task_Exported_Macros 
  * @{  
  */
-#define VERSION_MAJOR		0   // 0~255
-#define VERSION_MINOR		1   // 0~255
-#define VERSION_LITE		0	// 0~255
-/**
- * @}
- */
-
-/**
- * @defgroup      version_Exported_Constants
- * @{  
- */
+#define HAL_TASK_STANDBY_EVENT 			(0X01 << 0)
 
 /**
  * @}
  */
 
 /**
- * @defgroup      version_Exported_Types 
+ * @defgroup      hal_task_Exported_Constants
  * @{  
  */
 
 /**
  * @}
  */
-
+ 
 /**
- * @defgroup      version_Exported_Variables 
+ * @defgroup      hal_task_Exported_Types 
  * @{  
  */
 
@@ -62,11 +52,24 @@
  */
 
 /**
- * @defgroup      version_Exported_Functions 
+ * @defgroup      hal_task_Exported_Variables 
  * @{  
  */
-uint32_t Version_Get_Bin(void);
-char * Version_Get_Str(void);
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      hal_task_Exported_Functions 
+ * @{  
+ */
+uint32_t Hal_Task_Init(void); 
+void Hal_Task(void * pvParameter);
+void Hal_Task_Event_Start(uint32_t events, uint8_t event_from);
+void Hal_Task_Tim_Init(void);
+void Hal_Task_StartTim(uint16_t time_count);
+
 /**
  * @}
  */
@@ -79,3 +82,5 @@ char * Version_Get_Str(void);
  * @}
  */
 #endif
+
+
