@@ -18,6 +18,7 @@
  */
 #include "clog.h"
 #include "net_task.h"
+#include "conf_task.h"
 /**
  * @addtogroup    bsp_queue_Modules 
  * @{  
@@ -86,6 +87,15 @@ queue_instance_t usart1_rev =
 	.size = 3,
 };
 
+queue_instance_t usart2_rev =
+{
+	.in = 0,
+	.out = 0,
+	.count = 0,
+	.size = 3,
+};
+
+
 /**
  * @}
  */
@@ -123,7 +133,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 {
 	switch(queue_num)
 	{
-		case 0:
+		case BSP_QUEUE_UART1_REV:
 		{
 			if(len <= 100)
 			{
@@ -142,8 +152,38 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 
 		}
 		break;
+		case BSP_QUEUE_UART2_REV:
+		{
+			if(len <= 100)
+			{
+				memcpy(usart2_rev.queue[usart2_rev.in].buf , buf, len);
+				usart2_rev.queue[usart2_rev.in].len = len;
+				usart2_rev.in ++;
+				usart2_rev.count ++;			
+				usart2_rev.in %= 3;	
+				Conf_Task_Event_Start( CONF_TASK_REV_EVENT , EVENT_FROM_ISR);
+			}
+			else
+			{
+				DEBUG("Queue %d is over\r\n",queue_num);
+			}
+
+			
+		}
+		break;
 		default:break;
 	}
+}
+
+uint8_t BSP_Queue_GetCount(uint8_t queue_num)
+{
+	switch(queue_num)
+	{
+		case BSP_QUEUE_UART1_REV: return usart1_rev.count ; break;
+		case BSP_QUEUE_UART2_REV: return usart2_rev.count ; break;
+		default:break;
+	}
+	return 0;
 }
 
 uint8_t * BSP_Queue_Dequeue(uint8_t queue_num , uint8_t * len)
@@ -151,7 +191,7 @@ uint8_t * BSP_Queue_Dequeue(uint8_t queue_num , uint8_t * len)
 	uint8_t * buf_ptr = 0; 
 	switch(queue_num)
 	{
-		case 0:
+		case BSP_QUEUE_UART1_REV:
 		{
 			if(usart1_rev.count > 0 )
 			{
@@ -160,6 +200,24 @@ uint8_t * BSP_Queue_Dequeue(uint8_t queue_num , uint8_t * len)
 				usart1_rev.out ++;
 				usart1_rev.out %= usart1_rev.size;
 				usart1_rev.count --;
+				
+				return buf_ptr;
+			}
+			else
+			{
+				DEBUG("Queue %d is Empty\r\n" , queue_num);
+			}
+		}
+		break;
+		case BSP_QUEUE_UART2_REV:
+		{
+			if(usart2_rev.count > 0 )
+			{
+				buf_ptr = usart2_rev.queue[usart2_rev.out].buf;
+				*len = usart2_rev.queue[usart2_rev.out].len;
+				usart2_rev.out ++;
+				usart2_rev.out %= usart2_rev.size;
+				usart2_rev.count --;
 				
 				return buf_ptr;
 			}

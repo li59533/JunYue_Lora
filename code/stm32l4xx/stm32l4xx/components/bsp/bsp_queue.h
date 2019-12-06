@@ -28,6 +28,7 @@
  * @{  
  */
 #define BSP_QUEUE_UART1_REV      0
+#define BSP_QUEUE_UART2_REV		 1	
 /**
  * @}
  */
@@ -82,7 +83,7 @@ typedef struct
 void BSP_Queue_Init(uint8_t queue_num);
 void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len);
 uint8_t * BSP_Queue_Dequeue(uint8_t queue_num , uint8_t * len);
-
+uint8_t BSP_Queue_GetCount(uint8_t queue_num);
 
 /**
  * @}

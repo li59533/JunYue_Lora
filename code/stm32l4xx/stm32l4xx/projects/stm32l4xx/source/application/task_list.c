@@ -31,6 +31,7 @@
 #include "temperature_task.h"
 #include "datasend_task.h"
 #include "hal_task.h"
+#include "conf_task.h"
 /**
  * @addtogroup    task_list_Modules 
  * @{  
@@ -124,6 +125,8 @@ void RTOS_Init(void)
 	basetype = Temperature_Task_Init();
 	basetype = DataSend_Task_Init();
 	basetype = Hal_Task_Init();
+	basetype = Conf_Task_Init();
+	
 	
 	if(pdPASS == basetype)
 	{

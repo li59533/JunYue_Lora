@@ -21,12 +21,8 @@
 #include "task.h"
 #include "timers.h"
 #include "stm32_bsp_conf.h"
-#include "system_param.h"
-#include "bsp_led.h"
-#include "bsp_ad7682.h"
-#include "app_power.h"
 #include "first_task.h"
-#include "app_dataemu.h"
+
 /**
  * @addtogroup    first_task_Modules 
  * @{  

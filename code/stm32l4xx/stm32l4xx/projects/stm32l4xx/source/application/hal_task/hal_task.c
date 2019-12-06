@@ -136,7 +136,7 @@ void Hal_Task(void * pvParameter)
 		if((event_flag & HAL_TASK_STANDBY_EVENT) != 0x00)
 		{
 			DEBUG("HAL_TASK_STANDBY_EVENT\r\n");
-			APP_Power_EnterStandbyMode(30);
+			//APP_Power_EnterStandbyMode(10);
 		}
 		
 	}

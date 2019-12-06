@@ -223,6 +223,12 @@ void USART1_IRQHandler(void)
 {
 	BSP_Usart1_IRQHandler();
 }
+
+void USART2_IRQHandler(void)
+{
+	BSP_Usart2_IRQHandler();
+}
+
 void EXTI9_5_IRQHandler(void)
 {
 	BSP_LMT01_EXTI_IRQHandler();
@@ -235,7 +241,11 @@ void TIM4_IRQHandler(void)
 
 void DMA1_Channel1_IRQHandler(void)
 {
-	BSP_DMA1_IRQHandler();
+	BSP_UART1_DMA1_IRQHandler();
+}
+void DMA1_Channel2_IRQHandler(void)
+{
+	BSP_UART2_DMA1_IRQHandler();
 }
 
 
