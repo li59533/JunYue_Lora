@@ -132,6 +132,8 @@ void Conf_Task(void * pvParameter)
 	
 	BSP_Usart_Init( BSP_UART_2);
 	BSP_Usart_RevOneByteIT_Conf(BSP_UART_2) ;
+		
+	
 	while(1)
 	{
 		DEBUG("Conf Task Loop\r\n");
@@ -149,8 +151,7 @@ void Conf_Task(void * pvParameter)
 		{
 			DEBUG("Conf Task FIRST_TASK_TEST2_EVENT\r\n");
 		}		
-		
-		
+
 	}
 	
 }

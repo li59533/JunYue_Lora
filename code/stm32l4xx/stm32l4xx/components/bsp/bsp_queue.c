@@ -135,7 +135,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 	{
 		case BSP_QUEUE_UART1_REV:
 		{
-			if(len <= 100)
+			if(len <= 100 && len > 0)
 			{
 				memcpy(usart1_rev.queue[usart1_rev.in].buf , buf, len);
 				usart1_rev.queue[usart1_rev.in].len = len;
@@ -154,7 +154,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 		break;
 		case BSP_QUEUE_UART2_REV:
 		{
-			if(len <= 100)
+			if(len <= 100 && len > 0)
 			{
 				memcpy(usart2_rev.queue[usart2_rev.in].buf , buf, len);
 				usart2_rev.queue[usart2_rev.in].len = len;
@@ -177,13 +177,14 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 
 uint8_t BSP_Queue_GetCount(uint8_t queue_num)
 {
+	uint8_t return_temp = 0;
 	switch(queue_num)
 	{
-		case BSP_QUEUE_UART1_REV: return usart1_rev.count ; break;
-		case BSP_QUEUE_UART2_REV: return usart2_rev.count ; break;
+		case BSP_QUEUE_UART1_REV: return_temp = usart1_rev.count ; break;
+		case BSP_QUEUE_UART2_REV: return_temp = usart2_rev.count ; break;
 		default:break;
 	}
-	return 0;
+	return return_temp;
 }
 
 uint8_t * BSP_Queue_Dequeue(uint8_t queue_num , uint8_t * len)

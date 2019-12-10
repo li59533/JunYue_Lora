@@ -127,7 +127,7 @@ void Dataprocess_Task(void * pvParameter)
 	
 	DEBUG("Dataprocess_Task Enter\r\n");
 	APP_Power_AV3_3_ON();
-	BSP_AD7682_Init();
+	//BSP_AD7682_Init();
 	APP_DataFilter_Init();
 	
 

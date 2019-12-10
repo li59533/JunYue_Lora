@@ -144,6 +144,7 @@ const SystemParam_Config_t SystemParam_Config_Default =
 	.tempCompensation = -5 ,
 	//.Alarm_source_number = ,
 	//.Alarm_source = 
+	.sleep_time = 60, // default 1 min 
 };
 
 /**

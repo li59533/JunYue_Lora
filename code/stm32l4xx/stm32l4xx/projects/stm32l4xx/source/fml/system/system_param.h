@@ -190,6 +190,9 @@ typedef struct
 	uint8_t Alarm_source_number[10];//10个规则，每个规则的报警源数目，为0则不报警。
 	RULE Alarm_source[10][20]; //二维数组，最多10个规则，每个规则最多20个报警源
 	
+	/* Bigym use param*/
+	uint32_t sleep_time;
+	
     uint16_t crc;           /*!< 所有的参数结构体必须按字节对其。且最后一个必须包
                                  含一个uint16_t类型的数据，该数据用于内部存储时的
                                  crc校验和存储，用户在保存参数时不用关心该值数值。*/
@@ -229,7 +232,7 @@ typedef  struct
 	uint16_t daytime;
 	uint16_t minutetime;
 	uint16_t selffangda;
-  uint16_t alarmminutetime;
+	uint16_t alarmminutetime;
 	uint8_t Esp32TransmissionMode;
 	uint32_t sleeptime;
 	uint8_t wakeupsourec;
@@ -293,6 +296,9 @@ typedef  struct
 	uint32_t PeroidWaveTransmissionCounter;
 	uint32_t AutoPeriodTransmissonCounter;
 	uint64_t DeviceKey;
+	
+
+	
 }SystemParam_Param_t;
 
 /**

@@ -163,7 +163,7 @@ void BSP_Usart_Init(uint8_t  BSP_Uart_X)
 		{
 		DEBUG("Hal_Usart Init Err\r\n");
 		}
-		//MODIFY_REG(husart1.Instance->CR2, USART_CR2_SWAP, UART_ADVFEATURE_SWAP_ENABLE);
+
 	}
 	
 	if(BSP_Uart_X == BSP_UART_2)
@@ -199,7 +199,7 @@ void BSP_Usart_Init(uint8_t  BSP_Uart_X)
 		{
 		DEBUG("Hal_Usart Init Err\r\n");
 		}
-		//MODIFY_REG(husart2.Instance->CR2, USART_CR2_SWAP, UART_ADVFEATURE_SWAP_ENABLE);
+
 	}
 	
 	
@@ -309,19 +309,20 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 		__HAL_RCC_GPIOD_CLK_ENABLE();
 		__HAL_RCC_USART2_CLK_ENABLE();
         // ----------------------
-		GPIO_InitTypeDef GPIO_Init;
-		GPIO_Init.Alternate = GPIO_AF7_USART2 ;
-		GPIO_Init.Mode = GPIO_MODE_AF_PP ;
-		GPIO_Init.Pin = GPIO_PIN_15 ;
-		GPIO_Init.Pull = GPIO_NOPULL;
-		GPIO_Init.Speed = GPIO_SPEED_FAST;
-		HAL_GPIO_Init(GPIOA , &GPIO_Init);
+		GPIO_InitTypeDef GPIO_InitStruct;
+		GPIO_InitStruct.Pin = GPIO_PIN_15;
+		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+		GPIO_InitStruct.Alternate = GPIO_AF3_USART2;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-		GPIO_Init.Pin = GPIO_PIN_5 ;
-		GPIO_Init.Pull = GPIO_NOPULL;
-		GPIO_Init.Speed = GPIO_SPEED_FAST;
-		HAL_GPIO_Init(GPIOD , &GPIO_Init);
-		
+		GPIO_InitStruct.Pin = GPIO_PIN_5;
+		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+		GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+		HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 		
 		
 		// --------DMA Conf------------------
@@ -349,12 +350,58 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 		// --------NVIC configuration--------
 		__HAL_UART_ENABLE_IT( &husart2, UART_IT_IDLE); 
 		__HAL_UART_CLEAR_IDLEFLAG(&husart2);
-		HAL_NVIC_SetPriority(USART2_IRQn, 8, 0);
+		HAL_NVIC_SetPriority(USART2_IRQn, 7, 0);
 		HAL_NVIC_EnableIRQ(USART2_IRQn);
 		// ----------------------------------
 		
     }
 }
+
+void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+{
+  if(huart->Instance==USART1)
+  {
+  /* USER CODE BEGIN USART1_MspDeInit 0 */
+
+  /* USER CODE END USART1_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_USART1_CLK_DISABLE();
+  
+    /**USART1 GPIO Configuration    
+    PB7     ------> USART1_RX
+    PB6     ------> USART1_TX 
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7|GPIO_PIN_6);
+
+    /* USART1 DMA DeInit */
+    HAL_DMA_DeInit(huart->hdmatx);
+  /* USER CODE BEGIN USART1_MspDeInit 1 */
+
+  /* USER CODE END USART1_MspDeInit 1 */
+  }
+  else if(huart->Instance==USART2)
+  {
+  /* USER CODE BEGIN USART2_MspDeInit 0 */
+
+  /* USER CODE END USART2_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_USART2_CLK_DISABLE();
+  
+    /**USART2 GPIO Configuration    
+    PA15 (JTDI)     ------> USART2_RX
+    PD5     ------> USART2_TX 
+    */
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_15);
+
+    HAL_GPIO_DeInit(GPIOD, GPIO_PIN_5);
+
+  /* USER CODE BEGIN USART2_MspDeInit 1 */
+
+  /* USER CODE END USART2_MspDeInit 1 */
+  }
+
+}
+
 // -----------------------------------------------------
 
 
@@ -368,7 +415,7 @@ void BSP_Usart1_IRQHandler(void)
 		
 		usart1_i = 0;
 		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
-		DEBUG("ENTER Uart2 IDLE \r\n");
+		DEBUG("ENTER Uart1 IDLE \r\n");
 	}
 }
 
@@ -383,6 +430,7 @@ void BSP_Usart2_IRQHandler(void)
 		__HAL_UART_CLEAR_IDLEFLAG(&husart2);
 		DEBUG("ENTER Uart2 IDLE \r\n");
 	}
+	__HAL_UART_CLEAR_OREFLAG(&husart2);
 }
  // ----------------------------------------------------
 
@@ -412,9 +460,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 	if(huart->Instance == USART2)
 	{
+		usart2_i ++;
 		HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
 			
-		usart2_i ++;
+		
 		if(usart2_i >= BSP_USART2_RX_SIZE)
 		{
 			usart2_i = 0;

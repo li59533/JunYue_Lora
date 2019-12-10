@@ -68,7 +68,7 @@ uint32_t Hal_Task_Init(void);
 void Hal_Task(void * pvParameter);
 void Hal_Task_Event_Start(uint32_t events, uint8_t event_from);
 void Hal_Task_Tim_Init(void);
-void Hal_Task_StartTim(uint16_t time_count);
+void Hal_Task_StartTim(uint32_t time_count);
 
 /**
  * @}

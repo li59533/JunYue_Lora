@@ -301,7 +301,7 @@ static void app_dataemu_func(void)
 		
 		
 		char debug[40];
-		snprintf(debug,40,"E:%0.3f,V:%0.3f,D:%0.3f,K:%0.3f,E:%0.3f",g_SystemParam_Param.EffectiveValue[j],\
+		snprintf(debug,40,"E:%0.2f,V:%0.2f,D:%0.2f,K:%0.2f,E:%0.2f",g_SystemParam_Param.EffectiveValue[j],\
 													g_SystemParam_Param.Vrms[j],\
 													g_SystemParam_Param.Drms[j],\
 													g_SystemParam_Param.KurtosisIndex[j],\
@@ -310,10 +310,10 @@ static void app_dataemu_func(void)
 		DEBUG("%s\r\n",debug);
 		if(g_SystemParam_Param.EffectiveValue[j] < 0.25f)//g_SystemParam_Param.Arms[j] < 0.25f || 
 		{
-			g_SystemParam_Param.Vrms[j] = 0.0f;
-			g_SystemParam_Param.Drms[j] = 0.0f;
-			g_SystemParam_Param.KurtosisIndex[j] = 0.0f;
-			g_SystemParam_Param.Envelop[j] = 0.0f;
+//			g_SystemParam_Param.Vrms[j] = 0.0f;
+//			g_SystemParam_Param.Drms[j] = 0.0f;
+//			g_SystemParam_Param.KurtosisIndex[j] = 0.0f;
+//			g_SystemParam_Param.Envelop[j] = 0.0f;
 		}		
 		
 		

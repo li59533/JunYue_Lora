@@ -137,6 +137,7 @@ void DataSend_Task(void * pvParameter)
 		{
 			DEBUG("DATASEND_TASK_SEND_EVENT\r\n");
 			APP_DataSend_SendCharacteristic();
+			DataSend_Task_StartTim(10000);
 		}
 
 	}

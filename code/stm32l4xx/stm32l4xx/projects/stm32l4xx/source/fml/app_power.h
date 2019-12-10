@@ -45,6 +45,11 @@
  * @defgroup      app_power_Exported_Types 
  * @{  
  */
+typedef enum
+{
+	PWR_FROM_REST = 1,
+	PWR_FROM_SB = 2,
+}App_Power_CurMode_e;
 
 /**
  * @}
@@ -70,6 +75,8 @@ void APP_Power_LM78_ON(void);
 void APP_Power_LM78_OFF(void);
 
 void APP_Power_EnterStandbyMode(uint32_t WakeUpCounter);
+uint8_t APP_Power_CurrentMode(void);
+
 /**
  * @}
  */
