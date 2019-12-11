@@ -197,6 +197,7 @@ namespace Lora_ConfTool
             float Y_ADC_k;
             float Z_ADC_k;
             float battery;
+            float float_temp;
             UInt32 rtc_temp;
             UInt32 sleep_time;
             UInt16 ptr_count = 0;
@@ -230,21 +231,23 @@ namespace Lora_ConfTool
                     case 2:
                         {
                             X_k = BitConverter.ToSingle(tlv, 2);
-
-                            tbx_x_k.Text = X_k.ToString();
+                            float_temp = (float )1.0 / X_k;
+                            tbx_x_k.Text = float_temp.ToString();
                         }
                         break;
                     case 3:
                         {
                             Y_k = BitConverter.ToSingle(tlv, 2);
-                            tbx_y_k.Text = Y_k.ToString();
+                            float_temp = (float)1.0 / Y_k;
+                            tbx_y_k.Text = float_temp.ToString();
 
                         }
                         break;
                     case 4:
                         {
                             Z_k = BitConverter.ToSingle(tlv, 2);
-                            tbx_z_k.Text = Z_k.ToString();
+                            float_temp = (float)1.0 / Z_k;
+                            tbx_z_k.Text = float_temp.ToString();
                         }
                         break;
                     case 5:
@@ -276,7 +279,9 @@ namespace Lora_ConfTool
                     case 9:
                         {
                             rtc_temp =(UInt32) BitConverter.ToInt32(tlv,2);
-                            tbx_rtc.Text = rtc_temp.ToString("D");
+                            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+                            DateTime dt_temp = startTime.AddSeconds(rtc_temp);
+                            tbx_rtc.Text = dt_temp.ToString();
                         }
                         break;
                     case 10:
@@ -404,7 +409,230 @@ namespace Lora_ConfTool
 
             _serialPort.Write(setconf_buf, 0, 8);
 
+        }
 
+        public  enum LN_Protocol_Conf_Tag_e 
+        {
+            TAG_CONF_SN = 1,
+            TAG_CONF_X_K = 2,
+            TAG_CONF_Y_K = 3,
+            TAG_CONF_Z_K = 4,
+            TAG_CONF_X_ADC_K = 5,
+            TAG_CONF_Y_ADC_K = 6,
+            TAG_CONF_Z_ADC_K = 7,
+            TAG_CONF_CUR_BATTERY = 8,
+            TAG_CONF_RTC = 9,
+            TAG_CONF_SLEEPTIME = 10
+
+        };
+        
+
+        private void btn_setconfAll_Click(object sender, EventArgs e)
+        {
+            byte[] setconf_buf = new byte[200];
+            byte[] float_temp = new byte[4];
+            byte[] uint32_temp = new byte[4];
+            float x_k = (float)1.0 / Convert.ToSingle(tbx_x_k.Text.ToString());
+            float y_k =(float)1.0 / Convert.ToSingle(tbx_y_k.Text.ToString());
+            float z_k = (float )1.0 / Convert.ToSingle(tbx_z_k.Text.ToString());
+            float x_adc_k = Convert.ToSingle(tbx_x_adc_k.Text.ToString());
+            float y_adc_k = Convert.ToSingle(tbx_y_adc_k.Text.ToString());
+            float z_adc_k = Convert.ToSingle(tbx_z_adc_k.Text.ToString());
+            float battery = Convert.ToSingle(tbx_battery.Text.ToString());
+
+
+            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 8, 0, 0, 0);
+            UInt32 rtc_temp = Convert.ToUInt32(ts.TotalSeconds);
+
+            UInt32 sleeptime = Convert.ToUInt32(tbx_sleeptime.Text.ToString());
+
+            setconf_buf[0] = 0x7E;
+
+            setconf_buf[1] = 72;
+            setconf_buf[2] = 0;
+
+            setconf_buf[3] = 0;
+            setconf_buf[4] = 0;
+
+
+            setconf_buf[5] = 0x01; //cmd
+            // ---------TAG_CONF_SN-------------
+            setconf_buf[6] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_SN;
+            setconf_buf[7] = 8;
+            byte [] sn_temp = Encoding.ASCII.GetBytes(tbx_sn.Text.Trim());
+            setconf_buf[8] = sn_temp[0];
+            setconf_buf[9] = (byte)((sn_temp[1] - '0') * 100 + (sn_temp[2] - '0') * 10 + (sn_temp[3] - '0'));
+            setconf_buf[10] = 0x00;
+            setconf_buf[11] = 0x00;
+            setconf_buf[12] = (byte)((sn_temp[4] - '0') * 16 + (sn_temp[5] - '0'));
+            setconf_buf[13] = (byte)((sn_temp[6] - '0') * 16 + (sn_temp[7] - '0'));
+            setconf_buf[14] = (byte)((sn_temp[8] - '0') * 16 + (sn_temp[9] - '0'));
+            setconf_buf[15] = (byte)((sn_temp[10] - '0') * 16 + (sn_temp[11] - '0'));
+            // ---------TAG_CONF_X_K-------------
+            setconf_buf[16] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_X_K;
+            setconf_buf[17] = 4;
+
+            float_temp = BitConverter.GetBytes(x_k);
+            setconf_buf[18] = float_temp[0];
+            setconf_buf[19] = float_temp[1];
+            setconf_buf[20] = float_temp[2];
+            setconf_buf[21] = float_temp[3];
+            // --------TAG_CONF_Y_K-----------------
+            setconf_buf[22] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_Y_K;
+            setconf_buf[23] = 4;
+            float_temp = BitConverter.GetBytes(y_k);
+            setconf_buf[24] = float_temp[0];
+            setconf_buf[25] = float_temp[1];
+            setconf_buf[26] = float_temp[2];
+            setconf_buf[27] = float_temp[3];
+            // --------TAG_CONF_Z_K-----------------
+            setconf_buf[28] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_Z_K;
+            setconf_buf[29] = 4;
+            float_temp = BitConverter.GetBytes(z_k);
+            setconf_buf[30] = float_temp[0];
+            setconf_buf[31] = float_temp[1];
+            setconf_buf[32] = float_temp[2];
+            setconf_buf[33] = float_temp[3];
+            // --------TAG_CONF_X_ADC_K-----------------
+            setconf_buf[34] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_X_ADC_K;
+            setconf_buf[35] = 4;
+            float_temp = BitConverter.GetBytes(x_adc_k);
+            setconf_buf[36] = float_temp[0];
+            setconf_buf[37] = float_temp[1];
+            setconf_buf[38] = float_temp[2];
+            setconf_buf[39] = float_temp[3];
+            // --------TAG_CONF_Y_ADC_K-----------------
+            setconf_buf[40] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_Y_ADC_K;
+            setconf_buf[41] = 4;
+            float_temp = BitConverter.GetBytes(y_adc_k);
+            setconf_buf[42] = float_temp[0];
+            setconf_buf[43] = float_temp[1];
+            setconf_buf[44] = float_temp[2];
+            setconf_buf[45] = float_temp[3];
+            // --------TAG_CONF_Z_ADC_K-----------------
+            setconf_buf[46] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_Z_ADC_K;
+            setconf_buf[47] = 4;
+            float_temp = BitConverter.GetBytes(z_adc_k);
+            setconf_buf[48] = float_temp[0];
+            setconf_buf[49] = float_temp[1];
+            setconf_buf[50] = float_temp[2];
+            setconf_buf[51] = float_temp[3];
+            // --------TAG_CONF_CUR_BATTERY-----------------
+            setconf_buf[52] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_CUR_BATTERY;
+            setconf_buf[53] = 4;
+            float_temp = BitConverter.GetBytes(battery);
+            setconf_buf[54] = float_temp[0];
+            setconf_buf[55] = float_temp[1];
+            setconf_buf[56] = float_temp[2];
+            setconf_buf[57] = float_temp[3];
+            // --------TAG_CONF_RTC-----------------
+            setconf_buf[58] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_RTC;
+            setconf_buf[59] = 4;
+            uint32_temp = BitConverter.GetBytes(rtc_temp);
+            setconf_buf[60] = uint32_temp[0];
+            setconf_buf[61] = uint32_temp[1];
+            setconf_buf[62] = uint32_temp[2];
+            setconf_buf[63] = uint32_temp[3];
+            // --------TAG_CONF_SLEEPTIME-----------------
+            setconf_buf[64] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_SLEEPTIME;
+            setconf_buf[65] = 4;
+            uint32_temp = BitConverter.GetBytes(sleeptime);
+            setconf_buf[66] = uint32_temp[0];
+            setconf_buf[67] = uint32_temp[1];
+            setconf_buf[68] = uint32_temp[2];
+            setconf_buf[69] = uint32_temp[3];
+
+            setconf_buf[70] = 0x7E;
+
+            byte check_sum = 0;
+
+            for (uint i = 0; i < 71; i++)
+            {
+                check_sum += setconf_buf[i];
+            }
+            setconf_buf[71] = check_sum;
+
+
+            _serialPort.Write(setconf_buf, 0, 72);
+
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            lab_localtime.Text = dt.ToString();
+
+            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            lab_timstamp.Text = Convert.ToInt64(ts.TotalSeconds).ToString(); 
+        }
+
+        private void btn_getsn_Click(object sender, EventArgs e)
+        {
+            byte[] setconf_buf = new byte[100];
+            setconf_buf[0] = 0x7E;
+
+            setconf_buf[1] = 8;
+            setconf_buf[2] = 0;
+
+            setconf_buf[3] = 0;
+            setconf_buf[4] = 0;
+
+
+            setconf_buf[5] = 0x03; //cmd
+
+            setconf_buf[6] = 0x7E;
+
+            byte check_sum = 0;
+
+            for (uint i = 0; i < 7; i++)
+            {
+                check_sum += setconf_buf[i];
+            }
+            setconf_buf[7] = check_sum;
+
+
+            _serialPort.Write(setconf_buf, 0, 8);
+        }
+
+        private void btn_setsn_Click(object sender, EventArgs e)
+        {
+            byte[] setconf_buf = new byte[200];
+
+            setconf_buf[0] = 0x7E;
+
+            setconf_buf[1] = 18;
+            setconf_buf[2] = 0;
+
+            setconf_buf[3] = 0;
+            setconf_buf[4] = 0;
+
+            setconf_buf[5] = 0x01; //cmd
+            // ---------TAG_CONF_SN-------------
+            setconf_buf[6] = (byte)LN_Protocol_Conf_Tag_e.TAG_CONF_SN;
+            setconf_buf[7] = 8;
+            byte[] sn_temp = Encoding.ASCII.GetBytes(tbx_sn.Text.Trim());
+            setconf_buf[8] = sn_temp[0];
+            setconf_buf[9] = (byte)((sn_temp[1] - '0') * 100 + (sn_temp[2] - '0') * 10 + (sn_temp[3] - '0'));
+            setconf_buf[10] = 0x00;
+            setconf_buf[11] = 0x00;
+            setconf_buf[12] = (byte)((sn_temp[4] - '0') * 16 + (sn_temp[5] - '0'));
+            setconf_buf[13] = (byte)((sn_temp[6] - '0') * 16 + (sn_temp[7] - '0'));
+            setconf_buf[14] = (byte)((sn_temp[8] - '0') * 16 + (sn_temp[9] - '0'));
+            setconf_buf[15] = (byte)((sn_temp[10] - '0') * 16 + (sn_temp[11] - '0'));
+         
+            setconf_buf[16] = 0x7E;
+
+            byte check_sum = 0;
+
+            for (uint i = 0; i < 17; i++)
+            {
+                check_sum += setconf_buf[i];
+            }
+            setconf_buf[17] = check_sum;
+
+
+            _serialPort.Write(setconf_buf, 0, 18);
 
         }
     }

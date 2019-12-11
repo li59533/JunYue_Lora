@@ -71,7 +71,8 @@
  * @brief         
  * @{  
  */
-static uint8_t  app_conf_dataspace[200] = { 0 };
+#define APP_CONF_DATASPACE_SIZE		200 
+static uint8_t  app_conf_dataspace[APP_CONF_DATASPACE_SIZE] = { 0 };
 /**
  * @}
  */
@@ -195,16 +196,136 @@ static void app_setconfreq_process(uint8_t *payload,uint16_t len)
 		DEBUG("APP_Rev Tag is %X\r\n",tlv_buf->Tag);
 		switch(tlv_buf->Tag)
 		{
+			case TAG_CONF_SN:
+			{
+				if(tlv_buf->Len == 8)
+				{
+					memcpy(g_SystemParam_Config.SNnumber , tlv_buf->Value.Array , tlv_buf->Len);
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_SN is False\r\n");
+				}
+				
+			}
+			break;
+			case TAG_CONF_X_K:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.floatscale[1] = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_X_K is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_Y_K:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.floatscale[2] = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_Y_K is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_Z_K:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.floatscale[0] = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_Z_K is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_X_ADC_K:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.floatadc[1] = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_X_ADC_K is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_Y_ADC_K:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.floatadc[2] = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_Y_ADC_K is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_Z_ADC_K:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.floatadc[0] = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_Z_ADC_K is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_CUR_BATTERY:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					g_SystemParam_Config.battery = * (float *) tlv_buf->Value.Array;
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_CUR_BATTERY is False\r\n");
+				}
+			}
+			break;
+			case TAG_CONF_RTC:
+			{
+				if(tlv_buf->Len == 4)
+				{
+					RTC_T datetime ;
+					RTC_ConvertSecondsToDatetime(tlv_buf->Value.BIT_32 , &datetime);
+					BSP_RTC_WriteClock( datetime.Year , datetime.Mon, datetime.Day , datetime.Hour , datetime.Min ,datetime.Sec );
+				}
+				else
+				{
+					result = CONF_ERROR;
+					DEBUG("TAG_CONF_RTC is False\r\n");
+				}
+			}
+			break;
 			case TAG_CONF_SLEEPTIME:
 			{
-				if((tlv_buf->Value.BIT_32 <= 86400)&&(tlv_buf->Value.BIT_32 > 0))   // < 1 day (86400 s) and > 0 s
+				if((tlv_buf->Value.BIT_32 <= 86400)&&(tlv_buf->Value.BIT_32 >= 0))   // < 1 day (86400 s) and >= 0 s
 				{
 					g_SystemParam_Config.sleep_time = tlv_buf->Value.BIT_32;
 				}
 				else
 				{
 					result = CONF_ERROR;
-					DEBUG("TAG_SEND_INTERVAL is False\r\n");
+					DEBUG("TAG_CONF_SLEEPTIME is False\r\n");
 				}
 			}
 			break;
@@ -354,8 +475,6 @@ static void app_getversionreq_process(uint8_t *payload,uint16_t len)
 	
 	APP_Conf_SendBytes(app_conf_dataspace,ln_protocolintance->len);
 }
-
-
 
 void APP_Conf_ReportData(void) // Report Data in Uart2
 {

@@ -208,8 +208,21 @@ int8_t APP_DataSend_SendCharacteristic(void)
 	//uint8_t test_buf[8] = {0x00 , 0x00, 0x34,0x12,0x00,0x00,0x38,0x00};
 	
 	BSP_LM78_StartSend((uint8_t *)app_datastrbuf, strlen((const char *)app_datastrbuf));
+	
+	APP_DataSend_BatteryReduce();
+	
 	return 0 ; 
 }
+
+void APP_DataSend_BatteryReduce(void)
+{
+	g_SystemParam_Config.battery=g_SystemParam_Config.battery - 0.02f;
+	if(g_SystemParam_Config.battery <= 0 )
+	{
+		g_SystemParam_Config.battery = 0;
+	}
+}
+
 
 /**
  * @}

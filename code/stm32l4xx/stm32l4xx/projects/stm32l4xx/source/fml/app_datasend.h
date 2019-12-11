@@ -64,7 +64,7 @@
  * @{  
  */
 int8_t APP_DataSend_SendCharacteristic(void);
-
+void APP_DataSend_BatteryReduce(void);
 /**
  * @}
  */

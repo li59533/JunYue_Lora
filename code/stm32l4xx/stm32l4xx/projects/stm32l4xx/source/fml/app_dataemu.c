@@ -109,11 +109,7 @@ void APP_DataEmu_Process(void)
 	//WaritSignalCounter++;
 	//if(WaritSignalCounter > g_SystemParam_Config.WaitforIEPEtime) //d等待信号滤波稳定开始发送数据
 	{
-		g_SystemParam_Config.battery=g_SystemParam_Config.battery - 0.02f;
-		if(g_SystemParam_Config.battery <= 0 )
-		{
-			g_SystemParam_Config.battery = 0;
-		}
+
 		
 		//BSP_AD7682_StopSample();
 		//SystemParam_Save();

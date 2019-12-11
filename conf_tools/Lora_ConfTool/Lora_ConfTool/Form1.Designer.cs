@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Serial_Conf = new System.Windows.Forms.GroupBox();
             this.btn_serial_switch = new System.Windows.Forms.Button();
             this.cbx_comx = new System.Windows.Forms.ComboBox();
@@ -40,80 +41,89 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lvw_X_axis = new System.Windows.Forms.ListView();
-            this.lvw_Z_axis = new System.Windows.Forms.ListView();
-            this.lvw_Y_axis = new System.Windows.Forms.ListView();
-            this.lvw_Other = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lvw_Z_axis = new System.Windows.Forms.ListView();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lvw_Y_axis = new System.Windows.Forms.ListView();
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tbx_sn = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lvw_Other = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbx_sn = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbx_x_k = new System.Windows.Forms.TextBox();
-            this.tbx_y_k = new System.Windows.Forms.TextBox();
-            this.tbx_z_k = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btn_adc_k = new System.Windows.Forms.Button();
             this.tbx_z_adc_k = new System.Windows.Forms.TextBox();
             this.tbx_y_adc_k = new System.Windows.Forms.TextBox();
             this.tbx_x_adc_k = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbx_battery = new System.Windows.Forms.TextBox();
-            this.tbx_rtc = new System.Windows.Forms.TextBox();
-            this.tbx_sleeptime = new System.Windows.Forms.TextBox();
-            this.btn_axis_k = new System.Windows.Forms.Button();
-            this.btn_adc_k = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btn_other = new System.Windows.Forms.Button();
+            this.tbx_sleeptime = new System.Windows.Forms.TextBox();
+            this.tbx_rtc = new System.Windows.Forms.TextBox();
+            this.tbx_battery = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btn_axis_k = new System.Windows.Forms.Button();
+            this.tbx_z_k = new System.Windows.Forms.TextBox();
+            this.tbx_y_k = new System.Windows.Forms.TextBox();
+            this.tbx_x_k = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.btn_getconf = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btn_setconfAll = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lab_localtime = new System.Windows.Forms.Label();
+            this.lab_timstamp = new System.Windows.Forms.Label();
+            this.btn_getsn = new System.Windows.Forms.Button();
+            this.btn_setsn = new System.Windows.Forms.Button();
             this.Serial_Conf.SuspendLayout();
             this.Version.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // Serial_Conf
@@ -241,17 +251,6 @@
             this.tabPage1.Text = "Data";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1240, 483);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Conf";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -285,47 +284,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "X轴";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.lvw_Z_axis);
-            this.groupBox3.Location = new System.Drawing.Point(617, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(609, 231);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Z轴";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.lvw_Y_axis);
-            this.groupBox4.Location = new System.Drawing.Point(3, 240);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(608, 231);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Y轴";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.tbx_sn);
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.lvw_Other);
-            this.groupBox5.Location = new System.Drawing.Point(617, 240);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(609, 231);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "其他";
-            // 
             // lvw_X_axis
             // 
             this.lvw_X_axis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -345,62 +303,6 @@
             this.lvw_X_axis.TabIndex = 0;
             this.lvw_X_axis.UseCompatibleStateImageBehavior = false;
             this.lvw_X_axis.View = System.Windows.Forms.View.Details;
-            // 
-            // lvw_Z_axis
-            // 
-            this.lvw_Z_axis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvw_Z_axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11,
-            this.columnHeader12});
-            this.lvw_Z_axis.HideSelection = false;
-            this.lvw_Z_axis.Location = new System.Drawing.Point(6, 20);
-            this.lvw_Z_axis.Name = "lvw_Z_axis";
-            this.lvw_Z_axis.Size = new System.Drawing.Size(597, 205);
-            this.lvw_Z_axis.TabIndex = 0;
-            this.lvw_Z_axis.UseCompatibleStateImageBehavior = false;
-            this.lvw_Z_axis.View = System.Windows.Forms.View.Details;
-            // 
-            // lvw_Y_axis
-            // 
-            this.lvw_Y_axis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvw_Y_axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader13,
-            this.columnHeader14,
-            this.columnHeader15,
-            this.columnHeader16,
-            this.columnHeader17,
-            this.columnHeader18});
-            this.lvw_Y_axis.HideSelection = false;
-            this.lvw_Y_axis.Location = new System.Drawing.Point(6, 20);
-            this.lvw_Y_axis.Name = "lvw_Y_axis";
-            this.lvw_Y_axis.Size = new System.Drawing.Size(596, 205);
-            this.lvw_Y_axis.TabIndex = 0;
-            this.lvw_Y_axis.UseCompatibleStateImageBehavior = false;
-            this.lvw_Y_axis.View = System.Windows.Forms.View.Details;
-            // 
-            // lvw_Other
-            // 
-            this.lvw_Other.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvw_Other.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21});
-            this.lvw_Other.HideSelection = false;
-            this.lvw_Other.Location = new System.Drawing.Point(6, 20);
-            this.lvw_Other.Name = "lvw_Other";
-            this.lvw_Other.Size = new System.Drawing.Size(205, 205);
-            this.lvw_Other.TabIndex = 0;
-            this.lvw_Other.UseCompatibleStateImageBehavior = false;
-            this.lvw_Other.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -432,6 +334,39 @@
             this.columnHeader6.Text = "包络";
             this.columnHeader6.Width = 80;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.lvw_Z_axis);
+            this.groupBox3.Location = new System.Drawing.Point(617, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(609, 231);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Z轴";
+            // 
+            // lvw_Z_axis
+            // 
+            this.lvw_Z_axis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvw_Z_axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
+            this.lvw_Z_axis.HideSelection = false;
+            this.lvw_Z_axis.Location = new System.Drawing.Point(6, 20);
+            this.lvw_Z_axis.Name = "lvw_Z_axis";
+            this.lvw_Z_axis.Size = new System.Drawing.Size(597, 205);
+            this.lvw_Z_axis.TabIndex = 0;
+            this.lvw_Z_axis.UseCompatibleStateImageBehavior = false;
+            this.lvw_Z_axis.View = System.Windows.Forms.View.Details;
+            // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "序号";
@@ -461,6 +396,39 @@
             // 
             this.columnHeader12.Text = "包络";
             this.columnHeader12.Width = 80;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.lvw_Y_axis);
+            this.groupBox4.Location = new System.Drawing.Point(3, 240);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(608, 231);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Y轴";
+            // 
+            // lvw_Y_axis
+            // 
+            this.lvw_Y_axis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvw_Y_axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18});
+            this.lvw_Y_axis.HideSelection = false;
+            this.lvw_Y_axis.Location = new System.Drawing.Point(6, 20);
+            this.lvw_Y_axis.Name = "lvw_Y_axis";
+            this.lvw_Y_axis.Size = new System.Drawing.Size(596, 205);
+            this.lvw_Y_axis.TabIndex = 0;
+            this.lvw_Y_axis.UseCompatibleStateImageBehavior = false;
+            this.lvw_Y_axis.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader13
             // 
@@ -492,6 +460,55 @@
             this.columnHeader18.Text = "包络";
             this.columnHeader18.Width = 80;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.btn_setsn);
+            this.groupBox5.Controls.Add(this.btn_getsn);
+            this.groupBox5.Controls.Add(this.tbx_sn);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.lvw_Other);
+            this.groupBox5.Location = new System.Drawing.Point(617, 240);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(609, 231);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "其他";
+            // 
+            // tbx_sn
+            // 
+            this.tbx_sn.Location = new System.Drawing.Point(252, 21);
+            this.tbx_sn.Name = "tbx_sn";
+            this.tbx_sn.Size = new System.Drawing.Size(100, 21);
+            this.tbx_sn.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(229, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 12);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "SN";
+            // 
+            // lvw_Other
+            // 
+            this.lvw_Other.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvw_Other.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21});
+            this.lvw_Other.HideSelection = false;
+            this.lvw_Other.Location = new System.Drawing.Point(6, 20);
+            this.lvw_Other.Name = "lvw_Other";
+            this.lvw_Other.Size = new System.Drawing.Size(205, 205);
+            this.lvw_Other.TabIndex = 0;
+            this.lvw_Other.UseCompatibleStateImageBehavior = false;
+            this.lvw_Other.View = System.Windows.Forms.View.Details;
+            // 
             // columnHeader19
             // 
             this.columnHeader19.Text = "序号";
@@ -507,40 +524,36 @@
             this.columnHeader21.Text = "电量";
             this.columnHeader21.Width = 80;
             // 
-            // label3
+            // tabPage2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(229, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 12);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "SN";
+            this.tabPage2.Controls.Add(this.tableLayoutPanel2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1240, 483);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Conf";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tbx_sn
+            // tableLayoutPanel2
             // 
-            this.tbx_sn.Location = new System.Drawing.Point(252, 21);
-            this.tbx_sn.Name = "tbx_sn";
-            this.tbx_sn.Size = new System.Drawing.Size(100, 21);
-            this.tbx_sn.TabIndex = 2;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox6.Controls.Add(this.btn_axis_k);
-            this.groupBox6.Controls.Add(this.tbx_z_k);
-            this.groupBox6.Controls.Add(this.tbx_y_k);
-            this.groupBox6.Controls.Add(this.tbx_x_k);
-            this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Controls.Add(this.label5);
-            this.groupBox6.Controls.Add(this.label4);
-            this.groupBox6.Location = new System.Drawing.Point(3, 3);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(281, 121);
-            this.groupBox6.TabIndex = 0;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "灵敏度";
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.37134F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.62866F));
+            this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox8, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox7, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox9, 1, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.96391F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.03609F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1228, 471);
+            this.tableLayoutPanel2.TabIndex = 3;
             // 
             // groupBox7
             // 
@@ -560,94 +573,14 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "ADC_校准";
             // 
-            // groupBox8
+            // btn_adc_k
             // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox8.Controls.Add(this.btn_other);
-            this.groupBox8.Controls.Add(this.tbx_sleeptime);
-            this.groupBox8.Controls.Add(this.tbx_rtc);
-            this.groupBox8.Controls.Add(this.tbx_battery);
-            this.groupBox8.Controls.Add(this.label12);
-            this.groupBox8.Controls.Add(this.label11);
-            this.groupBox8.Controls.Add(this.label10);
-            this.groupBox8.Location = new System.Drawing.Point(290, 3);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(293, 121);
-            this.groupBox8.TabIndex = 2;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "其他";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.37134F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.62866F));
-            this.tableLayoutPanel2.Controls.Add(this.groupBox7, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox8, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_getconf, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.96391F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.03609F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1228, 471);
-            this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(15, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 12);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "X";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(15, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(11, 12);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Y";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(15, 91);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(11, 12);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Z";
-            // 
-            // tbx_x_k
-            // 
-            this.tbx_x_k.Location = new System.Drawing.Point(36, 18);
-            this.tbx_x_k.Name = "tbx_x_k";
-            this.tbx_x_k.Size = new System.Drawing.Size(100, 21);
-            this.tbx_x_k.TabIndex = 3;
-            // 
-            // tbx_y_k
-            // 
-            this.tbx_y_k.Location = new System.Drawing.Point(36, 53);
-            this.tbx_y_k.Name = "tbx_y_k";
-            this.tbx_y_k.Size = new System.Drawing.Size(100, 21);
-            this.tbx_y_k.TabIndex = 4;
-            // 
-            // tbx_z_k
-            // 
-            this.tbx_z_k.Location = new System.Drawing.Point(36, 88);
-            this.tbx_z_k.Name = "tbx_z_k";
-            this.tbx_z_k.Size = new System.Drawing.Size(100, 21);
-            this.tbx_z_k.TabIndex = 5;
+            this.btn_adc_k.Location = new System.Drawing.Point(180, 21);
+            this.btn_adc_k.Name = "btn_adc_k";
+            this.btn_adc_k.Size = new System.Drawing.Size(75, 95);
+            this.btn_adc_k.TabIndex = 12;
+            this.btn_adc_k.Text = "Set";
+            this.btn_adc_k.UseVisualStyleBackColor = true;
             // 
             // tbx_z_adc_k
             // 
@@ -700,25 +633,57 @@
             this.label9.TabIndex = 6;
             this.label9.Text = "X";
             // 
-            // label10
+            // groupBox8
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(16, 23);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "电量";
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox8.Controls.Add(this.lab_timstamp);
+            this.groupBox8.Controls.Add(this.lab_localtime);
+            this.groupBox8.Controls.Add(this.label13);
+            this.groupBox8.Controls.Add(this.btn_other);
+            this.groupBox8.Controls.Add(this.tbx_sleeptime);
+            this.groupBox8.Controls.Add(this.tbx_rtc);
+            this.groupBox8.Controls.Add(this.tbx_battery);
+            this.groupBox8.Controls.Add(this.label12);
+            this.groupBox8.Controls.Add(this.label11);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Location = new System.Drawing.Point(290, 3);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(737, 121);
+            this.groupBox8.TabIndex = 2;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "其他";
             // 
-            // label11
+            // btn_other
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(16, 57);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 12);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "时钟";
+            this.btn_other.Location = new System.Drawing.Point(228, 18);
+            this.btn_other.Name = "btn_other";
+            this.btn_other.Size = new System.Drawing.Size(75, 97);
+            this.btn_other.TabIndex = 15;
+            this.btn_other.Text = "Set";
+            this.btn_other.UseVisualStyleBackColor = true;
+            // 
+            // tbx_sleeptime
+            // 
+            this.tbx_sleeptime.Location = new System.Drawing.Point(75, 88);
+            this.tbx_sleeptime.Name = "tbx_sleeptime";
+            this.tbx_sleeptime.Size = new System.Drawing.Size(100, 21);
+            this.tbx_sleeptime.TabIndex = 5;
+            // 
+            // tbx_rtc
+            // 
+            this.tbx_rtc.Location = new System.Drawing.Point(75, 51);
+            this.tbx_rtc.Name = "tbx_rtc";
+            this.tbx_rtc.ReadOnly = true;
+            this.tbx_rtc.Size = new System.Drawing.Size(147, 21);
+            this.tbx_rtc.TabIndex = 4;
+            // 
+            // tbx_battery
+            // 
+            this.tbx_battery.Location = new System.Drawing.Point(75, 14);
+            this.tbx_battery.Name = "tbx_battery";
+            this.tbx_battery.Size = new System.Drawing.Size(100, 21);
+            this.tbx_battery.TabIndex = 3;
             // 
             // label12
             // 
@@ -730,26 +695,44 @@
             this.label12.TabIndex = 2;
             this.label12.Text = "休眠时间";
             // 
-            // tbx_battery
+            // label11
             // 
-            this.tbx_battery.Location = new System.Drawing.Point(75, 14);
-            this.tbx_battery.Name = "tbx_battery";
-            this.tbx_battery.Size = new System.Drawing.Size(100, 21);
-            this.tbx_battery.TabIndex = 3;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(16, 57);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "时钟";
             // 
-            // tbx_rtc
+            // label10
             // 
-            this.tbx_rtc.Location = new System.Drawing.Point(75, 51);
-            this.tbx_rtc.Name = "tbx_rtc";
-            this.tbx_rtc.Size = new System.Drawing.Size(100, 21);
-            this.tbx_rtc.TabIndex = 4;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(16, 23);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "电量";
             // 
-            // tbx_sleeptime
+            // groupBox6
             // 
-            this.tbx_sleeptime.Location = new System.Drawing.Point(75, 88);
-            this.tbx_sleeptime.Name = "tbx_sleeptime";
-            this.tbx_sleeptime.Size = new System.Drawing.Size(100, 21);
-            this.tbx_sleeptime.TabIndex = 5;
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.btn_axis_k);
+            this.groupBox6.Controls.Add(this.tbx_z_k);
+            this.groupBox6.Controls.Add(this.tbx_y_k);
+            this.groupBox6.Controls.Add(this.tbx_x_k);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Location = new System.Drawing.Point(3, 3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(281, 121);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "灵敏度";
             // 
             // btn_axis_k
             // 
@@ -760,33 +743,139 @@
             this.btn_axis_k.Text = "Set";
             this.btn_axis_k.UseVisualStyleBackColor = true;
             // 
-            // btn_adc_k
+            // tbx_z_k
             // 
-            this.btn_adc_k.Location = new System.Drawing.Point(180, 21);
-            this.btn_adc_k.Name = "btn_adc_k";
-            this.btn_adc_k.Size = new System.Drawing.Size(75, 95);
-            this.btn_adc_k.TabIndex = 12;
-            this.btn_adc_k.Text = "Set";
-            this.btn_adc_k.UseVisualStyleBackColor = true;
+            this.tbx_z_k.Location = new System.Drawing.Point(36, 88);
+            this.tbx_z_k.Name = "tbx_z_k";
+            this.tbx_z_k.Size = new System.Drawing.Size(100, 21);
+            this.tbx_z_k.TabIndex = 5;
             // 
-            // btn_other
+            // tbx_y_k
             // 
-            this.btn_other.Location = new System.Drawing.Point(212, 12);
-            this.btn_other.Name = "btn_other";
-            this.btn_other.Size = new System.Drawing.Size(75, 97);
-            this.btn_other.TabIndex = 15;
-            this.btn_other.Text = "Set";
-            this.btn_other.UseVisualStyleBackColor = true;
+            this.tbx_y_k.Location = new System.Drawing.Point(36, 53);
+            this.tbx_y_k.Name = "tbx_y_k";
+            this.tbx_y_k.Size = new System.Drawing.Size(100, 21);
+            this.tbx_y_k.TabIndex = 4;
+            // 
+            // tbx_x_k
+            // 
+            this.tbx_x_k.Location = new System.Drawing.Point(36, 18);
+            this.tbx_x_k.Name = "tbx_x_k";
+            this.tbx_x_k.Size = new System.Drawing.Size(100, 21);
+            this.tbx_x_k.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(15, 91);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(11, 12);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Z";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(15, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(11, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Y";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(15, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(11, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "X";
             // 
             // btn_getconf
             // 
-            this.btn_getconf.Location = new System.Drawing.Point(290, 130);
+            this.btn_getconf.Location = new System.Drawing.Point(18, 20);
             this.btn_getconf.Name = "btn_getconf";
-            this.btn_getconf.Size = new System.Drawing.Size(293, 127);
+            this.btn_getconf.Size = new System.Drawing.Size(109, 96);
             this.btn_getconf.TabIndex = 3;
             this.btn_getconf.Text = "GetConf";
             this.btn_getconf.UseVisualStyleBackColor = true;
             this.btn_getconf.Click += new System.EventHandler(this.btn_getconf_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btn_setconfAll);
+            this.groupBox9.Controls.Add(this.btn_getconf);
+            this.groupBox9.Location = new System.Drawing.Point(290, 130);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(293, 127);
+            this.groupBox9.TabIndex = 3;
+            this.groupBox9.TabStop = false;
+            // 
+            // btn_setconfAll
+            // 
+            this.btn_setconfAll.Location = new System.Drawing.Point(164, 21);
+            this.btn_setconfAll.Name = "btn_setconfAll";
+            this.btn_setconfAll.Size = new System.Drawing.Size(109, 95);
+            this.btn_setconfAll.TabIndex = 4;
+            this.btn_setconfAll.Text = "SetConfALL";
+            this.btn_setconfAll.UseVisualStyleBackColor = true;
+            this.btn_setconfAll.Click += new System.EventHandler(this.btn_setconfAll_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(317, 23);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 12);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "本地时间";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lab_localtime
+            // 
+            this.lab_localtime.AutoSize = true;
+            this.lab_localtime.Location = new System.Drawing.Point(376, 23);
+            this.lab_localtime.Name = "lab_localtime";
+            this.lab_localtime.Size = new System.Drawing.Size(35, 12);
+            this.lab_localtime.TabIndex = 17;
+            this.lab_localtime.Text = ".0.0.";
+            // 
+            // lab_timstamp
+            // 
+            this.lab_timstamp.AutoSize = true;
+            this.lab_timstamp.Location = new System.Drawing.Point(376, 39);
+            this.lab_timstamp.Name = "lab_timstamp";
+            this.lab_timstamp.Size = new System.Drawing.Size(59, 12);
+            this.lab_timstamp.TabIndex = 18;
+            this.lab_timstamp.Text = "timestamp";
+            // 
+            // btn_getsn
+            // 
+            this.btn_getsn.Location = new System.Drawing.Point(369, 21);
+            this.btn_getsn.Name = "btn_getsn";
+            this.btn_getsn.Size = new System.Drawing.Size(75, 23);
+            this.btn_getsn.TabIndex = 3;
+            this.btn_getsn.Text = "Get";
+            this.btn_getsn.UseVisualStyleBackColor = true;
+            this.btn_getsn.Click += new System.EventHandler(this.btn_getsn_Click);
+            // 
+            // btn_setsn
+            // 
+            this.btn_setsn.Location = new System.Drawing.Point(451, 20);
+            this.btn_setsn.Name = "btn_setsn";
+            this.btn_setsn.Size = new System.Drawing.Size(75, 23);
+            this.btn_setsn.TabIndex = 4;
+            this.btn_setsn.Text = "Set";
+            this.btn_setsn.UseVisualStyleBackColor = true;
+            this.btn_setsn.Click += new System.EventHandler(this.btn_setsn_Click);
             // 
             // Form1
             // 
@@ -798,7 +887,7 @@
             this.Controls.Add(this.Version);
             this.Controls.Add(this.Serial_Conf);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Lora_ConfTool_V1.0.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Serial_Conf.ResumeLayout(false);
             this.Serial_Conf.PerformLayout();
@@ -808,20 +897,21 @@
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -899,6 +989,14 @@
         private System.Windows.Forms.Button btn_other;
         private System.Windows.Forms.Button btn_axis_k;
         private System.Windows.Forms.Button btn_getconf;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button btn_setconfAll;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lab_localtime;
+        private System.Windows.Forms.Label lab_timstamp;
+        private System.Windows.Forms.Button btn_setsn;
+        private System.Windows.Forms.Button btn_getsn;
     }
 }
 

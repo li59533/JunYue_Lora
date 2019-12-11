@@ -457,14 +457,14 @@
               <FilePath>..\source\application\first_task\first_task.c</FilePath>
             </File>
             <File>
-              <FileName>second_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\source\application\second_task\second_task.c</FilePath>
-            </File>
-            <File>
               <FileName>hal_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\application\hal_task\hal_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>second_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\application\second_task\second_task.c</FilePath>
             </File>
             <File>
               <FileName>datasend_task.c</FileName>
