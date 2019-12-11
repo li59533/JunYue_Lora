@@ -195,7 +195,7 @@ static void app_setconfreq_process(uint8_t *payload,uint16_t len)
 		DEBUG("APP_Rev Tag is %X\r\n",tlv_buf->Tag);
 		switch(tlv_buf->Tag)
 		{
-			case TAG_SEND_INTERVAL:
+			case TAG_CONF_SLEEPTIME:
 			{
 				if((tlv_buf->Value.BIT_32 <= 86400)&&(tlv_buf->Value.BIT_32 > 0))   // < 1 day (86400 s) and > 0 s
 				{
@@ -236,10 +236,6 @@ static void app_setconfreq_process(uint8_t *payload,uint16_t len)
 	
 }
 
-
-
-
-
 // head len cmd tlv foot sum
 
 static void app_getconfreq_process(uint8_t *payload,uint16_t len)
@@ -256,13 +252,73 @@ static void app_getconfreq_process(uint8_t *payload,uint16_t len)
 	
 	payload_ptr = &ln_protocolintance->cmd + 1;
 	
-	// ------- mvToAcc_p---------------
-	tlv_value.Tag = CMD_GetConf_Resp;
-	tlv_value.Len = 4;
-	tlv_value.Value.BIT_32 =  g_SystemParam_Config.sleep_time;
-
-	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// ------- TAG_CONF_SN---------------
+	tlv_value.Tag = TAG_CONF_SN;
+	tlv_value.Len = 8;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.SNnumber , 8);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
 	// --------------------------------
+	// ------- TAG_CONF_X_K---------------
+	tlv_value.Tag = TAG_CONF_X_K;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.floatscale[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------	
+	// ------- TAG_CONF_Y_K---------------
+	tlv_value.Tag = TAG_CONF_Y_K;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.floatscale[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------		
+	// ------- TAG_CONF_Z_K---------------
+	tlv_value.Tag = TAG_CONF_Z_K;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.floatscale[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------		
+	// ------- TAG_CONF_X_ADC_K---------------
+	tlv_value.Tag = TAG_CONF_X_ADC_K;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.floatadc[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------		
+	// ------- TAG_CONF_Y_ADC_K---------------
+	tlv_value.Tag = TAG_CONF_Y_ADC_K;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.floatadc[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------		
+	// ------- TAG_CONF_Z_ADC_K---------------
+	tlv_value.Tag = TAG_CONF_Z_ADC_K;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.floatadc[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------		
+	// ------- TAG_CONF_CUR_BATTERY---------------
+	tlv_value.Tag = TAG_CONF_CUR_BATTERY;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.battery , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------	
+	// ------- TAG_CONF_RTC---------------
+	tlv_value.Tag = TAG_CONF_RTC;
+	tlv_value.Len = 4;
+	
+	uint32_t  timestamp = 0;
+	RTC_T rtc_temp = BSP_RTC_Get();
+	
+	timestamp = RTC_ConvertDatetimeToSeconds(&rtc_temp);
+	tlv_value.Value.BIT_32 = timestamp;
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	
+	// --------------------------------			
+	// ------- TAG_CONF_SLEEPTIME---------------
+	tlv_value.Tag = TAG_CONF_SLEEPTIME;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.sleep_time , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);	
+	// --------------------------------		
+		
 	ln_protocolintance->len = (payload_ptr - &ln_protocolintance->head) + 1;
 	*payload_ptr = LNPROTOCOL_FOOT;
 	*(payload_ptr + 1) =  LNprotocol_AddChecksum((uint8_t * )&ln_protocolintance,ln_protocolintance->len - 1);
@@ -270,6 +326,9 @@ static void app_getconfreq_process(uint8_t *payload,uint16_t len)
 	APP_Conf_SendBytes(app_conf_dataspace,ln_protocolintance->len);
 	
 }
+
+
+
 
 static void app_getversionreq_process(uint8_t *payload,uint16_t len)
 {
@@ -296,6 +355,134 @@ static void app_getversionreq_process(uint8_t *payload,uint16_t len)
 	APP_Conf_SendBytes(app_conf_dataspace,ln_protocolintance->len);
 }
 
+
+
+void APP_Conf_ReportData(void) // Report Data in Uart2
+{
+	ln_protocolintance_t *ln_protocolintance = (ln_protocolintance_t * )app_conf_dataspace;
+	LN_Tlv_t tlv_value = { 0 };
+	uint8_t  * payload_ptr = 0;
+
+
+	ln_protocolintance->head = LNPROTOCOL_HEAD;
+	//ln_protocolintance->len = sizeof(ln_protocolintance_t);
+	ln_protocolintance->inf = 0x00;
+	ln_protocolintance->cmd = CMD_ReportData;
+
+	payload_ptr = &ln_protocolintance->cmd + 1;
+
+	// ------- TAG_X_ACC_VALUE---------------
+	tlv_value.Tag = TAG_X_ACC_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.EffectiveValue[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------
+	// ------- TAG_X_SPEED_VALUE---------------
+	tlv_value.Tag = TAG_X_SPEED_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Vrms[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------	
+	// ------- TAG_X_DISPLACE_VALUE---------------
+	tlv_value.Tag = TAG_X_DISPLACE_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Drms[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------		
+	// ------- TAG_X_KURTOSIS_VALUE---------------
+	tlv_value.Tag = TAG_X_KURTOSIS_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.KurtosisIndex[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------			
+	// ------- TAG_X_ENVELOPE_VALUE---------------
+	tlv_value.Tag = TAG_X_ENVELOPE_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Envelop[1] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------				
+	// ------- TAG_Y_ACC_VALUE---------------
+	tlv_value.Tag = TAG_Y_ACC_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.EffectiveValue[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------
+	// ------- TAG_Y_SPEED_VALUE---------------
+	tlv_value.Tag = TAG_Y_SPEED_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Vrms[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------	
+	// ------- TAG_Y_DISPLACE_VALUE---------------
+	tlv_value.Tag = TAG_Y_DISPLACE_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Drms[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------		
+	// ------- TAG_Y_KURTOSIS_VALUE---------------
+	tlv_value.Tag = TAG_Y_KURTOSIS_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.KurtosisIndex[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------			
+	// ------- TAG_Y_ENVELOPE_VALUE---------------
+	tlv_value.Tag = TAG_Y_ENVELOPE_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Envelop[2] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------				
+		// ------- TAG_Z_ACC_VALUE---------------
+	tlv_value.Tag = TAG_Z_ACC_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.EffectiveValue[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------
+	// ------- TAG_Z_SPEED_VALUE---------------
+	tlv_value.Tag = TAG_Z_SPEED_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Vrms[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------	
+	// ------- TAG_Z_DISPLACE_VALUE---------------
+	tlv_value.Tag = TAG_Z_DISPLACE_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Drms[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------		
+	// ------- TAG_Z_KURTOSIS_VALUE---------------
+	tlv_value.Tag = TAG_Z_KURTOSIS_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.KurtosisIndex[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------			
+	// ------- TAG_Z_ENVELOPE_VALUE---------------
+	tlv_value.Tag = TAG_Z_ENVELOPE_VALUE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.Envelop[0] , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------				
+	// ------- TAG_TEMPERATURE---------------
+	tlv_value.Tag = TAG_TEMPERATURE;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Param.pdate , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------		
+		// ------- TAG_BATTERY---------------
+	tlv_value.Tag = TAG_BATTERY;
+	tlv_value.Len = 4;
+	memcpy(tlv_value.Value.Array , (uint8_t *)&g_SystemParam_Config.battery , 4);
+	payload_ptr += LN_AddTlv(payload_ptr, &tlv_value);
+	// --------------------------------		
+	
+	
+	
+	ln_protocolintance->len = (payload_ptr - &ln_protocolintance->head) + 1;
+	*payload_ptr = LNPROTOCOL_FOOT;
+	*(payload_ptr + 1) =  LNprotocol_AddChecksum((uint8_t * )&ln_protocolintance,ln_protocolintance->len - 1);
+
+	APP_Conf_SendBytes(app_conf_dataspace,ln_protocolintance->len);
+
+}
 
 
 /**

@@ -158,7 +158,7 @@ void Hal_Task(void * pvParameter)
 				DEBUG("HAL_TASK_STANDBY_EVENT\r\n");
 				
 				RTOS_Delay_ms(5000);
-				//APP_Power_EnterStandbyMode(g_SystemParam_Config.sleep_time);				
+				APP_Power_EnterStandbyMode(g_SystemParam_Config.sleep_time);				
 			}
 			else
 			{

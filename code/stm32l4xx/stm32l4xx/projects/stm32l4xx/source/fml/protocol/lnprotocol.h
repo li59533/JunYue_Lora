@@ -51,11 +51,45 @@
  */
 typedef enum 
 {
-	TAG_SEND_INTERVAL = 0x01 , // sending interval	
+	TAG_CONF_SN      	= 1,
+	TAG_CONF_X_K		= 2,
+	TAG_CONF_Y_K		= 3,
+	TAG_CONF_Z_K		= 4,
+	TAG_CONF_X_ADC_K	= 5,
+	TAG_CONF_Y_ADC_K	= 6,
+	TAG_CONF_Z_ADC_K	= 7,
+	TAG_CONF_CUR_BATTERY = 8,
+	TAG_CONF_RTC		= 9,
+	TAG_CONF_SLEEPTIME 	= 10
+
+}LN_Protocol_Conf_Tag_e;
+
+typedef enum
+{
+	TAG_X_ACC_VALUE 	 = 1,
+	TAG_X_SPEED_VALUE 	 = 2,
+	TAG_X_DISPLACE_VALUE = 3,
+	TAG_X_KURTOSIS_VALUE = 4,
+	TAG_X_ENVELOPE_VALUE = 5,
+	
+	TAG_Y_ACC_VALUE 	 = 6,
+	TAG_Y_SPEED_VALUE 	 = 7,
+	TAG_Y_DISPLACE_VALUE = 8,
+	TAG_Y_KURTOSIS_VALUE = 9,
+	TAG_Y_ENVELOPE_VALUE = 10,
+	
+	TAG_Z_ACC_VALUE 	 = 11,
+	TAG_Z_SPEED_VALUE 	 = 12,
+	TAG_Z_DISPLACE_VALUE = 13,
+	TAG_Z_KURTOSIS_VALUE = 14,
+	TAG_Z_ENVELOPE_VALUE = 15,	
+	TAG_TEMPERATURE    	 = 16,
+	TAG_BATTERY			 = 17,	
 	
 	
-	
-}LN_Protocol_Tag_e;
+}LN_Protocol_ReportData_Tag_e;
+
+
 
 typedef enum
 {
@@ -73,6 +107,8 @@ typedef enum
 	
 	CMD_GetVersion_Req = 0x80,
 	CMD_GetVersion_Resp = 0x81,
+	
+	CMD_ReportData	 = 0xc8,
 }LN_Protocol_Cmd_e;
 
 

@@ -90,41 +90,35 @@ namespace Lora_ConfTool
         {
             if (buf[0] == 0x7E)
             {
-                if (buf[1] == 0x42)
+                if (len == (buf[1] + buf[2] * 256))
                 {
-                    if (len == (buf[2] + buf[3] * 256 + 6))
-                    {
-                        if (rev_calc_checksum(buf, len) == buf[len - 2])
-                        {
-                            rev_count++;
-                            
-                        }
-                    }
-                }
-                else
-                {
-                    if (len == (buf[1] + buf[2] * 256))
-                    {
-                        //byte[] newA=  a.Skip(2).Take(5).ToArray();  
+                    //byte[] newA=  a.Skip(2).Take(5).ToArray();  
 
-                        switch (buf[5])
-                        {
-                            case 0x04:
-                                {
-                                  
-                                }
-                                break;
-                            case 0x81:
-                                {
-                                    byte[] version = buf.Skip(6).Take(4).ToArray();
-                                    getversion_resp_process(version, (UInt16)version.Length);
-                                }
-                                break;
-                            default: break;
-                        }
+                    switch (buf[5])
+                    {
+                        case 0x04:
+                            {
 
+                                rev_conf_resp(buf.Skip(6).Take(len - 6).ToArray(), (UInt16)(len - 6));
+                            }
+                            break;
+
+                        case 0x81:
+                            {
+                                byte[] version = buf.Skip(6).Take(4).ToArray();
+                                getversion_resp_process(version, (UInt16)version.Length);
+                            }
+                            break;
+                        case 0xc8:
+                            {
+                                rev_reportData(buf.Skip(6).Take(len - 6).ToArray(), (UInt16)(len - 6));
+                            }
+                            break;
+                        default: break;
                     }
+
                 }
+
             }
         }
 
@@ -170,7 +164,7 @@ namespace Lora_ConfTool
 
 
             _serialPort.Write(setconf_buf, 0, 8);
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -191,6 +185,227 @@ namespace Lora_ConfTool
             {
                 btn_serial_switch.Text = "Open";
             }
+        }
+
+        public void rev_conf_resp(Byte[] buf, UInt16 len)
+        {
+            byte[] sn = new byte[8];
+            float X_k;
+            float Y_k;
+            float Z_k;
+            float X_ADC_k;
+            float Y_ADC_k;
+            float Z_ADC_k;
+            float battery;
+            UInt32 rtc_temp;
+            UInt32 sleep_time;
+            UInt16 ptr_count = 0;
+            Int16 len_temp;
+
+            len_temp = (Int16)len;
+
+
+            while (len_temp > 0)
+            {
+                len_temp = (Int16)(len - ptr_count);
+                if (len_temp <= 1)
+                {
+                    break;
+                }
+                byte[] tlv = buf.Skip(ptr_count).Take(len_temp).ToArray();
+
+                
+
+                switch (tlv[0])
+                {
+                    case 1:
+                        {
+                            if (tlv[1] == 8)
+                            {
+                                sn = tlv.Skip(2).Take(8).ToArray();
+                                tbx_sn.Text = (char )sn[0] + sn[1].ToString("D") + sn[4].ToString("X2") + sn[5].ToString("X2") + sn[6].ToString("X2") + sn[7].ToString("X2");
+                            }
+                        }
+                        break;
+                    case 2:
+                        {
+                            X_k = BitConverter.ToSingle(tlv, 2);
+
+                            tbx_x_k.Text = X_k.ToString();
+                        }
+                        break;
+                    case 3:
+                        {
+                            Y_k = BitConverter.ToSingle(tlv, 2);
+                            tbx_y_k.Text = Y_k.ToString();
+
+                        }
+                        break;
+                    case 4:
+                        {
+                            Z_k = BitConverter.ToSingle(tlv, 2);
+                            tbx_z_k.Text = Z_k.ToString();
+                        }
+                        break;
+                    case 5:
+                        {
+                            X_ADC_k = BitConverter.ToSingle(tlv, 2);
+
+                            tbx_x_adc_k.Text = X_ADC_k.ToString();
+                        }
+                        break;
+                    case 6:
+                        {
+                            Y_ADC_k = BitConverter.ToSingle(tlv, 2);
+                            tbx_y_adc_k.Text = Y_ADC_k.ToString();
+                        }
+                        break;
+                    case 7:
+                        {
+                            Z_ADC_k = BitConverter.ToSingle(tlv, 2);
+
+                            tbx_z_adc_k.Text = Z_ADC_k.ToString();
+                        }
+                        break;
+                    case 8:
+                        {
+                            battery = BitConverter.ToSingle(tlv, 2);
+                            tbx_battery.Text = battery.ToString();
+                        }
+                        break;
+                    case 9:
+                        {
+                            rtc_temp =(UInt32) BitConverter.ToInt32(tlv,2);
+                            tbx_rtc.Text = rtc_temp.ToString("D");
+                        }
+                        break;
+                    case 10:
+                        {
+                            sleep_time = (UInt32)BitConverter.ToInt32(tlv, 2);
+                            tbx_sleeptime.Text = sleep_time.ToString("D");
+                        }
+                        break;
+                    default:break;
+
+                }
+
+                ptr_count = (UInt16)(ptr_count + tlv[1] + 2);
+            }
+            
+        }
+
+        public void rev_reportData(Byte[] buf, UInt16 len)
+        {
+            float[] Acc = new float[3];
+            float[] Speed = new float[3];
+            float[] Displace = new float[3];
+            float[] Kur = new float[3];
+            float[] Env = new float[3];
+            float temperature;
+            float battery;
+
+            Acc[1] = BitConverter.ToSingle(buf, 0 + 2);
+            Speed[1] = BitConverter.ToSingle(buf, 4 + 2*2);
+            Displace[1] = BitConverter.ToSingle(buf, 4 * 2 + 2*3 );
+            Kur[1] = BitConverter.ToSingle(buf, 4 * 3 + 2 * 4);
+            Env[1] = BitConverter.ToSingle(buf, 4 * 4 + 2 * 5);
+
+            Acc[2] = BitConverter.ToSingle(buf, 4 * 5 + 2 * 6);
+            Speed[2] = BitConverter.ToSingle(buf, 4 * 6 + 2 * 7);
+            Displace[2] = BitConverter.ToSingle(buf, 4 * 7 + 2 * 8);
+            Kur[2] = BitConverter.ToSingle(buf, 4 * 8 + 2 * 9);
+            Env[2] = BitConverter.ToSingle(buf, 4 * 9 + 2 * 10);
+
+            Acc[0] = BitConverter.ToSingle(buf, 4 * 10 + 2 * 11);
+            Speed[0] = BitConverter.ToSingle(buf, 4 * 11 + 2 * 12);
+            Displace[0] = BitConverter.ToSingle(buf, 4 * 12 + 2 * 13);
+            Kur[0] = BitConverter.ToSingle(buf, 4 * 13 + 2 * 14);
+            Env[0] = BitConverter.ToSingle(buf, 4 * 14 + 2 * 15);
+
+            temperature = BitConverter.ToSingle(buf, 4 * 15 + 2 * 16);
+            battery = BitConverter.ToSingle(buf, 4 * 16 + 2 * 17);
+
+
+            ListViewItem lvi_X = new ListViewItem(rev_count.ToString());
+            lvi_X.SubItems.Add(Acc[1].ToString());
+            lvi_X.SubItems.Add(Speed[1].ToString());
+            lvi_X.SubItems.Add(Displace[1].ToString());
+            lvi_X.SubItems.Add(Kur[1].ToString());
+            lvi_X.SubItems.Add(Env[1].ToString());
+            lvw_X_axis.Items.Add(lvi_X);
+            lvw_X_axis.Items[lvw_X_axis.Items.Count - 1].EnsureVisible();
+
+            ListViewItem lvi_Y = new ListViewItem(rev_count.ToString());
+            lvi_Y.SubItems.Add(Acc[2].ToString());
+            lvi_Y.SubItems.Add(Speed[2].ToString());
+            lvi_Y.SubItems.Add(Displace[2].ToString());
+            lvi_Y.SubItems.Add(Kur[2].ToString());
+            lvi_Y.SubItems.Add(Env[2].ToString());
+            lvw_Y_axis.Items.Add(lvi_Y);
+            lvw_Y_axis.Items[lvw_Y_axis.Items.Count - 1].EnsureVisible();
+
+            ListViewItem lvi_Z = new ListViewItem(rev_count.ToString());
+            lvi_Z.SubItems.Add(Acc[0].ToString());
+            lvi_Z.SubItems.Add(Speed[0].ToString());
+            lvi_Z.SubItems.Add(Displace[0].ToString());
+            lvi_Z.SubItems.Add(Kur[0].ToString());
+            lvi_Z.SubItems.Add(Env[0].ToString());
+            lvw_Z_axis.Items.Add(lvi_Z);
+            lvw_Z_axis.Items[lvw_Z_axis.Items.Count - 1].EnsureVisible();
+
+            ListViewItem lvi_Other = new ListViewItem(rev_count.ToString());
+            lvi_Other.SubItems.Add(temperature.ToString());
+            lvi_Other.SubItems.Add(battery.ToString());
+      
+            lvw_Other.Items.Add(lvi_Other);
+            lvw_Other.Items[lvw_Other.Items.Count - 1].EnsureVisible();
+
+
+
+
+
+            if (rev_count >= 10)
+            {
+                rev_count = 0;
+                lvw_X_axis.Items.Clear();
+                lvw_Y_axis.Items.Clear();
+                lvw_Z_axis.Items.Clear();
+                lvw_Other.Items.Clear();
+                tbx_revdata.Text = "";
+            }
+
+            rev_count++;
+        }
+
+        private void btn_getconf_Click(object sender, EventArgs e)
+        {
+            byte[] setconf_buf = new byte[100];
+            setconf_buf[0] = 0x7E;
+
+            setconf_buf[1] = 8;
+            setconf_buf[2] = 0;
+
+            setconf_buf[3] = 0;
+            setconf_buf[4] = 0;
+
+
+            setconf_buf[5] = 0x03; //cmd
+
+            setconf_buf[6] = 0x7E;
+
+            byte check_sum = 0;
+
+            for (uint i = 0; i < 7; i++)
+            {
+                check_sum += setconf_buf[i];
+            }
+            setconf_buf[7] = check_sum;
+
+
+            _serialPort.Write(setconf_buf, 0, 8);
+
+
+
         }
     }
 }

@@ -153,13 +153,16 @@ void APP_Power_LMT01_PowerDisable(void)
 
 void APP_Power_EnterStandbyMode(uint32_t WakeUpCounter)
 {
-	
-	
-	
-	
-	__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-	BSP_RTC_SetWakeTime( WakeUpCounter,  RTC_WAKEUPCLOCK_CK_SPRE_16BITS);
-	HAL_PWR_EnterSTANDBYMode();
+	if(WakeUpCounter > 0)
+	{
+		__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+		BSP_RTC_SetWakeTime( WakeUpCounter,  RTC_WAKEUPCLOCK_CK_SPRE_16BITS);
+		HAL_PWR_EnterSTANDBYMode();
+	}
+	else
+	{
+		
+	}
 }
 
 
