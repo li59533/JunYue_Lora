@@ -285,11 +285,11 @@ int8_t BSP_LM78_StartSend(uint8_t *buf, uint16_t len)
 void BSP_LM78_ReqProcess(void)
 {
 	static uint8_t status = 0;
-	if(bsp_lm78_getqueueCount() > 0)
+		if(bsp_lm78_getqueueCount() > 0)
 	{
 		if(status == bsp_lm78_getCurStatus())
 		{
-			
+			status = 0; 
 			bsp_lm78_statusDequeue();
 			Net_Task_Event_Start(NET_TASK_SEND_AT_EVENT, EVENT_FROM_TASK);
 			return;
@@ -298,6 +298,9 @@ void BSP_LM78_ReqProcess(void)
 		{
 			status = bsp_lm78_getCurStatus();
 		}
+		
+		DEBUG("BSP_LM78_ReqProcess Status :%d\r\n",status);
+		
 		switch(status )
 		{
 			case LM78_STATUS_IDLE:

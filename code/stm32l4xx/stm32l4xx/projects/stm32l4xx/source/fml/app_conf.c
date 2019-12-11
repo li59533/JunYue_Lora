@@ -364,7 +364,7 @@ static void app_getconfreq_process(uint8_t *payload,uint16_t len)
 	ln_protocolintance_t *ln_protocolintance = (ln_protocolintance_t * )app_conf_dataspace;
 	LN_Tlv_t tlv_value = { 0 };
 	uint8_t  * payload_ptr = 0;
-	float float_temp = 0.0;
+
 	
 	ln_protocolintance->head = LNPROTOCOL_HEAD;
 	//ln_protocolintance->len = sizeof(ln_protocolintance_t);

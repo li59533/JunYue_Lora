@@ -120,11 +120,15 @@ void app_datasend_test(void)
 int8_t APP_DataSend_SendCharacteristic(void)
 {
 	char app_databuf[200] = { 0 };
+
 	char app_datastrbuf[200] = { 0 };
 	uint16_t ptr = 0;
-	uint8_t app_databuf_ptr = 0;
+	uint8_t * app_databuf_ptr = 0;
 	uint16_t len = 0 ;
-	app_datasend_test();
+	uint16_t battery_temp = 0;
+	//app_datasend_test();
+	
+	int16_t temperature_temp = 0;
 	struct
 	{
 		uint16_t EffectiveValue[4];
@@ -134,7 +138,8 @@ int8_t APP_DataSend_SendCharacteristic(void)
 		uint16_t Envelop[4];
 	}character_buf;
 	
-	
+	battery_temp = (uint16_t )g_SystemParam_Config.battery * 10;
+	temperature_temp = (int16_t )g_SystemParam_Param.pdate * 10;
 	for( uint8_t i = 0 ; i < 3 ; i ++)
 	{
 		if(g_SystemParam_Param.EffectiveValue[i] <= 6000.0f)
@@ -183,18 +188,40 @@ int8_t APP_DataSend_SendCharacteristic(void)
 		}		
 	}
 	
+	// ------SN ----------------
+	memcpy(app_databuf , g_SystemParam_Config.SNnumber , 8);
 	
+	// -------offset---------------
+	app_databuf_ptr = (uint8_t *)&app_databuf[8];
+	
+	// ------charater ----------
 	for(uint8_t i = 0 ; i < 3; i ++)
 	{
-		memcpy(app_databuf + 10*i + 0 , &character_buf.EffectiveValue[i] , 2 );
-		memcpy(app_databuf + 10*i + 2, &character_buf.Vrms[i] , 2 );
-		memcpy(app_databuf + 10*i + 4, &character_buf.Drms[i] , 2 );
-		memcpy(app_databuf + 10*i + 6, &character_buf.KurtosisIndex[i] , 2 );
-		memcpy(app_databuf + 10*i + 8, &character_buf.Envelop[i] , 2 );
+		memcpy(app_databuf_ptr + 10*i + 0 , &character_buf.EffectiveValue[i] , 2 );
+		memcpy(app_databuf_ptr + 10*i + 2, &character_buf.Vrms[i] , 2 );
+		memcpy(app_databuf_ptr + 10*i + 4, &character_buf.Drms[i] , 2 );
+		memcpy(app_databuf_ptr + 10*i + 6, &character_buf.KurtosisIndex[i] , 2 );
+		memcpy(app_databuf_ptr + 10*i + 8, &character_buf.Envelop[i] , 2 );
 		len = 10*i + 8 + 2;
 	}
+	// ------temperature -------
+	memcpy(app_databuf_ptr + len, &temperature_temp , 2 );
+	len += 2;
+	
+	// ------ battery ----------
+	memcpy(app_databuf_ptr + len, &battery_temp , 2 );
+	len += 2;
+	
+	// ------rtc ---------------
+	uint32_t  timestamp = 0;
+	RTC_T rtc_temp = BSP_RTC_Get();
+	
+	timestamp = RTC_ConvertDatetimeToSeconds(&rtc_temp);
+	memcpy(app_databuf_ptr + len, &timestamp , 4 );
+	len += 4;
+	// -------------------------
 
-	for(uint16_t i = 0 ; i < len ; i ++)
+	for(uint16_t i = 0 ; i < len + 8 ; i ++)
 	{
 		ptr += snprintf( app_datastrbuf + ptr , 200 - ptr , "%02X",app_databuf[i]);
 	}

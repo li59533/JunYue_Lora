@@ -120,7 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name></Name>
+          <Name>d</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>252</LineNumber>
+          <LineNumber>337</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134229494</Address>
+          <Address>134229272</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,23 +163,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\252</Expression>
+          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\337</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>158</LineNumber>
+          <LineNumber>201</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134247548</Address>
+          <Address>134227496</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\source\application\hal_task\hal_task.c</Filename>
+          <Filename>..\source\fml\app_datasend.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../source/application/hal_task/hal_task.c\158</Expression>
+          <Expression>\\L100\../source/fml/app_datasend.c\201</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -187,6 +187,11 @@
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>g_SystemParam_Config,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>bsp_usart2_rx</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>

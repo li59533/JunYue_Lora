@@ -147,7 +147,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 			}
 			else
 			{
-				DEBUG("Queue %d is over\r\n",queue_num);
+				DEBUG("Queue %d is over len %d\r\n",queue_num , len);
 			}
 
 		}
@@ -165,7 +165,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 			}
 			else
 			{
-				DEBUG("Queue %d is over\r\n",queue_num);
+				DEBUG("Queue %d is over len %d\r\n",queue_num , len );
 			}
 
 			
