@@ -120,9 +120,18 @@ void BSP_Queue_Init(uint8_t queue_num)
 {
 	switch(queue_num)
 	{
-		case 0:
+		case BSP_QUEUE_UART1_REV:
 		{
-			memset(&usart1_rev,0,sizeof(usart1_rev));
+			usart1_rev.in = 0 ;
+			usart1_rev.count = 0;			
+			usart1_rev.out  = 0;	
+		}
+		break;
+		case BSP_QUEUE_UART2_REV:
+		{
+			usart2_rev.in = 0 ;
+			usart2_rev.count = 0;			
+			usart2_rev.out  = 0;	
 		}
 		break;
 		default:break;
@@ -137,6 +146,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 		{
 			if(len <= 100 && len > 0)
 			{
+				memset(usart1_rev.queue[usart1_rev.in].buf , 0 , sizeof(usart1_rev.queue[usart1_rev.in].buf ));
 				memcpy(usart1_rev.queue[usart1_rev.in].buf , buf, len);
 				usart1_rev.queue[usart1_rev.in].len = len;
 				usart1_rev.in ++;
@@ -156,6 +166,7 @@ void BSP_Queue_Enqueue(uint8_t queue_num, uint8_t * buf, uint16_t len)
 		{
 			if(len <= 100 && len > 0)
 			{
+				memset(usart2_rev.queue[usart2_rev.in].buf , 0 , sizeof(usart2_rev.queue[usart2_rev.in].buf ));
 				memcpy(usart2_rev.queue[usart2_rev.in].buf , buf, len);
 				usart2_rev.queue[usart2_rev.in].len = len;
 				usart2_rev.in ++;
@@ -186,6 +197,7 @@ uint8_t BSP_Queue_GetCount(uint8_t queue_num)
 	}
 	return return_temp;
 }
+
 
 uint8_t * BSP_Queue_Dequeue(uint8_t queue_num , uint8_t * len)
 {

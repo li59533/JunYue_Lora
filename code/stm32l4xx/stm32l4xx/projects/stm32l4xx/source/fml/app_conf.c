@@ -603,6 +603,74 @@ void APP_Conf_ReportData(void) // Report Data in Uart2
 
 }
 
+void APP_Conf_FromLora(uint8_t *buf , uint8_t len )
+{
+	uint8_t conf_buf[50] = { 0 };
+	uint8_t i = 0;
+	if(len > 0)
+	{
+		for( i = 0 ; i < ( len /2) ; i ++)
+		{
+			conf_buf[i] = APP_Conf_StrTo16(buf[i * 2],buf[i * 2+1]);
+		}
+		
+		if(conf_buf[0] == 0x7e)
+		{
+			if(conf_buf[5] == 0x7e)
+			{
+				uint32_t sleeptime_temp = (uint32_t)(conf_buf[1] << 24 | conf_buf[2] << 16 | conf_buf[3] << 8 | conf_buf[4]);// 
+				DEBUG("APP_CONF Lora sleepTime:%d s\r\n" , sleeptime_temp);
+				if((sleeptime_temp <= 86400)&&(sleeptime_temp >= 0))   // < 1 day (86400 s) and >= 0 s
+				{
+					g_SystemParam_Config.sleep_time = sleeptime_temp;
+					SystemParam_Save();
+				}
+				
+			}
+
+		}
+		
+	}
+	else
+	{
+		DEBUG("APP Conf From Lora is NONE\r\n");
+	}
+}
+
+uint8_t APP_Conf_StrTo16(char buf1,char buf2)
+{
+	uint8_t high = 0;
+	uint8_t low = 0;
+	if(buf1 >= '0'&& buf1 <= '9')
+	{
+		high = (buf1 - '0') * 16;
+	}
+	else if (buf1 >= 'a' && buf1 <= 'f')
+	{
+		high = ((buf1 - 'a') + 10) * 16;
+	}
+	else
+	{
+		high = ((buf1 - 'A') + 10) * 16;
+	}
+	
+	if(buf2 >= '0'&& buf2 <= '9')
+	{
+		low = (buf2 - '0') ;
+	}
+	else if (buf2 >= 'a' && buf2 <= 'f')
+	{
+		low = ((buf2 - 'a') + 10) ;
+	}
+	else
+	{
+		low = ((buf2 - 'A') + 10) ;
+	}
+	
+	return high + low;
+	
+}
+
 
 /**
  * @}

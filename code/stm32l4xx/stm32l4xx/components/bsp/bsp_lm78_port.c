@@ -109,7 +109,8 @@ void BSP_LM78_Port_Init(void)
 
 void BSP_LM78_SendBytes(uint8_t * buf, uint16_t len )
 {
-	BSP_Usart_WriteBytes_Common( 0 , buf , len); // blocking mode
+	BSP_Usart_WriteBytes_DMA(BSP_UART_1 , buf , len);
+	//BSP_Usart_WriteBytes_Common( 0 , buf , len); // blocking mode
 }
 
 

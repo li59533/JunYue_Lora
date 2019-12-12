@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>337</LineNumber>
+          <LineNumber>378</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134229272</Address>
+          <Address>134229632</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,23 +163,39 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\337</Expression>
+          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\378</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>201</LineNumber>
+          <LineNumber>316</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227496</Address>
+          <Address>134229422</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\source\fml\app_datasend.c</Filename>
+          <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../source/fml/app_datasend.c\201</Expression>
+          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\316</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>267</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134230062</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\267</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -192,6 +208,21 @@
           <count>1</count>
           <WinNumber>1</WinNumber>
           <ItemText>bsp_usart2_rx</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>bsp_usart2_rx</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>bsp_usart1_rx</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>usart1_rev</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -244,6 +275,12 @@
       <pszMrulep></pszMrulep>
       <pSingCmdsp></pSingCmdsp>
       <pMultCmdsp></pMultCmdsp>
+      <SystemViewers>
+        <Entry>
+          <Name>System Viewer\USART1</Name>
+          <WinId>35905</WinId>
+        </Entry>
+      </SystemViewers>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableFlashSeq>1</EnableFlashSeq>

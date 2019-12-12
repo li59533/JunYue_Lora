@@ -166,6 +166,7 @@ void Net_Task(void * pvParameter)
 	
 		if((event_flag & NET_TASK_SEND_AT_EVENT) != 0x00)
 		{	
+			APP_Power_LM78_ON();
 			BSP_LM78_ReqProcess();
 			DEBUG("NET_TASK_SEND_AT_EVENT\r\n");
 		}
@@ -173,9 +174,15 @@ void Net_Task(void * pvParameter)
 		if((event_flag & NET_TASK_AT_PROCESS_EVENT) != 0x00)
 		{
 			BSP_LM78_RespProcess();
+			
 			DEBUG("NET_TASK_AT_PROCESS_EVENT\r\n");
 		}	
 		
+		if((event_flag & NET_TASK_POWER_DOWN_EVENT) != 0x00)
+		{
+			
+			DEBUG("NET_TASK_POWER_DOWN_EVENT\r\n");
+		}	
 	}
 	
 }

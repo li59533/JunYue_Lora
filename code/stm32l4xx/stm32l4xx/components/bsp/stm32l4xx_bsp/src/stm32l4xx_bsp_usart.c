@@ -409,28 +409,34 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 void BSP_Usart1_IRQHandler(void)
 {
 	HAL_UART_IRQHandler( &husart1);
+	HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
 	if(__HAL_UART_GET_IT(&husart1, UART_IT_IDLE) == SET)
 	{
 		BSP_Queue_Enqueue( BSP_QUEUE_UART1_REV , bsp_usart1_rx , usart1_i);
-		
+		memset(bsp_usart1_rx , 0 , sizeof(bsp_usart1_rx));
 		usart1_i = 0;
 		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
 		DEBUG("ENTER Uart1 IDLE \r\n");
 	}
+	__HAL_UART_CLEAR_OREFLAG(&husart1);
+	
 }
 
 // ------------------USART2_IRQHandler------------------
 void BSP_Usart2_IRQHandler(void)
 {
 	HAL_UART_IRQHandler( &husart2);
+	HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
 	if(__HAL_UART_GET_IT(&husart2, UART_IT_IDLE) == SET)
 	{
 		BSP_Queue_Enqueue( BSP_QUEUE_UART2_REV , bsp_usart2_rx , usart2_i);
+		memset(bsp_usart2_rx , 0 , sizeof(bsp_usart2_rx));
 		usart2_i = 0;
 		__HAL_UART_CLEAR_IDLEFLAG(&husart2);
 		DEBUG("ENTER Uart2 IDLE \r\n");
 	}
 	__HAL_UART_CLEAR_OREFLAG(&husart2);
+	
 }
  // ----------------------------------------------------
 
@@ -452,6 +458,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
 			
 		usart1_i ++;
+		//DEBUG("usart1_i:%d\r\n" , usart1_i);
 		if(usart1_i >= BSP_USART1_RX_SIZE)
 		{
 			usart1_i = 0;
@@ -460,10 +467,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 	if(huart->Instance == USART2)
 	{
-		usart2_i ++;
-		HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
-			
 		
+		HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
+		usart2_i ++;
 		if(usart2_i >= BSP_USART2_RX_SIZE)
 		{
 			usart2_i = 0;

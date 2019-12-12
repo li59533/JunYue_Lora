@@ -70,6 +70,8 @@ void APP_Conf_TestUart(void);
 
 void APP_Conf_ReportData(void);
 
+void APP_Conf_FromLora(uint8_t *buf , uint8_t len );
+uint8_t APP_Conf_StrTo16(char buf1,char buf2);
 
 /**
  * @}

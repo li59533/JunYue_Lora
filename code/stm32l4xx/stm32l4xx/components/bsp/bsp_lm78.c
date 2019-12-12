@@ -22,6 +22,9 @@
 #include "bsp_queue.h"
 #include "net_task.h"
 #include "hal_task.h"
+#include "app_power.h"
+#include "app_conf.h"
+#include "rtos_tools.h"
 /**
  * @addtogroup    bsp_lm78_Modules 
  * @{  
@@ -128,6 +131,8 @@ typedef enum
 	LM78_STATUS_GET_ADDR_RESP ,
 	LM78_STATUS_SEND_BYTES_REQ ,
 	LM78_STATUS_SEND_BYTES_RESP ,
+	LM78_STATUS_REVB_REQ,
+	LM78_STATUS_REVB_RESP,
 	LM78_STATUS_REST ,
 	LM78_STATUS_OK ,
 }LM78_AT_CMD_e;
@@ -148,7 +153,7 @@ const char LM78_AT_GetAddr[] 			= "\r\nAT+DADDR=?\r\n";
 const char LM78_AT_SendOriginalData[] 	= "\r\nAT+SENDB=2:";
 const char LM78_AT_SendstrData[] 		= "\r\nAT+SEND=2:";
 const char LM78_AT_Rest[] 				= "\r\nATZ\r\n";
-
+const char LM78_AT_REVB[]				= "\r\nAT+RECVB=?\r\n";
 
 
 /**
@@ -165,6 +170,7 @@ static void bsp_lm78_statusEnqueue(uint8_t status );
 static uint8_t bsp_lm78_statusDequeue(void);
 static uint8_t bsp_lm78_getqueueCount(void);
 static uint8_t bsp_lm78_getCurStatus(void);
+static void bsp_lm78_statusQueueInit(void);
 /**s
  * @}
  */
@@ -187,84 +193,175 @@ void BSP_LM78_RespProcess(void)
 {
 	uint8_t * rev_buf = 0;
 	uint8_t len = 0;
+	rev_buf = BSP_Queue_Dequeue( BSP_QUEUE_UART1_REV , &len);
+	DEBUG("BSP_Queue_Dequeue Count:%d\r\n",BSP_Queue_GetCount(BSP_QUEUE_UART1_REV));
+	
 	switch(bsp_lm78_getCurStatus())
 	{
-
 		case LM78_STATUS_AT_REQ:
 		{
-			rev_buf = BSP_Queue_Dequeue( BSP_QUEUE_UART1_REV , &len);
-			
 			if(strstr((const char *)rev_buf,"OK") != 0 )
 			{
 				bsp_lm78_statusDequeue();
-				bsp_lm78_statusEnqueue(LM78_STATUS_GET_VERSION_REQ);
-				
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					bsp_lm78_statusEnqueue(LM78_STATUS_GET_VERSION_REQ);
+				}
 			}
 			else
 			{
-				
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
 			}
 			DEBUG("AT_RESP:%s\r\n",rev_buf);
 		}
 		break;	
 		case LM78_STATUS_GET_VERSION_REQ :
 		{
-			rev_buf = BSP_Queue_Dequeue( BSP_QUEUE_UART1_REV , &len);
-			
 			if(strstr((const char *)rev_buf,"OK") != 0 )
 			{
 				bsp_lm78_statusDequeue();
-				bsp_lm78_statusEnqueue(LM78_STATUS_GET_ADDR_REQ);
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					bsp_lm78_statusEnqueue(LM78_STATUS_GET_ADDR_REQ);
+				}				
+				
 				
 			}
 			else
 			{
-				
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
 			}
 			DEBUG("AT_VERSION RESP:%s\r\n",rev_buf);			
 		}
 		break;
 		case LM78_STATUS_GET_ADDR_REQ:
 		{
-			rev_buf = BSP_Queue_Dequeue( BSP_QUEUE_UART1_REV , &len);
-			
 			if(strstr((const char *)rev_buf,"OK") != 0 )
 			{
 				bsp_lm78_statusDequeue();
-				bsp_lm78_statusEnqueue(LM78_STATUS_OK);
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					bsp_lm78_statusEnqueue(LM78_STATUS_OK);
+				
+				}				
+				
 				
 			}
 			else
 			{
-				
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}				
 			}
 			DEBUG("AT ADDR RESP:%s\r\n",rev_buf);				
 		}
 		break;
 		case LM78_STATUS_SEND_BYTES_REQ:
 		{
-			rev_buf = BSP_Queue_Dequeue( BSP_QUEUE_UART1_REV , &len);
-			
 			if(strstr((const char *)rev_buf,"OK") != 0 )
 			{
 				bsp_lm78_statusDequeue();
-				bsp_lm78_statusEnqueue(LM78_STATUS_OK);
-				Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
+				
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					RTOS_Delay_ms(1000);
+					bsp_lm78_statusEnqueue(LM78_STATUS_REVB_REQ);
+					Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
+				}
+
+			}
+			else
+			{
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					bsp_lm78_statusDequeue();
+				bsp_lm78_statusEnqueue(LM78_STATUS_REST);
+				}
+				//bsp_lm78_statusEnqueue(LM78_STATUS_OK);
+			}
+			DEBUG("AT SEND B RESP:%s len :%d\r\n",rev_buf , len);				
+		}
+		break;
+		case LM78_STATUS_REVB_REQ:
+		{
+			bsp_lm78_statusDequeue();
+			
+			char *conf_buf_head = 0;
+			conf_buf_head = strstr((const char *)rev_buf,":7e");
+			DEBUG("LM78_STATUS_REVB_REQ:%s len :%d\r\n",rev_buf , len);	
+			if(conf_buf_head != NULL)
+			{
+				DEBUG("ENTER Lora CONF\r\n");
+				APP_Conf_FromLora((uint8_t *)(conf_buf_head + 1 ), strlen((const char *)(conf_buf_head + 1)) );
+				
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					bsp_lm78_statusEnqueue(LM78_STATUS_OK);
+				}
+				
 				
 			}
 			else
 			{
-				bsp_lm78_statusEnqueue(LM78_STATUS_OK);
+				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+				{
+					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+				}
+				else
+				{
+					RTOS_Delay_ms(200);
+					bsp_lm78_statusEnqueue(LM78_STATUS_REVB_REQ);
+				}
+				
 			}
-			DEBUG("AT SEND B RESP:%s\r\n",rev_buf);				
 		}
 		break;
 		case LM78_STATUS_OK:
 		{
-			
+			if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+			{
+				Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
+			}
+			DEBUG("LM78_STATUS_OK:%s len :%d\r\n",rev_buf , len);		
 		}
 		break;
 		default :break;
+	}
+	
+	if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
+	{
+		Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
 	}
 }
 
@@ -285,7 +382,7 @@ int8_t BSP_LM78_StartSend(uint8_t *buf, uint16_t len)
 void BSP_LM78_ReqProcess(void)
 {
 	static uint8_t status = 0;
-		if(bsp_lm78_getqueueCount() > 0)
+	if(bsp_lm78_getqueueCount() > 0)
 	{
 		if(status == bsp_lm78_getCurStatus())
 		{
@@ -311,19 +408,19 @@ void BSP_LM78_ReqProcess(void)
 			break;
 			case LM78_STATUS_AT_REQ:
 			{
-				BSP_LM78_SendBytes((uint8_t *)LM78_AT_AT,sizeof(LM78_AT_AT));
+				BSP_LM78_SendBytes((uint8_t *)LM78_AT_AT,strlen(LM78_AT_AT));
 				DEBUG("REQ AT\r\n");
 			}
 			break;
 			case LM78_STATUS_GET_VERSION_REQ :
 			{
-				BSP_LM78_SendBytes((uint8_t *)LM78_AT_GetVersion,sizeof(LM78_AT_GetVersion));
+				BSP_LM78_SendBytes((uint8_t *)LM78_AT_GetVersion,strlen(LM78_AT_GetVersion));
 				DEBUG("REQ AT+VER=?\r\n");
 			}
 			break;
 			case LM78_STATUS_GET_ADDR_REQ:
 			{
-				BSP_LM78_SendBytes((uint8_t *)LM78_AT_GetAddr,sizeof(LM78_AT_GetAddr));
+				BSP_LM78_SendBytes((uint8_t *)LM78_AT_GetAddr,strlen(LM78_AT_GetAddr));
 				DEBUG("REQ AT+DADDR=?\r\n");
 			}
 			break;
@@ -339,12 +436,22 @@ void BSP_LM78_ReqProcess(void)
 			break;
 			case LM78_STATUS_REST:
 			{
-				BSP_LM78_SendBytes((uint8_t *)LM78_AT_Rest,sizeof(LM78_AT_Rest));
+				BSP_LM78_SendBytes((uint8_t *)LM78_AT_Rest,strlen(LM78_AT_Rest));
+				bsp_lm78_statusQueueInit();
+				BSP_Queue_Init(BSP_QUEUE_UART1_REV);
 				DEBUG("REQ ATZ\r\n");
+			}
+			break;
+			case LM78_STATUS_REVB_REQ:
+			{
+				status = 0;
+				BSP_LM78_SendBytes((uint8_t *)LM78_AT_REVB,strlen(LM78_AT_REVB));
+				DEBUG("REQ AT+RECVB=?\r\n");
 			}
 			break;
 			case LM78_STATUS_OK:
 			{
+				//APP_Power_LM78_OFF();
 				bsp_lm78_statusDequeue();
 				//bsp_lm78_statusEnqueue(LM78_STATUS_OK);
 			}
@@ -361,7 +468,12 @@ void BSP_LM78_ReqProcess(void)
 }
 
 
-
+static void bsp_lm78_statusQueueInit(void)
+{
+	LM78_StatusQueue.count = 0;
+	LM78_StatusQueue.in = 0;
+	LM78_StatusQueue.out = 0;
+}
 
 static void bsp_lm78_statusEnqueue(uint8_t status )
 {
