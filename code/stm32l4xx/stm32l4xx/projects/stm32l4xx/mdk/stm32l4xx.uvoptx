@@ -152,50 +152,82 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>378</LineNumber>
+          <LineNumber>431</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134229632</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\378</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>316</LineNumber>
+          <LineNumber>219</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134229422</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\316</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>267</LineNumber>
+          <LineNumber>220</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134230062</Address>
+          <Address>134233282</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
+          <Filename>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\267</Expression>
+          <Expression>\\L100\../../../components/bsp/stm32l4xx_bsp/src/stm32l4xx_bsp_usart.c\220</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>432</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134232878</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_usart.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\L100\../../../components/bsp/stm32l4xx_bsp/src/stm32l4xx_bsp_usart.c\432</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>475</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134248180</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_usart.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\L100\../../../components/bsp/stm32l4xx_bsp/src/stm32l4xx_bsp_usart.c\475</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -224,15 +256,12 @@
           <WinNumber>1</WinNumber>
           <ItemText>usart1_rev</ItemText>
         </Ww>
-      </WatchWindow1>
-      <MemoryWindow1>
-        <Mm>
+        <Ww>
+          <count>5</count>
           <WinNumber>1</WinNumber>
-          <SubType>0</SubType>
-          <ItemText>portNVIC_IP_REGISTERS_OFFSET_16</ItemText>
-          <AccSizeX>0</AccSizeX>
-        </Mm>
-      </MemoryWindow1>
+          <ItemText>usart2_rev</ItemText>
+        </Ww>
+      </WatchWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -275,12 +304,6 @@
       <pszMrulep></pszMrulep>
       <pSingCmdsp></pSingCmdsp>
       <pMultCmdsp></pMultCmdsp>
-      <SystemViewers>
-        <Entry>
-          <Name>System Viewer\USART1</Name>
-          <WinId>35905</WinId>
-        </Entry>
-      </SystemViewers>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableFlashSeq>1</EnableFlashSeq>
@@ -2145,7 +2168,7 @@
 
   <Group>
     <GroupName>RTOS</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -80,7 +80,8 @@ static uint8_t bsp_usart2_tx[BSP_USART2_TX_SIZE] = { 0 };
 static uint8_t bsp_usart2_rx[BSP_USART2_RX_SIZE] = { 0 };
 // ------------------------
 
-
+static uint8_t bsp_usart1_rxtemp = 0;
+static uint8_t bsp_usart2_rxtemp = 0;
 
 
 static uint16_t usart1_i = 0;
@@ -212,11 +213,11 @@ void BSP_Usart_RevOneByteIT_Conf(uint8_t  BSP_Uart_X)  // IT in rev 1 byte
 	
 	if( BSP_Uart_X == BSP_UART_1)
 	{
-		HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
+		HAL_UART_Receive_IT( &husart1 , &bsp_usart1_rxtemp, 1);
 	}
 	if( BSP_Uart_X == BSP_UART_2)
 	{
-		HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
+		HAL_UART_Receive_IT( &husart2 , &bsp_usart2_rxtemp, 1);
 	}	
 	
 }
@@ -408,8 +409,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 // ------------------USART1_IRQHandler------------------
 void BSP_Usart1_IRQHandler(void)
 {
-	HAL_UART_IRQHandler( &husart1);
-	HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
+	
+
 	if(__HAL_UART_GET_IT(&husart1, UART_IT_IDLE) == SET)
 	{
 		BSP_Queue_Enqueue( BSP_QUEUE_UART1_REV , bsp_usart1_rx , usart1_i);
@@ -418,6 +419,7 @@ void BSP_Usart1_IRQHandler(void)
 		__HAL_UART_CLEAR_IDLEFLAG(&husart1);
 		DEBUG("ENTER Uart1 IDLE \r\n");
 	}
+	HAL_UART_IRQHandler( &husart1);
 	__HAL_UART_CLEAR_OREFLAG(&husart1);
 	
 }
@@ -425,8 +427,7 @@ void BSP_Usart1_IRQHandler(void)
 // ------------------USART2_IRQHandler------------------
 void BSP_Usart2_IRQHandler(void)
 {
-	HAL_UART_IRQHandler( &husart2);
-	HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
+
 	if(__HAL_UART_GET_IT(&husart2, UART_IT_IDLE) == SET)
 	{
 		BSP_Queue_Enqueue( BSP_QUEUE_UART2_REV , bsp_usart2_rx , usart2_i);
@@ -435,7 +436,11 @@ void BSP_Usart2_IRQHandler(void)
 		__HAL_UART_CLEAR_IDLEFLAG(&husart2);
 		DEBUG("ENTER Uart2 IDLE \r\n");
 	}
+	
+	HAL_UART_IRQHandler( &husart2);
 	__HAL_UART_CLEAR_OREFLAG(&husart2);
+	
+	
 	
 }
  // ----------------------------------------------------
@@ -454,26 +459,25 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART1)
 	{
-		//HAL_UART_Receive_IT( huart , bsp_usart1_rx + usart1_i , 1);
-		HAL_UART_Receive_IT( &husart1 , bsp_usart1_rx + usart1_i, 1);
-			
+		bsp_usart1_rx[usart1_i] = bsp_usart1_rxtemp;	
 		usart1_i ++;
-		//DEBUG("usart1_i:%d\r\n" , usart1_i);
 		if(usart1_i >= BSP_USART1_RX_SIZE)
 		{
 			usart1_i = 0;
 		}
+		HAL_UART_Receive_IT( &husart1 ,  &bsp_usart1_rxtemp, 1);
 	}
 
 	if(huart->Instance == USART2)
 	{
 		
-		HAL_UART_Receive_IT( &husart2 , bsp_usart2_rx + usart2_i, 1);
+		bsp_usart2_rx[usart2_i] = bsp_usart2_rxtemp;
 		usart2_i ++;
 		if(usart2_i >= BSP_USART2_RX_SIZE)
 		{
 			usart2_i = 0;
 		}
+		HAL_UART_Receive_IT( &husart2 , &bsp_usart2_rxtemp, 1);
 	}
 	
 }
