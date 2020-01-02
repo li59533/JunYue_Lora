@@ -28,6 +28,7 @@
 #include "bsp_lm78.h"
 #include "bsp_led.h"
 #include "timers.h"
+
 /**
  * @addtogroup    net_task_Modules 
  * @{  
@@ -144,7 +145,7 @@ void Net_Task(void * pvParameter)
 	DEBUG("Net Task Enter\r\n");
 	APP_Power_LM78_ON();
 	BSP_LM78_Init();
-	//NET_Task_Tim_Init();
+	NET_Task_Tim_Init();
 	//NET_Task_StartTim(10000);
 	
 	Net_Task_Event_Start(NET_TASK_SEND_AT_EVENT, EVENT_FROM_TASK);
@@ -173,15 +174,19 @@ void Net_Task(void * pvParameter)
 		
 		if((event_flag & NET_TASK_AT_PROCESS_EVENT) != 0x00)
 		{
+			NET_Task_StartTim(3000);
 			BSP_LM78_RespProcess();
 			
 			DEBUG("NET_TASK_AT_PROCESS_EVENT\r\n");
 		}	
 		
-		if((event_flag & NET_TASK_POWER_DOWN_EVENT) != 0x00)
+		if((event_flag & NET_TASK_POWER_REST_EVENT) != 0x00)
 		{
+			DEBUG("NET_TASK_POWER_REST_EVENT\r\n");
+			APP_Power_LM78_OFF();
+			RTOS_Delay_ms(2000);
+			APP_Power_LM78_ON();
 			
-			DEBUG("NET_TASK_POWER_DOWN_EVENT\r\n");
 		}	
 	}
 	
@@ -213,7 +218,7 @@ void NET_Task_Tim_Init(void)
 {
 	net_task_timout = xTimerCreate(	"NetTimOUT",			/*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 									pdMS_TO_TICKS(1000),
-									pdTRUE,
+									pdFALSE,
 									NULL,
 									net_task_tim_callback );
 }
@@ -225,7 +230,7 @@ void NET_Task_StartTim(uint16_t time_count)
 }
 static void net_task_tim_callback(TimerHandle_t xTimer)
 {
-	Net_Task_Event_Start(NET_TASK_SEND_AT_EVENT, EVENT_FROM_TASK);
+	Net_Task_Event_Start(NET_TASK_POWER_REST_EVENT, EVENT_FROM_TASK);
 }
 
 

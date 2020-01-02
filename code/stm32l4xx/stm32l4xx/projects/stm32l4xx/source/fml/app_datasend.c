@@ -19,6 +19,7 @@
 #include "clog.h"
 #include "bsp_lm78.h"
 #include "system_param.h" 
+#include "app_battery.h"
 /**
  * @addtogroup    app_datasend_Modules 
  * @{  
@@ -236,19 +237,12 @@ int8_t APP_DataSend_SendCharacteristic(void)
 	
 	BSP_LM78_StartSend((uint8_t *)app_datastrbuf, strlen((const char *)app_datastrbuf));
 	
-	APP_DataSend_BatteryReduce();
+	APP_Battery_Reduce();
 	
 	return 0 ; 
 }
 
-void APP_DataSend_BatteryReduce(void)
-{
-	g_SystemParam_Config.battery=g_SystemParam_Config.battery - 0.02f;
-	if(g_SystemParam_Config.battery <= 0 )
-	{
-		g_SystemParam_Config.battery = 0;
-	}
-}
+
 
 
 /**

@@ -1,6 +1,6 @@
 /**
  **************************************************************************************************
- * @file        bsp_lm78_port.c
+ * @file        app_battery.c
  * @author
  * @version   v0.1.0
  * @date        
@@ -10,22 +10,21 @@
  *
  **************************************************************************************************
  */
-
+#include "app_battery.h"
 #include "stm32_bsp_conf.h"
-#include "bsp_lm78_port.h"
-
+#include "system_param.h"
 /**
  * @addtogroup    XXX 
  * @{  
  */
-
+#include "clog.h"
 /**
- * @addtogroup    bsp_lm78_port_Modules 
+ * @addtogroup    app_battery_Modules 
  * @{  
  */
 
 /**
- * @defgroup      bsp_lm78_port_IO_Defines 
+ * @defgroup      app_battery_IO_Defines 
  * @brief         
  * @{  
  */
@@ -35,27 +34,7 @@
  */
 
 /**
- * @defgroup      bsp_lm78_port_Macros_Defines 
- * @brief         
- * @{  
- */
-
-/**
- * @}
- */
- 
-/**
- * @defgroup      bsp_lm78_port_Constants_Defines 
- * @brief         
- * @{  
- */
-
-/**
- * @}
- */
-
-/**
- * @defgroup      bsp_lm78_port_Private_Types
+ * @defgroup      app_battery_Macros_Defines 
  * @brief         
  * @{  
  */
@@ -65,18 +44,37 @@
  */
  
 /**
- * @defgroup      bsp_lm78_port_Private_Variables 
+ * @defgroup      app_battery_Constants_Defines 
  * @brief         
  * @{  
  */
 
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_battery_Private_Types
+ * @brief         
+ * @{  
+ */
 
 /**
  * @}
  */
  
 /**
- * @defgroup      bsp_lm78_port_Public_Variables 
+ * @defgroup      app_battery_Private_Variables 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+ 
+/**
+ * @defgroup      app_battery_Public_Variables 
  * @brief         
  * @{  
  */
@@ -86,36 +84,36 @@
  */
 
 /**
- * @defgroup      bsp_lm78_port_Private_FunctionPrototypes 
+ * @defgroup      app_battery_Private_FunctionPrototypes 
  * @brief         
  * @{  
  */
 
-/**s
+/**
  * @}
  */
 
-
 /**
- * @defgroup      bsp_lm78_port_Functions 
+ * @defgroup      app_battery_Functions 
  * @brief         
  * @{  
  */
-void BSP_LM78_Port_Init(void)
+
+void APP_Battery_Reduce(void)
 {
-	BSP_Usart_Init( BSP_UART_1);
-	BSP_Usart_RevOneByteIT_Conf(BSP_UART_1);
-	
+	g_SystemParam_Config.battery=g_SystemParam_Config.battery - 0.02f;
+	if(g_SystemParam_Config.battery <= 0 )
+	{
+		g_SystemParam_Config.battery = 0;
+	}
 }
 
-void BSP_LM78_SendBytes(uint8_t * buf, uint16_t len )
+void APP_Battery_Rest(void)
 {
-	BSP_Usart_WriteBytes_DMA(BSP_UART_1 , buf , len);
-	//BSP_Usart_WriteBytes_Common( 0 , buf , len); // blocking mode
-}
-void BSP_LM_78_Rest(void)
-{
-	
+	if(g_SystemParam_Config.battery <= 10.0f)
+	{
+		g_SystemParam_Config.battery = 100.0f;
+	}
 }
 
 

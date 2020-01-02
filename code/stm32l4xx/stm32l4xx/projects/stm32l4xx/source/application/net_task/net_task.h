@@ -30,7 +30,7 @@
 
 #define NET_TASK_SEND_AT_EVENT    	(0X01 << 0)
 #define NET_TASK_AT_PROCESS_EVENT  	(0X01 << 1)
-#define NET_TASK_POWER_DOWN_EVENT 	(0X01 << 2)
+#define NET_TASK_POWER_REST_EVENT 	(0X01 << 2)
 /**
  * @}
  */

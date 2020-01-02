@@ -26,6 +26,7 @@
 #include "app_power.h"
 #include "hal_task.h"
 #include "rtos_tools.h"
+#include "app_battery.h"
 /**
  * @addtogroup    hal_task_Modules 
  * @{  
@@ -137,6 +138,8 @@ void Hal_Task(void * pvParameter)
 	if(APP_Power_CurrentMode() == PWR_FROM_REST)
 	{
 		
+		APP_Battery_Rest();
+		SystemParam_Save();
 		Hal_Task_StartTim(60000);
 		hal_pwr_flag = 0;
 	}

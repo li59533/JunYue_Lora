@@ -468,6 +468,7 @@ void BSP_LM78_ReqProcess(void)
 }
 
 
+
 static void bsp_lm78_statusQueueInit(void)
 {
 	LM78_StatusQueue.count = 0;
