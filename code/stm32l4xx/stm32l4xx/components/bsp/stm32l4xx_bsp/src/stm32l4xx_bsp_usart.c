@@ -148,6 +148,7 @@ void BSP_Usart_Init(uint8_t  BSP_Uart_X)
 		//USART1->CR2 |= 0x01 << 15;
 		husart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT; // this is the hardware making RX and TX changed
 		husart1.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
+//		
 		if (HAL_UART_Init(&husart1) != HAL_OK)
 		{
 		DEBUG("Hal_Usart Init Err\r\n");
@@ -311,19 +312,19 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 		__HAL_RCC_USART2_CLK_ENABLE();
         // ----------------------
 		GPIO_InitTypeDef GPIO_InitStruct;
-		GPIO_InitStruct.Pin = GPIO_PIN_15;
-		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-		GPIO_InitStruct.Pull = GPIO_NOPULL;
-		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-		GPIO_InitStruct.Alternate = GPIO_AF3_USART2;
-		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-		GPIO_InitStruct.Pin = GPIO_PIN_5;
+		GPIO_InitStruct.Pin = GPIO_PIN_2;
 		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 		GPIO_InitStruct.Pull = GPIO_NOPULL;
 		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 		GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-		HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+		GPIO_InitStruct.Pin = GPIO_PIN_3;
+		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+		GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 		
 		
 		// --------DMA Conf------------------

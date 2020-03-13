@@ -1,0 +1,160 @@
+/**
+ **************************************************************************************************
+ * @file        app_task.c
+ * @author
+ * @version   v0.1.0
+ * @date        
+ * @brief
+ **************************************************************************************************
+ * @attention
+ *
+ **************************************************************************************************
+ */
+#include "self_def.h"
+#include "osal.h"
+#include "clog.h"
+#include "app_task.h"
+
+
+/**
+ * @addtogroup    XXX 
+ * @{  
+ */
+#include "bsp_led.h"
+
+/**
+ * @addtogroup    app_task_Modules 
+ * @{  
+ */
+
+/**
+ * @defgroup      app_task_IO_Defines 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Macros_Defines 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Constants_Defines 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Private_Types
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Private_Variables 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Public_Variables 
+ * @brief         
+ * @{  
+ */
+uint8_t g_AppTask_Id = 0;
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Private_FunctionPrototypes 
+ * @brief         
+ * @{  
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      app_task_Functions 
+ * @brief         
+ * @{  
+ */
+void AppTask_Init(uint8_t taskId)
+{
+    g_AppTask_Id = taskId;
+	
+}
+
+osal_event_t AppTask_Process(uint8_t taskid,osal_event_t events)
+{
+    if (events & APP_TASK_LOOP_EVENT)
+    {		
+		
+        return events ^ APP_TASK_LOOP_EVENT;
+    }
+
+    if (events & APP_TASK_TRANSFER_CORELOOP_EVENT)
+    {		
+	
+        return events ^ APP_TASK_TRANSFER_CORELOOP_EVENT;
+    }	
+	
+	
+	
+    return 0;
+}
+
+void AppTask_Send_Event(osal_event_t events)
+{
+    OS_Events_Set(g_AppTask_Id,events);
+}
+
+void AppTask_Timer_Start_Event(osal_event_t event_flag,uint32_t timeout)
+{
+	OS_Timer_Start(g_AppTask_Id, event_flag,timeout);	
+}
+
+void AppTask_Timer_Stop_Event(osal_event_t event_flag)
+{
+	OS_Timer_Stop(g_AppTask_Id, event_flag);	
+}
+
+void AppTask_Clear_Event(osal_event_t events)
+{
+	OS_Events_Clear(g_AppTask_Id,events);
+}
+/**
+ * @}
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @}
+ */
+

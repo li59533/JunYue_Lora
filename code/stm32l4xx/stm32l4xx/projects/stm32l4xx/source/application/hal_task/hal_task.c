@@ -208,6 +208,7 @@ void Hal_Task_StartTim(uint32_t time_count)
 	xTimerChangePeriod( hal_task_tim,  pdMS_TO_TICKS(time_count) , 0 );
 	xTimerStart( hal_task_tim,0);
 }
+
 static void hal_task_tim_callback(TimerHandle_t xTimer)
 {
 	
