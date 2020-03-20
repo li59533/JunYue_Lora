@@ -70,7 +70,9 @@ void BSP_Flash_Init(void);
 int8_t BSP_Flash_WriteBytes(uint32_t AddrStart,uint8_t *buf,uint16_t len); 
 void BSP_Flash_ReadBytes(uint32_t AddrStart, uint8_t *buf , uint16_t len);
 
+// -------Test Func ------------
 void BSP_Flash_Test(void);
+// -----------------------------
 /**
  * @}
  */

@@ -63,8 +63,13 @@
  * @defgroup      bsp_power_Exported_Functions 
  * @{  
  */
- 
-void BSP_Power_EnterVLPS(void);
+
+void BSP_Power_Init(void);
+void BSP_Power_EnterVLPS(void); // this need be modif, 
+void BSP_Power_EnterVLPS_WithCall(void (* beforefunc)(void) , void (* afterfunc)(void))  ; //  this func can take func_ptr
+void BSP_Power_V30_ON(void);
+void BSP_Power_V30_OFF(void);
+
 
 // -------Test Func------------- 
 void BSP_Power_ModeTest(void);

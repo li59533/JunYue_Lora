@@ -27,9 +27,9 @@
  * @defgroup      bsp_tim_Exported_Macros 
  * @{  
  */
-#define		BSP_CLOCK0  0
-#define		BSP_CLOCK1  1
-#define 	BSP_CLOCK2  2
+#define		BSP_TIM0  0
+#define		BSP_TIM1  1
+#define 	BSP_TIM2  2
 
 
 /**
@@ -67,10 +67,12 @@
  * @defgroup      bsp_tim_Exported_Functions 
  * @{  
  */
-void BSP_Clock_DeInit(uint8_t BSP_CLOCKx);
-void BSP_Clock_Init(uint8_t BSP_CLOCKx);
-uint32_t BSP_GetTimrCurCount(uint8_t BSP_CLOCKx);
-void BSP_Clock_StartOnceTimer(uint8_t BSP_CLOCKx , uint32_t msec);
+void BSP_Tim_DeInit(uint8_t BSP_TIMx);
+void BSP_Tim_Init(uint8_t BSP_TIMx);
+uint32_t BSP_GetTimrCurCount(uint8_t BSP_TIMx);
+void BSP_Tim_StartOnceTimer(uint8_t BSP_TIMx , uint32_t msec);
+void BSP_TIM_Stop(uint8_t BSP_TIMx);
+void BSP_TIM_Start(uint8_t BSP_TIMx);
 
 /**
  * @}

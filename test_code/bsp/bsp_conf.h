@@ -43,14 +43,14 @@
 #define BSP_USART_MODULE_ENABLE			1
 #define BSP_FLASH_MODULE_ENABLE			1
 #define BSP_LPV_MODULE_ENABLE			1
-
+#define BSP_SPI_MODULE_ENABLE			1
 
 #define BSP_CAN_MODULE_ENABLE 			0
 #define BSP_DAC_MODULE_ENABLE			0
 #define BSP_EXTI_MODULE_ENABLE 			0
 
 #define BSP_IIC_MODULE_ENABLE			0
-#define BSP_SPI_MODULE_ENABLE			0
+
 #define BSP_WDG_MODULE_ENABLE			0
 #define BSP_SYSTICK_MODULE_ENABLE		0
 
@@ -107,6 +107,11 @@
 	#include "fsl_smc.h"
 	#include "fsl_pmc.h"
 #endif	
+
+#if BSP_SPI_MODULE_ENABLE == 1	
+	#include "fsl_spi.h"
+#endif	
+
 
 
 

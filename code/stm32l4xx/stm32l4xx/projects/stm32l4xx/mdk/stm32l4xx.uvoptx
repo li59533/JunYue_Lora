@@ -396,7 +396,7 @@
 
   <Group>
     <GroupName>Fml</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -583,8 +583,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_exti.c</PathWithFileName>
-      <FilenameWithoutPath>stm32l4xx_bsp_exti.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_flash.c</PathWithFileName>
+      <FilenameWithoutPath>stm32l4xx_bsp_flash.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -595,8 +595,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_flash.c</PathWithFileName>
-      <FilenameWithoutPath>stm32l4xx_bsp_flash.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\components\bsp\stm32l4xx_bsp\src\stm32l4xx_bsp_exti.c</PathWithFileName>
+      <FilenameWithoutPath>stm32l4xx_bsp_exti.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -748,7 +748,7 @@
 
   <Group>
     <GroupName>Mdl</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -792,7 +792,7 @@
 
   <Group>
     <GroupName>Source</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -872,7 +872,7 @@
 
   <Group>
     <GroupName>Utilities</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

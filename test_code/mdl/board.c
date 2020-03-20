@@ -24,7 +24,7 @@
  * @addtogroup    XXX 
  * @{  
  */
-
+#include "bsp_power.h"
 /**
  * @addtogroup    board_Modules 
  * @{  
@@ -113,14 +113,19 @@ void Board_Init_ClockRUN(void)
 
 void Board_Init_BSP(void)
 {
-	BSP_RTC_Init();   //RTC Init
 	BSP_Flash_Init(); // Flash Init
-	BSP_UART_Init( BSP_UART2 );
+	BSP_Power_Init();
+//	BSP_RTC_Init();   //RTC Init
+//	
+//	BSP_UART_Init( BSP_UART2 );
 	
 // --------Test func-------------	
 //	BSP_ADC_Init();
 //	BSP_UART_Init( BSP_UART0 );
 //	BSP_UART_Init( BSP_UART2 );
+	
+//	BSP_Tim_Init( BSP_TIM1);	
+	
 // ------------------------------
 	
 }

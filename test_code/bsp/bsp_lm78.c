@@ -150,7 +150,9 @@ typedef enum
 const char LM78_AT_AT[] 				= "\r\nAT\r\n";
 const char LM78_AT_GetVersion[] 		= "\r\nAT+VER=?\r\n";
 const char LM78_AT_GetAddr[] 			= "\r\nAT+DADDR=?\r\n";
-const char LM78_AT_SendOriginalData[] 	= "\r\nAT+SENDB=2:";
+//const char LM78_AT_SendOriginalData[] 	= "\r\nAT+SENDB=2:";
+const char LM78_AT_SendOriginalData[] 	= "\r\nAT+SEND=2:";
+
 const char LM78_AT_SendstrData[] 		= "\r\nAT+SEND=2:";
 const char LM78_AT_Rest[] 				= "\r\nATZ\r\n";
 const char LM78_AT_REVB[]				= "\r\nAT+RECVB=?\r\n";

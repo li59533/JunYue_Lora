@@ -14,17 +14,11 @@
 #include "osal.h"
 #include "clog.h"
 #include "user_task.h"
-
-
 /**
  * @addtogroup    XXX 
  * @{  
  */
-#include "bsp_led.h"
-#include "bsp_power.h"
-#include "bsp_rtc.h"
-#include "bsp_systick.h"
-
+#include "bsp_ad7682.h"
 /**
  * @addtogroup    user_task_Modules 
  * @{  
@@ -108,36 +102,47 @@ uint8_t g_UserTask_Id = 0;
 void UserTask_Init(uint8_t taskId)
 {
     g_UserTask_Id = taskId;
-
-	BSP_LED_Blink( BSP_LED_TEST , 0 , 10, 1000);
-	
+	//UserTask_Send_Event(USER_TASK_LOOP_EVENT);
+	OS_Timer_Start(g_UserTask_Id, USER_TASK_LOOP2_EVENT,1000);	
+	UserTask_Send_Event(USER_TASK_AD7682_INIT_EVENT);
 }
 
 osal_event_t UserTask_Process(uint8_t taskid,osal_event_t events)
 {
     if (events & USER_TASK_LOOP_EVENT)
     {
-		DEBUG("USER_TASK_LOOP_EVENT\r\n");		
+		DEBUG("USER_TASK_LOOP_EVENT\r\n");
+
+		OS_Timer_Start(g_UserTask_Id, USER_TASK_LOOP_EVENT,1000);			
         return events ^ USER_TASK_LOOP_EVENT;
     }
 	
     if (events & USER_TASK_LOOP2_EVENT)
     {
-		
+		//DEBUG("BSP_AD_7682_TriggerGet_IN0\r\n");
+		//BSP_AD7682_LoopTrig();
+		BSP_AD7682_TestFunc();
+		OS_Timer_Start(g_UserTask_Id, USER_TASK_LOOP2_EVENT,1000);			
         return events ^ USER_TASK_LOOP2_EVENT;
     }	
-
-    if (events & USER_TASK_GETDATA_EVENT)
-    {
 	
-        return events ^ USER_TASK_GETDATA_EVENT;
-    }	
-
-    if (events & USER_TASK_CONFREV_EVENT)
+    if (events & USER_TASK_AD7682_INIT_EVENT)
     {
-		
-        return events ^ USER_TASK_CONFREV_EVENT;
+		DEBUG("USER_TASK_AD7682_INIT_EVENT\r\n");
+		BSP_AD7682_Init();
+        return events ^ USER_TASK_AD7682_INIT_EVENT;
+    }		
+
+    if (events & USER_TASK_AD7682_VALUECALC_EVENT)
+    {
+		//DEBUG("USER_TASK_AD7682_VALUECALC_EVENT\r\n");
+		BSP_AD7682_GetNeedValue();
+        return events ^ USER_TASK_AD7682_VALUECALC_EVENT;
     }	
+	
+	
+	
+	
 	
 	
     return 0;
@@ -158,6 +163,7 @@ void UserTask_Clear_Event(osal_event_t events)
 {
 
 }
+
 /**
  * @}
  */

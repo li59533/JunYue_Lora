@@ -22,7 +22,7 @@
  */
 #include "bsp_led.h"
 #include "bsp_e32.h"
-
+#include "bsp_ad7682.h"
 #include "bsp_lm78.h"
 /**
  * @addtogroup    net_task_Modules 
@@ -121,10 +121,13 @@ osal_event_t NetTask_Process(uint8_t taskid,osal_event_t events)
     {
 		DEBUG("NET_TASK_LOOP_EVENT\r\n");
 		
-		uint8_t temp_test[10] = { 0x12 , 0x34, 0x56 , 0x78 , 0x90 , 0x10 ,0xff, 0xef , 0x3e};
-		static uint8_t times = 0;
-		temp_test[9] = times ++;
-		BSP_LM78_StartSend(temp_test, 10);
+		char buf[30];
+		sprintf( buf ,"%f", BSP_AD7682_GetAvalue());
+		DEBUG("BSP_AD7682_GetAvalue:%s\r\n" ,buf );
+		char temp_test[] = "123456";
+		BSP_LM78_StartSend((uint8_t *)buf, strlen(buf));
+		
+		BSP_LED_Blink(BSP_LED_TEST, 3, 20, 100);
 		NetTask_Timer_Start_Event(NET_TASK_LOOP_EVENT,10000);
 		
         return events ^ NET_TASK_LOOP_EVENT;

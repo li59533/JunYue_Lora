@@ -132,8 +132,6 @@ void BSP_SPI_Init(void)
 	{
 		DEBUG("SPI 1 init err\r\n");
 	}
-	
-	
 }
 
 

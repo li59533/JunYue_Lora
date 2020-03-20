@@ -21,6 +21,7 @@
  * @{  
  */
 #include "bsp_led.h"
+#include "bsp_ad7682.h"
 /**
  * @addtogroup    bsp_tim_Modules 
  * @{  
@@ -105,23 +106,22 @@ static void bsp_tmp0_init(void);
  * @{  
  */
 
- 
-void BSP_Clock_Init(uint8_t BSP_CLOCKx)
+void BSP_Tim_Init(uint8_t BSP_TIMx)
 {
-	switch (BSP_CLOCKx)
+	switch (BSP_TIMx)
 	{
-		case BSP_CLOCK0 :bsp_lptmr_init();break;
-		case BSP_CLOCK1 : bsp_tmp0_init();break;
+		case BSP_TIM0 :bsp_lptmr_init();break;
+		case BSP_TIM1 :bsp_tmp0_init();break;
 		default :break;
 	}
 }
 
-void BSP_Clock_DeInit(uint8_t BSP_CLOCKx)
+void BSP_Clock_DeInit(uint8_t BSP_TIMx)
 {
-	switch (BSP_CLOCKx)
+	switch (BSP_TIMx)
 	{
-		case BSP_CLOCK0 :bsp_lptmr_deinit();break;
-		case BSP_CLOCK1 : bsp_tmp0_deinit();break;
+		case BSP_TIM0 :bsp_lptmr_deinit();break;
+		case BSP_TIM1 : bsp_tmp0_deinit();break;
 		default :break;
 	}
 }
@@ -153,17 +153,19 @@ static void bsp_tmp0_init(void)
 	config.enableReloadOnTrigger = false;
 	config.enableStartOnTrigger = false ;
 	config.enableStopOnOverflow = false;
-	config.prescale = kTPM_Prescale_Divide_128;
+	config.prescale = kTPM_Prescale_Divide_1;
 	//config.triggerSelect = kTPM_Trigger_Select_8;
 	config.useGlobalTimeBase = false;
 	
 	TPM_Init(TPM0, &config);
 	
-	TPM_SetTimerPeriod(TPM0, 65535);
+	TPM_SetTimerPeriod(TPM0, 2400); // 20kHz
 	
-//	TPM_EnableInterrupts(TPM0, kTPM_TimeOverflowInterruptEnable);
+	TPM_EnableInterrupts(TPM0, kTPM_TimeOverflowInterruptEnable);
 //	
-//	EnableIRQ(TPM0_IRQn);
+	NVIC_SetPriority (TPM0_IRQn, (1UL << __NVIC_PRIO_BITS));
+	EnableIRQ(TPM0_IRQn);
+	
 	
 	TPM_StartTimer(TPM0, kTPM_SystemClock);
 }
@@ -194,29 +196,49 @@ static void bsp_lptmr_init(void)
 	/* Starts counting */
 	LPTMR_StartTimer(LPTMR0);	
 }
-void BSP_Clock_StartOnceTimer(uint8_t BSP_CLOCKx , uint32_t msec)
+void BSP_Clock_StartOnceTimer(uint8_t BSP_TIMx , uint32_t msec)
 {
 	
 }
 
 
-uint32_t BSP_GetTimrCurCount(uint8_t BSP_CLOCKx)
+uint32_t BSP_GetTimrCurCount(uint8_t BSP_TIMx)
 {
 	uint32_t count = 0;
-	switch(BSP_CLOCKx)
+	switch(BSP_TIMx)
 	{
-		case BSP_CLOCK0 : count = LPTMR_GetCurrentTimerCount(LPTMR0);break;
-		case BSP_CLOCK1 : count = TPM_GetCurrentTimerCount(TPM0);break;
+		case BSP_TIM0 : count = LPTMR_GetCurrentTimerCount(LPTMR0);break;
+		case BSP_TIM1 : count = TPM_GetCurrentTimerCount(TPM0);break;
 		default :break;
 	}
 	return count ;
+}
+
+void BSP_TIM_Stop(uint8_t BSP_TIMx)
+{
+	switch(BSP_TIMx)
+	{
+		case BSP_TIM0 : break;
+		case BSP_TIM1 : TPM_StopTimer(TPM0);break;
+		default :break;
+	}	
+}
+
+void BSP_TIM_Start(uint8_t BSP_TIMx)
+{
+	switch(BSP_TIMx)
+	{
+		case BSP_TIM0 : break;
+		case BSP_TIM1 : TPM_StartTimer(TPM0, kTPM_SystemClock);break;
+		default :break;
+	}	
 }
 
  // ----------IRQHandler ------------------
 void LPTMR0_IRQHandler(void)
 {
 	DEBUG("LPTMR0_IRQHandler\r\n");
-	DEBUG("Time Count : %d\r\n" , BSP_GetTimrCurCount(BSP_CLOCK0));
+	DEBUG("Time Count : %d\r\n" , BSP_GetTimrCurCount(BSP_TIM0));
 	
 	LPTMR_ClearStatusFlags(LPTMR0,LPTMR_CSR_TCF_MASK);
 
@@ -226,11 +248,11 @@ void LPTMR0_IRQHandler(void)
 
 void TPM0_IRQHandler(void)
 {
-	DEBUG("TPM0_IRQHandler\r\n");
+//	DEBUG("TPM0_IRQHandler\r\n");
 	//DEBUG("Time Count : %d\r\n" , BSP_GetTimrCurCount(BSP_CLOCK1));
 	
 	TPM_ClearStatusFlags( TPM0 ,kTPM_TimeOverflowFlag);
-	BSP_LED_Toggle(BSP_LED1);
+	BSP_AD7682_LoopTrig();
 }
 
  // ---------------------------------------

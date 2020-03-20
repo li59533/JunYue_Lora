@@ -22,13 +22,8 @@
  * @{  
  */
 #include "bsp_systick.h"
-
-
 #include "system_param.h"
-#include "bsp_flash.h"
-#include "bsp_uart.h"
-#include "bsp_power.h"
-#include "bsp_rtc.h"
+
 /**	
  * @addtogroup    main_Modules 
  * @{  
@@ -114,6 +109,7 @@ int main(void)
 	Board_Init_ClockRUN();
 	
 	BSP_SysTick_Init();
+	
 	Board_Init_BSP();
 	
 	SystemParam_Init();
@@ -133,7 +129,7 @@ void Error_Handler(void)
 {
 	while(1)
 	{
-		//DEBUG(0,"Error_Handler\r\n");
+		DEBUG(0,"Error_Handler\r\n");
 	};
 }
 

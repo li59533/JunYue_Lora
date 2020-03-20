@@ -98,8 +98,8 @@ const LED_IO_Typedef LED_IO[BSP_LEDCOUNT] =
 {
 	{
 		{kCLOCK_PortE , PORTE, GPIOE , 18, kPORT_MuxAsGpio ,kGPIO_DigitalOutput ,0},
-		.OnLevel = 0,
-        .OffLevel = 1,
+		.OnLevel = 1,
+        .OffLevel = 0,
 	},
 };
 
@@ -189,7 +189,6 @@ void BSP_LED_Toggle(uint8_t BSP_LEDx)
     {
         BSP_LED_Open(BSP_LEDx);
     }	
-	
 }
 
 

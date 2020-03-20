@@ -177,18 +177,6 @@ typedef struct
  * @defgroup      lnprotocol_Exported_Functions 
  * @{  
  */
-uint8_t * LNprotocol_AddHead(uint8_t * targetspace_ptr); // return the value ptr
-
-uint8_t * LNprotocol_AddValue(uint8_t * targetspace_ptr , uint8_t *buf,uint8_t len);
-
-uint8_t * LNprotocol_AddFoot(uint8_t * targetspace_ptr);
-
-void LNprotocol_Addlen(uint8_t *buf, uint16_t len);
-
-uint8_t LNprotocol_AddChecksum(uint8_t * buf,uint16_t len);
-
-uint8_t LN_AddTlv(uint8_t * disaddr,LN_Tlv_t * tlv_value);
-
 
 uint8_t * LNprotocol_AddPayload(uint8_t * buf_ptr , uint8_t * payload , uint16_t len);
 uint8_t LNprotocol_GetChecksum(uint8_t *buf , uint16_t len);
