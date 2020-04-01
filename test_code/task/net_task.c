@@ -110,7 +110,8 @@ void NetTask_Init(uint8_t taskId)
 	NetTask_Send_Event(NET_TASK_MODULE_INIT_EVENT);
 	
 	BSP_LM78_Init();
-	NetTask_Timer_Start_Event(NET_TASK_LOOP_EVENT,20000);
+	BSP_LED_Blink(BSP_LED_TEST, 3, 50, 1000);
+	NetTask_Timer_Start_Event(NET_TASK_LOOP_EVENT,5000);
 	//NetTask_Send_Event(NET_TASK_AT_PROCESS_EVENT);
 	//NetTask_Send_Event(NET_TASK_SEND_AT_EVENT);
 }
@@ -129,10 +130,17 @@ osal_event_t NetTask_Process(uint8_t taskid,osal_event_t events)
 		
 		BSP_LED_Blink(BSP_LED_TEST, 3, 20, 100);
 		NetTask_Timer_Start_Event(NET_TASK_LOOP_EVENT,10000);
-		
+		NetTask_Timer_Start_Event(NET_TASK_TESTLED_EVENT,1000);
         return events ^ NET_TASK_LOOP_EVENT;
     }
 
+	
+    if (events & NET_TASK_TESTLED_EVENT)
+    {
+		BSP_LED_Blink(BSP_LED_TEST, 0, 50, 500);
+        return events ^ NET_TASK_TESTLED_EVENT;
+    }		
+	
 
     if (events & NET_TASK_AT_PROCESS_EVENT)
     {

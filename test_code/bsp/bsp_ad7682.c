@@ -139,7 +139,7 @@ typedef struct
 	uint8_t check_interval;
 }bsp_ad7682_getcmd_queue_t;
 
-const uint8_t BSP_AD7682_UserSequence[] = { 2 };
+const uint8_t BSP_AD7682_UserSequence[] = { 3 };
 
 static uint8_t bsp_ad7682_userseq_ptr = 0;
 
@@ -198,7 +198,7 @@ void BSP_AD7682_GetValue(uint16_t value)
 			case 2 :
 				{
 					BSP_AD7682_Value.In_2 = value;
-					BSP_AD7682_CalcRMS( value);
+					
 					
 					
 				}
@@ -206,6 +206,7 @@ void BSP_AD7682_GetValue(uint16_t value)
 			case 3 :
 				{
 					BSP_AD7682_Value.In_3 = value;
+					BSP_AD7682_CalcRMS( value);
 				}
 				break;
 			default:break;
@@ -215,33 +216,45 @@ void BSP_AD7682_GetValue(uint16_t value)
 	}
 }
 
-static uint32_t orignalRMS_value = 0;
+static float orignalRMS_value = 0;
 static float Value_A = 0.0f;
-
+static float  avr_temp = 0;
+static float  sum_avr_temp = 0;
+	static float sum = 0;
+	static float avr = 0;
+float f_value = 0.0f;
 void BSP_AD7682_CalcRMS(uint16_t value)
 {
 	static uint16_t count = 0 ;
 	
-	static uint32_t sum = 0;
-	sum  += (value * value );
+
+	
+	
+	
+	f_value = (float)( value * 0.03814697f);
+	
+	avr += f_value;
+	sum  += (float)(( f_value - avr_temp) * ( f_value - avr_temp)  );
 	
 	
 	count ++;
 	if(count == 20000)
 	{
 		count  = 0 ;
-		sum /= 20000;
-		orignalRMS_value = sqrt(sum);
-		DEBUG("RMS:%d\r\n" , orignalRMS_value);
-		sum = 0;
-		
+		sum_avr_temp =sqrt (sum / 20000 );
+		//avr /= 20000;
+		avr_temp = avr / 20000;
+		orignalRMS_value = (sum_avr_temp);
+		//DEBUG("RMS:%d\r\n" , orignalRMS_value);
+		sum = 0.0f;
+		avr = 0.0f;
 		UserTask_Send_Event(USER_TASK_AD7682_VALUECALC_EVENT)	;	
 	}
 }
 
 void BSP_AD7682_GetNeedValue(void)
 {
-	Value_A = (float)(orignalRMS_value * 0.03814697); // 0.03814697 = 2500/65536
+	Value_A = (float)(orignalRMS_value );//* 0.03814697); // 0.03814697 = 2500/65536
 }
 
 float BSP_AD7682_GetAvalue(void)
