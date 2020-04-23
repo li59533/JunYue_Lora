@@ -129,7 +129,7 @@ osal_event_t NetTask_Process(uint8_t taskid,osal_event_t events)
 		BSP_LM78_StartSend((uint8_t *)buf, strlen(buf));
 		
 		BSP_LED_Blink(BSP_LED_TEST, 3, 20, 100);
-		NetTask_Timer_Start_Event(NET_TASK_LOOP_EVENT,10000);
+		NetTask_Timer_Start_Event(NET_TASK_LOOP_EVENT,60000);
 		NetTask_Timer_Start_Event(NET_TASK_TESTLED_EVENT,1000);
         return events ^ NET_TASK_LOOP_EVENT;
     }

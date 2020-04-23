@@ -1,0 +1,22 @@
+智城网络服务器
+	IP地址：192.168.1.160
+	MAC地址：20：04：0F：F2：A2：D4
+
+用户名/密码
+	用户名：root
+	密码：123456
+
+开启服务
+	lora start
+	lora get //看三个服务是不是已启动
+	cd /opt/lora/tomcat8/apache-tomcat-8.5.43/bin/
+	./startup.sh
+
+web端
+	http://192.168.1.160:8080/
+	用户名：yssh
+	密码：yssh2019
+
+
+
+http://192.168.1.160:82/test/test

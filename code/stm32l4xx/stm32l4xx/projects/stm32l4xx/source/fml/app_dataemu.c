@@ -269,7 +269,7 @@ static void app_dataemu_func(void)
 		{
 			emu_inter_data[i]=emu_inter_data[i]*emu_inter_data[i]*emu_inter_data[i]*emu_inter_data[i];
 		}
-		arm_rms_f32(emu_inter_data, g_SystemParam_Config.channel_freq[j], &g_SystemParam_Param.Kurtosis[j]);
+		arm_mean_f32(emu_inter_data, g_SystemParam_Config.channel_freq[j], &g_SystemParam_Param.Kurtosis[j]);
 		g_SystemParam_Param.KurtosisIndex[j]=g_SystemParam_Param.Kurtosis[j]/(g_SystemParam_Param.EffectiveValue[j]*g_SystemParam_Param.EffectiveValue[j]*g_SystemParam_Param.EffectiveValue[j]*g_SystemParam_Param.EffectiveValue[j]);
 
 

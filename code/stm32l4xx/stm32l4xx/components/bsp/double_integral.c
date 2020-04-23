@@ -113,10 +113,17 @@ int integ_init(uint16_t len,uint32_t sample_freq,float gravity,uint32_t integ_ti
 		integ.w_vec[i] = dw*i;											//正离散圆频率向量
 		integ.w_vec[i] = POW(integ.w_vec[i],integ.integ_time);		//以积分次数为指数，建立圆频率变量向量
 	}
-	for(int i=integ.fft_len/2; i<(integ.fft_len-1); i++){
-		integ.w_vec[i] = -dw*(integ.fft_len/2-1) + dw*(i - integ.fft_len/2);	//负离散圆频率向量
+//	for(int i=integ.fft_len/2; i<(integ.fft_len-1); i++){
+//		integ.w_vec[i] = -dw*(integ.fft_len/2-1) + dw*(i - integ.fft_len/2);	//负离散圆频率向量
+//		integ.w_vec[i] = POW(integ.w_vec[i],integ.integ_time);		//以积分次数为指数，建立圆频率变量向量
+//	}
+	for(int i=integ.fft_len/2 + 1 ; i<(integ.fft_len); i++)
+	{
+		integ.w_vec[i] = dw*(i - integ.fft_len);
+		//integ.w_vec[i] = -dw*(integ.fft_len/2-1) + dw*(i - integ.fft_len/2);	//负离散圆频率向量
 		integ.w_vec[i] = POW(integ.w_vec[i],integ.integ_time);		//以积分次数为指数，建立圆频率变量向量
-	}
+	}	
+
 	
 	return 0;
 }
