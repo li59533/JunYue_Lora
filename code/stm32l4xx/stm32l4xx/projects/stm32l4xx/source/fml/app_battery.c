@@ -101,8 +101,8 @@
 
 void APP_Battery_Reduce(void)
 {
-	g_SystemParam_Config.battery=g_SystemParam_Config.battery - 0.02f;
-	if(g_SystemParam_Config.battery <= 0 )
+	g_SystemParam_Config.battery=g_SystemParam_Config.battery - 0.009090909f;  // test - 5.0f 
+ 	if(g_SystemParam_Config.battery <= 0 )
 	{
 		g_SystemParam_Config.battery = 0;
 	}

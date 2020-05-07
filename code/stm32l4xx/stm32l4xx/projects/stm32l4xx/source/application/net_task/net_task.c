@@ -174,7 +174,7 @@ void Net_Task(void * pvParameter)
 		
 		if((event_flag & NET_TASK_AT_PROCESS_EVENT) != 0x00)
 		{
-			NET_Task_StartTim(3000);
+			//NET_Task_StartTim(3000);
 			BSP_LM78_RespProcess();
 			
 			DEBUG("NET_TASK_AT_PROCESS_EVENT\r\n");

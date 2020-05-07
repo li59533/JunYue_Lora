@@ -50,7 +50,8 @@
  * @{  
  */
 #define BSP_AD7682_CH_QUEUE_LEN 		12
-const uint8_t bsp_ad7682_ch_queue[BSP_AD7682_CH_QUEUE_LEN] = {2 ,3, 2, 1, 2, 3, 2, 1} ; //{2 ,3, 2, 1, 2, 3, 2, 1} ;  // real sample fre is 32768 ,so this ch can be 16384 ,8192
+													
+const uint8_t bsp_ad7682_ch_queue[BSP_AD7682_CH_QUEUE_LEN] = {2 ,1, 2, 3, 2, 1, 2, 3} ; //{2 ,3, 2, 1, 2, 3, 2, 1} ;  // real sample fre is 32768 ,so this ch can be 16384 ,8192
 const uint8_t bsp_ad7682_ch_data_queue[12]={0,1,0,2,0,1,0,2};
 
 

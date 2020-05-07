@@ -119,6 +119,7 @@ void RTOS_Init(void)
 	
 	//basetype = First_Task_Init();
 	//basetype = Second_Task_Init();
+	
 	basetype = Dataprocess_Task_Init();
 	basetype = Net_Task_Init();
 	basetype = DataEmu_Task_Init();

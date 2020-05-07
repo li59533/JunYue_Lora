@@ -130,7 +130,7 @@ void Temperature_Task(void * pvParameter)
 	{
 		//DEBUG("Temperature Task Looping\r\n");
 		BSP_LMT01_StartGetValue();
-		vTaskDelay(pdMS_TO_TICKS(2000));
+		vTaskDelay(pdMS_TO_TICKS(1000));
 		
 		rtc_data = BSP_RTC_Get();
 		

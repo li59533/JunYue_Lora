@@ -143,12 +143,12 @@ void APP_Power_LM78_OFF(void)
 
 void APP_Power_LMT01_PowerEnable(void)
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_SET);
 }
 
 void APP_Power_LMT01_PowerDisable(void)
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_RESET);
 }
 
 void APP_Power_EnterStandbyMode(uint32_t WakeUpCounter)

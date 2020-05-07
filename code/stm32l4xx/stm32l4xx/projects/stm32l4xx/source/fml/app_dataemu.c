@@ -175,7 +175,7 @@ static void app_dataemu_func(void)
 	
 	for(j = 0 ; j < BSP_AD7682_ACC_REALCHS ; j ++)
 	{
-		inter_factor = g_SystemParam_Config.floatscale[j] * g_SystemParam_Config.floatadc[j] * 0.045776f  ;//3000 / 65535;
+		inter_factor = g_SystemParam_Config.floatscale[j] * g_SystemParam_Config.floatadc[j]  * 0.03814755f ;//2500 / 65535;
 		switch(j)
 		{
 			case 0: 
@@ -304,12 +304,61 @@ static void app_dataemu_func(void)
 //													g_SystemParam_Param.Envelop[j]);
 //		
 //		DEBUG("%s\r\n",debug);
+		
+		// --- value limit ----
+		if(g_SystemParam_Param.KurtosisIndex[j] >= 50)
+		{
+			g_SystemParam_Param.KurtosisIndex[j] = 50;
+		}
+		
+		if(g_SystemParam_Param.Vrms[j] >= 35)
+		{
+			g_SystemParam_Param.Vrms[j] = 35;
+		}
+		if(g_SystemParam_Param.Drms[j] >= 560)
+		{
+			g_SystemParam_Param.Drms[j] = 560;
+		}		
+		
+		if(j == 0)
+		{
+			if(g_SystemParam_Param.EffectiveValue[j] >= 100)
+			{
+				g_SystemParam_Param.EffectiveValue[j] = 100;
+			}				
+		}
+		else
+		{
+			if(g_SystemParam_Param.EffectiveValue[j] >= 500)
+			{
+				g_SystemParam_Param.EffectiveValue[j] = 500;
+			}				
+		}
+
+		// ----- change unit mm2/s -> ge
+
+		g_SystemParam_Param.Envelop[j] /= 9.8;
+		
+		if(g_SystemParam_Param.Envelop[j] >10)
+		{
+			g_SystemParam_Param.Envelop[j] = 10;
+		}
+		
+		// ----- clear sub axis Envelop to 0----
+		if(j != 0 )
+		{
+			g_SystemParam_Param.Envelop[j] = 0;
+		}
+		
+		// --------------------		
+		
+		
 		if(g_SystemParam_Param.EffectiveValue[j] < 0.25f)//g_SystemParam_Param.Arms[j] < 0.25f || 
 		{
-//			g_SystemParam_Param.Vrms[j] = 0.0f;
-//			g_SystemParam_Param.Drms[j] = 0.0f;
-//			g_SystemParam_Param.KurtosisIndex[j] = 0.0f;
-//			g_SystemParam_Param.Envelop[j] = 0.0f;
+			g_SystemParam_Param.Vrms[j] = 0.0f;
+			g_SystemParam_Param.Drms[j] = 0.0f;
+			g_SystemParam_Param.KurtosisIndex[j] = 0.0f;
+			g_SystemParam_Param.Envelop[j] = 0.0f;
 		}		
 		
 		

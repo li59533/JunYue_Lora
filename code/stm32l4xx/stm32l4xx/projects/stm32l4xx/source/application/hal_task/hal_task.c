@@ -141,6 +141,7 @@ void Hal_Task(void * pvParameter)
 		APP_Battery_Rest();
 		SystemParam_Save();
 		Hal_Task_StartTim(60000);
+		//Hal_Task_StartTim(1000);
 		hal_pwr_flag = 0;
 	}
 	else
@@ -148,7 +149,6 @@ void Hal_Task(void * pvParameter)
 		Hal_Task_StartTim(20000);
 		hal_pwr_flag = 1;
 	}
-	
 	
 	while(1)
 	{
@@ -161,7 +161,8 @@ void Hal_Task(void * pvParameter)
 				DEBUG("HAL_TASK_STANDBY_EVENT\r\n");
 				SystemParam_Save();
 				RTOS_Delay_ms(5000);
-				APP_Power_EnterStandbyMode(g_SystemParam_Config.sleep_time);				
+				APP_Power_EnterStandbyMode(g_SystemParam_Config.sleep_time);	
+							
 			}
 			else
 			{

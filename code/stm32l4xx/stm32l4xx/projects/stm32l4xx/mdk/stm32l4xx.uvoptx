@@ -152,34 +152,50 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>178</LineNumber>
+          <LineNumber>184</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134249182</Address>
+          <Address>134227678</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\source\application\net_task\net_task.c</Filename>
+          <Filename>..\source\fml\app_datasend.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../source/application/net_task/net_task.c\178</Expression>
+          <Expression>\\L100\../source/fml/app_datasend.c\184</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>197</LineNumber>
+          <LineNumber>196</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134229956</Address>
+          <Address>134227746</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\components\bsp\bsp_lm78.c</Filename>
+          <Filename>..\source\fml\app_datasend.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\L100\../../../components/bsp/bsp_lm78.c\197</Expression>
+          <Expression>\\L100\../source/fml/app_datasend.c\196</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>213</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134227862</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\source\fml\app_datasend.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\L100\../source/fml/app_datasend.c\213</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -212,6 +228,11 @@
           <count>5</count>
           <WinNumber>1</WinNumber>
           <ItemText>usart2_rev</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>g_SystemParam_Param.Envelop</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

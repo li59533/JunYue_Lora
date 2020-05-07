@@ -23,6 +23,7 @@
 #include "app_power.h"
 #include "datasend_task.h"
 #include "app_datasend.h"
+#include "hal_task.h"
 /**
  * @addtogroup    datasend_task_Modules 
  * @{  
@@ -126,7 +127,7 @@ uint32_t DataSend_Task_Init(void)
 void DataSend_Task(void * pvParameter)
 {
 	uint32_t event_flag = 0;
-	DataSend_Task_StartTim(2000);
+	DataSend_Task_StartTim(3000);
 	DEBUG("DataSend Task Enter\r\n");
 
 	while(1)
@@ -137,7 +138,8 @@ void DataSend_Task(void * pvParameter)
 		{
 			DEBUG("DATASEND_TASK_SEND_EVENT\r\n");
 			APP_DataSend_SendCharacteristic();
-			DataSend_Task_StartTim(10000);
+			//DataSend_Task_StartTim(000);
+			Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
 		}
 
 	}

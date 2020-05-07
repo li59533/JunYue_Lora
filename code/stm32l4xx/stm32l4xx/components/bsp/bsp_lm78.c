@@ -289,7 +289,7 @@ void BSP_LM78_RespProcess(void)
 				{
 					RTOS_Delay_ms(1000);
 					bsp_lm78_statusEnqueue(LM78_STATUS_REVB_REQ);
-					Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
+					
 				}
 
 			}
@@ -302,7 +302,7 @@ void BSP_LM78_RespProcess(void)
 				else
 				{
 					bsp_lm78_statusDequeue();
-				bsp_lm78_statusEnqueue(LM78_STATUS_REST);
+					bsp_lm78_statusEnqueue(LM78_STATUS_REST);
 				}
 				//bsp_lm78_statusEnqueue(LM78_STATUS_OK);
 			}
@@ -329,8 +329,7 @@ void BSP_LM78_RespProcess(void)
 				{
 					bsp_lm78_statusEnqueue(LM78_STATUS_OK);
 				}
-				
-				
+
 			}
 			else
 			{

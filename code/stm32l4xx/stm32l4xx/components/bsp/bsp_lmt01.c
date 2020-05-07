@@ -124,7 +124,7 @@ static void lmt01_gpio_init(void)
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 
 	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOE_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
 	__HAL_RCC_GPIOC_CLK_ENABLE();
 
 
@@ -134,11 +134,11 @@ static void lmt01_gpio_init(void)
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-	/*Configure GPIO pin : PE0 */
-	GPIO_InitStruct.Pin = GPIO_PIN_0;
+	/*Configure GPIO pin : PB2 */
+	GPIO_InitStruct.Pin = GPIO_PIN_2;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-	HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	/* EXTI interrupt init*/
 	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
@@ -242,12 +242,12 @@ void BSP_LMT01_StartGetValue(void)
 
 void BSP_LMT01_PowerEnable(void)
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_SET);
 }
 
 void BSP_LMT01_PowerDisable(void)
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_RESET);
 }
 
 

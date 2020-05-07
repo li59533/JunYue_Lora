@@ -145,9 +145,9 @@ void BSP_Usart_Init(uint8_t  BSP_Uart_X)
 		husart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
 		husart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;	
 
-		//USART1->CR2 |= 0x01 << 15;
-		husart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT; // this is the hardware making RX and TX changed
-		husart1.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
+//		USART1->CR2 |= 0x01 << 15;
+//		husart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT; // this is the hardware making RX and TX changed
+//		husart1.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
 //		
 		if (HAL_UART_Init(&husart1) != HAL_OK)
 		{
