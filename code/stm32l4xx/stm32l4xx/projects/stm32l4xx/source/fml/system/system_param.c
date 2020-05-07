@@ -75,7 +75,7 @@ const SystemParam_Config_t SystemParam_Config_Default =
     .vaildsign = 0xAA55, //	uint16_t vaildsign;
 	.baundrate =  1,//uint8_t baundrate;    
 	.addr = 1,//uint8_t addr; 
-	.SNnumber ={'G',100,0,0,0x31,0x00,0x11,0x00},//0x6275110032120001,//0x6275110032120003,//0x5955125011120002, 03 yec-test 101
+	.SNnumber ={'L',100,0,0,0x31,0x00,0x11,0x00},//0x6275110032120001,//0x6275110032120003,//0x5955125011120002, 03 yec-test 101
 	.parity = 0, //uint8_t parity;		// =0 : n,8,1   =1: o,8,1  =2: e,8,1  
 	.floatscale = {0.3333f,0.075756f,0.075756f,1,1,1,1,1,1,1,1,1},
 	.DisplayMode = 0, //uint8_t DisplayMode;  // ???? = 0 ?? =1 ??
@@ -144,7 +144,7 @@ const SystemParam_Config_t SystemParam_Config_Default =
 	.tempCompensation = -5 ,
 	//.Alarm_source_number = ,
 	//.Alarm_source = 
-	.sleep_time = 10, // default 1 min 
+	.sleep_time = 60, // default 1 min 
 };
 
 /**
