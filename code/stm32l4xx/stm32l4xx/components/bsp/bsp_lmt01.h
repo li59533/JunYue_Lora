@@ -77,6 +77,7 @@ void BSP_LMT01_CoreLoop(void);  //call this func in 20ms
 uint8_t BSP_LMT01_GetDataStatus(void);
 float BSP_LMT01_GetValue(void);
 float BSP_LMT01_GetMidValue(void);
+void BSP_LMT01_EXTI_IRQHandler(void);
 // ----------TestFunc ----------
 void BSP_LMT01_TestFunc(void);
 // -----------------------------

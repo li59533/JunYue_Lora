@@ -337,7 +337,7 @@ static void app_dataemu_func(void)
 
 		// ----- change unit mm2/s -> ge
 
-		g_SystemParam_Param.Envelop[j] /= 9.8;
+		g_SystemParam_Param.Envelop[j] /= 9.8f;
 		
 		if(g_SystemParam_Param.Envelop[j] >10)
 		{
