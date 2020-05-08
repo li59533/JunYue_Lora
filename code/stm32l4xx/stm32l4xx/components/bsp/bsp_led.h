@@ -53,6 +53,12 @@
  * @{  
  */
 
+typedef enum
+{
+	Blink_HighSpeed = 1,
+	Blink_MidSpeed ,
+	Blink_LowSpeed , 
+}BSP_LED_FuncBlink_e;
 /**
  * @}
  */
@@ -75,6 +81,11 @@ void Bsp_LedInit(void);
 void Bsp_LedOpen(uint8_t bsp_ledx);
 void Bsp_LedClose(uint8_t bsp_ledx);
 void Bsp_LedToggle(uint8_t bsp_ledx);
+
+
+void BSP_Led_UpdateStatus(void); // let this func in 5ms
+void BSP_Led_Blink(uint8_t bsp_ledx , uint8_t blink_count , uint8_t duty_cycle , uint16_t period);
+void BSP_LED_BlinkStandard_3(uint8_t bsp_ledx , BSP_LED_FuncBlink_e funcblink);
 
 /**
  * @}

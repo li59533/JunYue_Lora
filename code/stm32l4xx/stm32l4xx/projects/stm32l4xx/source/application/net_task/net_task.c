@@ -152,9 +152,7 @@ void Net_Task(void * pvParameter)
 	
 	while(1)
 	{
-		DEBUG("Net Task Looping\r\n");
-		Bsp_LedToggle(BSP_LED_TEST);
-		
+		DEBUG("Net Task Looping\r\n");		
 		/*
 		char test_lorabuf[] = "\r\nAT+SENDB=2:FF\r\n";
 		BSP_LM78_SendBytes((uint8_t *)test_lorabuf,sizeof(test_lorabuf));

@@ -18,11 +18,11 @@
  */
 #include "FreeRTOS.h"
 #include "task.h"
+#include "bsp_led.h"
 
 #include "first_task.h"
 #include "second_task.h"
 #include "net_task.h"
-#include "bsp_led.h"
 #include "stm32l4xx_hal.h"
 #include "clog.h"
 #include "dataprocess_task.h"
@@ -32,6 +32,8 @@
 #include "datasend_task.h"
 #include "hal_task.h"
 #include "conf_task.h"
+#include "led_task.h"
+
 /**
  * @addtogroup    task_list_Modules 
  * @{  
@@ -127,7 +129,7 @@ void RTOS_Init(void)
 	basetype = DataSend_Task_Init();
 	basetype = Hal_Task_Init();
 	basetype = Conf_Task_Init();
-	
+	basetype = Led_Task_Init(); 
 	
 	if(pdPASS == basetype)
 	{
@@ -137,7 +139,7 @@ void RTOS_Init(void)
 	{
 		while(1)
 		{
-			HAL_Delay(30);
+			HAL_Delay(300);
 			Bsp_LedToggle(BSP_LED_TEST);
 			DEBUG("RTOS is not start\r\n");
 		}

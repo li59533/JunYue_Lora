@@ -67,6 +67,8 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btn_setsn = new System.Windows.Forms.Button();
+            this.btn_getsn = new System.Windows.Forms.Button();
             this.tbx_sn = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lvw_Other = new System.Windows.Forms.ListView();
@@ -75,22 +77,6 @@
             this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.btn_adc_k = new System.Windows.Forms.Button();
-            this.tbx_z_adc_k = new System.Windows.Forms.TextBox();
-            this.tbx_y_adc_k = new System.Windows.Forms.TextBox();
-            this.tbx_x_adc_k = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.btn_other = new System.Windows.Forms.Button();
-            this.tbx_sleeptime = new System.Windows.Forms.TextBox();
-            this.tbx_rtc = new System.Windows.Forms.TextBox();
-            this.tbx_battery = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btn_axis_k = new System.Windows.Forms.Button();
             this.tbx_z_k = new System.Windows.Forms.TextBox();
@@ -99,15 +85,30 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btn_getconf = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.lab_timstamp = new System.Windows.Forms.Label();
+            this.lab_localtime = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btn_other = new System.Windows.Forms.Button();
+            this.tbx_sleeptime = new System.Windows.Forms.TextBox();
+            this.tbx_rtc = new System.Windows.Forms.TextBox();
+            this.tbx_battery = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btn_adc_k = new System.Windows.Forms.Button();
+            this.tbx_z_adc_k = new System.Windows.Forms.TextBox();
+            this.tbx_y_adc_k = new System.Windows.Forms.TextBox();
+            this.tbx_x_adc_k = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.btn_setconfAll = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
+            this.btn_getconf = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lab_localtime = new System.Windows.Forms.Label();
-            this.lab_timstamp = new System.Windows.Forms.Label();
-            this.btn_getsn = new System.Windows.Forms.Button();
-            this.btn_setsn = new System.Windows.Forms.Button();
+            this.btn_GetData = new System.Windows.Forms.Button();
             this.Serial_Conf.SuspendLayout();
             this.Version.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -120,9 +121,9 @@
             this.groupBox5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -465,6 +466,7 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.btn_GetData);
             this.groupBox5.Controls.Add(this.btn_setsn);
             this.groupBox5.Controls.Add(this.btn_getsn);
             this.groupBox5.Controls.Add(this.tbx_sn);
@@ -476,6 +478,26 @@
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "其他";
+            // 
+            // btn_setsn
+            // 
+            this.btn_setsn.Location = new System.Drawing.Point(451, 20);
+            this.btn_setsn.Name = "btn_setsn";
+            this.btn_setsn.Size = new System.Drawing.Size(75, 23);
+            this.btn_setsn.TabIndex = 4;
+            this.btn_setsn.Text = "Set";
+            this.btn_setsn.UseVisualStyleBackColor = true;
+            this.btn_setsn.Click += new System.EventHandler(this.btn_setsn_Click);
+            // 
+            // btn_getsn
+            // 
+            this.btn_getsn.Location = new System.Drawing.Point(369, 21);
+            this.btn_getsn.Name = "btn_getsn";
+            this.btn_getsn.Size = new System.Drawing.Size(75, 23);
+            this.btn_getsn.TabIndex = 3;
+            this.btn_getsn.Text = "Get";
+            this.btn_getsn.UseVisualStyleBackColor = true;
+            this.btn_getsn.Click += new System.EventHandler(this.btn_getsn_Click);
             // 
             // tbx_sn
             // 
@@ -554,166 +576,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.03609F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1228, 471);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox7.Controls.Add(this.btn_adc_k);
-            this.groupBox7.Controls.Add(this.tbx_z_adc_k);
-            this.groupBox7.Controls.Add(this.tbx_y_adc_k);
-            this.groupBox7.Controls.Add(this.tbx_x_adc_k);
-            this.groupBox7.Controls.Add(this.label7);
-            this.groupBox7.Controls.Add(this.label8);
-            this.groupBox7.Controls.Add(this.label9);
-            this.groupBox7.Location = new System.Drawing.Point(3, 130);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(281, 127);
-            this.groupBox7.TabIndex = 1;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "ADC_校准";
-            // 
-            // btn_adc_k
-            // 
-            this.btn_adc_k.Location = new System.Drawing.Point(180, 21);
-            this.btn_adc_k.Name = "btn_adc_k";
-            this.btn_adc_k.Size = new System.Drawing.Size(75, 95);
-            this.btn_adc_k.TabIndex = 12;
-            this.btn_adc_k.Text = "Set";
-            this.btn_adc_k.UseVisualStyleBackColor = true;
-            // 
-            // tbx_z_adc_k
-            // 
-            this.tbx_z_adc_k.Location = new System.Drawing.Point(36, 95);
-            this.tbx_z_adc_k.Name = "tbx_z_adc_k";
-            this.tbx_z_adc_k.Size = new System.Drawing.Size(100, 21);
-            this.tbx_z_adc_k.TabIndex = 11;
-            // 
-            // tbx_y_adc_k
-            // 
-            this.tbx_y_adc_k.Location = new System.Drawing.Point(36, 58);
-            this.tbx_y_adc_k.Name = "tbx_y_adc_k";
-            this.tbx_y_adc_k.Size = new System.Drawing.Size(100, 21);
-            this.tbx_y_adc_k.TabIndex = 10;
-            // 
-            // tbx_x_adc_k
-            // 
-            this.tbx_x_adc_k.Location = new System.Drawing.Point(36, 20);
-            this.tbx_x_adc_k.Name = "tbx_x_adc_k";
-            this.tbx_x_adc_k.Size = new System.Drawing.Size(100, 21);
-            this.tbx_x_adc_k.TabIndex = 9;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(15, 98);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(11, 12);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Z";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(15, 61);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(11, 12);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Y";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(15, 26);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(11, 12);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "X";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox8.Controls.Add(this.lab_timstamp);
-            this.groupBox8.Controls.Add(this.lab_localtime);
-            this.groupBox8.Controls.Add(this.label13);
-            this.groupBox8.Controls.Add(this.btn_other);
-            this.groupBox8.Controls.Add(this.tbx_sleeptime);
-            this.groupBox8.Controls.Add(this.tbx_rtc);
-            this.groupBox8.Controls.Add(this.tbx_battery);
-            this.groupBox8.Controls.Add(this.label12);
-            this.groupBox8.Controls.Add(this.label11);
-            this.groupBox8.Controls.Add(this.label10);
-            this.groupBox8.Location = new System.Drawing.Point(290, 3);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(737, 121);
-            this.groupBox8.TabIndex = 2;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "其他";
-            // 
-            // btn_other
-            // 
-            this.btn_other.Location = new System.Drawing.Point(228, 18);
-            this.btn_other.Name = "btn_other";
-            this.btn_other.Size = new System.Drawing.Size(75, 97);
-            this.btn_other.TabIndex = 15;
-            this.btn_other.Text = "Set";
-            this.btn_other.UseVisualStyleBackColor = true;
-            // 
-            // tbx_sleeptime
-            // 
-            this.tbx_sleeptime.Location = new System.Drawing.Point(75, 88);
-            this.tbx_sleeptime.Name = "tbx_sleeptime";
-            this.tbx_sleeptime.Size = new System.Drawing.Size(100, 21);
-            this.tbx_sleeptime.TabIndex = 5;
-            // 
-            // tbx_rtc
-            // 
-            this.tbx_rtc.Location = new System.Drawing.Point(75, 51);
-            this.tbx_rtc.Name = "tbx_rtc";
-            this.tbx_rtc.ReadOnly = true;
-            this.tbx_rtc.Size = new System.Drawing.Size(147, 21);
-            this.tbx_rtc.TabIndex = 4;
-            // 
-            // tbx_battery
-            // 
-            this.tbx_battery.Location = new System.Drawing.Point(75, 14);
-            this.tbx_battery.Name = "tbx_battery";
-            this.tbx_battery.Size = new System.Drawing.Size(100, 21);
-            this.tbx_battery.TabIndex = 3;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(16, 91);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(53, 12);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "休眠时间";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(16, 57);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 12);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "时钟";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(16, 23);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "电量";
             // 
             // groupBox6
             // 
@@ -794,15 +656,192 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "X";
             // 
-            // btn_getconf
+            // groupBox8
             // 
-            this.btn_getconf.Location = new System.Drawing.Point(18, 20);
-            this.btn_getconf.Name = "btn_getconf";
-            this.btn_getconf.Size = new System.Drawing.Size(109, 96);
-            this.btn_getconf.TabIndex = 3;
-            this.btn_getconf.Text = "GetConf";
-            this.btn_getconf.UseVisualStyleBackColor = true;
-            this.btn_getconf.Click += new System.EventHandler(this.btn_getconf_Click);
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox8.Controls.Add(this.lab_timstamp);
+            this.groupBox8.Controls.Add(this.lab_localtime);
+            this.groupBox8.Controls.Add(this.label13);
+            this.groupBox8.Controls.Add(this.btn_other);
+            this.groupBox8.Controls.Add(this.tbx_sleeptime);
+            this.groupBox8.Controls.Add(this.tbx_rtc);
+            this.groupBox8.Controls.Add(this.tbx_battery);
+            this.groupBox8.Controls.Add(this.label12);
+            this.groupBox8.Controls.Add(this.label11);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Location = new System.Drawing.Point(290, 3);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(737, 121);
+            this.groupBox8.TabIndex = 2;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "其他";
+            // 
+            // lab_timstamp
+            // 
+            this.lab_timstamp.AutoSize = true;
+            this.lab_timstamp.Location = new System.Drawing.Point(376, 39);
+            this.lab_timstamp.Name = "lab_timstamp";
+            this.lab_timstamp.Size = new System.Drawing.Size(59, 12);
+            this.lab_timstamp.TabIndex = 18;
+            this.lab_timstamp.Text = "timestamp";
+            // 
+            // lab_localtime
+            // 
+            this.lab_localtime.AutoSize = true;
+            this.lab_localtime.Location = new System.Drawing.Point(376, 23);
+            this.lab_localtime.Name = "lab_localtime";
+            this.lab_localtime.Size = new System.Drawing.Size(35, 12);
+            this.lab_localtime.TabIndex = 17;
+            this.lab_localtime.Text = ".0.0.";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(317, 23);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 12);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "本地时间";
+            // 
+            // btn_other
+            // 
+            this.btn_other.Location = new System.Drawing.Point(228, 18);
+            this.btn_other.Name = "btn_other";
+            this.btn_other.Size = new System.Drawing.Size(75, 97);
+            this.btn_other.TabIndex = 15;
+            this.btn_other.Text = "Set";
+            this.btn_other.UseVisualStyleBackColor = true;
+            // 
+            // tbx_sleeptime
+            // 
+            this.tbx_sleeptime.Location = new System.Drawing.Point(75, 88);
+            this.tbx_sleeptime.Name = "tbx_sleeptime";
+            this.tbx_sleeptime.Size = new System.Drawing.Size(100, 21);
+            this.tbx_sleeptime.TabIndex = 5;
+            // 
+            // tbx_rtc
+            // 
+            this.tbx_rtc.Location = new System.Drawing.Point(75, 51);
+            this.tbx_rtc.Name = "tbx_rtc";
+            this.tbx_rtc.ReadOnly = true;
+            this.tbx_rtc.Size = new System.Drawing.Size(147, 21);
+            this.tbx_rtc.TabIndex = 4;
+            // 
+            // tbx_battery
+            // 
+            this.tbx_battery.Location = new System.Drawing.Point(75, 14);
+            this.tbx_battery.Name = "tbx_battery";
+            this.tbx_battery.Size = new System.Drawing.Size(100, 21);
+            this.tbx_battery.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(16, 91);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 12);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "休眠时间";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(16, 57);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "时钟";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(16, 23);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "电量";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.btn_adc_k);
+            this.groupBox7.Controls.Add(this.tbx_z_adc_k);
+            this.groupBox7.Controls.Add(this.tbx_y_adc_k);
+            this.groupBox7.Controls.Add(this.tbx_x_adc_k);
+            this.groupBox7.Controls.Add(this.label7);
+            this.groupBox7.Controls.Add(this.label8);
+            this.groupBox7.Controls.Add(this.label9);
+            this.groupBox7.Location = new System.Drawing.Point(3, 130);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(281, 127);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "ADC_校准";
+            // 
+            // btn_adc_k
+            // 
+            this.btn_adc_k.Location = new System.Drawing.Point(180, 21);
+            this.btn_adc_k.Name = "btn_adc_k";
+            this.btn_adc_k.Size = new System.Drawing.Size(75, 95);
+            this.btn_adc_k.TabIndex = 12;
+            this.btn_adc_k.Text = "Set";
+            this.btn_adc_k.UseVisualStyleBackColor = true;
+            // 
+            // tbx_z_adc_k
+            // 
+            this.tbx_z_adc_k.Location = new System.Drawing.Point(36, 95);
+            this.tbx_z_adc_k.Name = "tbx_z_adc_k";
+            this.tbx_z_adc_k.Size = new System.Drawing.Size(100, 21);
+            this.tbx_z_adc_k.TabIndex = 11;
+            // 
+            // tbx_y_adc_k
+            // 
+            this.tbx_y_adc_k.Location = new System.Drawing.Point(36, 58);
+            this.tbx_y_adc_k.Name = "tbx_y_adc_k";
+            this.tbx_y_adc_k.Size = new System.Drawing.Size(100, 21);
+            this.tbx_y_adc_k.TabIndex = 10;
+            // 
+            // tbx_x_adc_k
+            // 
+            this.tbx_x_adc_k.Location = new System.Drawing.Point(36, 20);
+            this.tbx_x_adc_k.Name = "tbx_x_adc_k";
+            this.tbx_x_adc_k.Size = new System.Drawing.Size(100, 21);
+            this.tbx_x_adc_k.TabIndex = 9;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(15, 98);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(11, 12);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Z";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(15, 61);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(11, 12);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Y";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(15, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(11, 12);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "X";
             // 
             // groupBox9
             // 
@@ -824,14 +863,15 @@
             this.btn_setconfAll.UseVisualStyleBackColor = true;
             this.btn_setconfAll.Click += new System.EventHandler(this.btn_setconfAll_Click);
             // 
-            // label13
+            // btn_getconf
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(317, 23);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 12);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "本地时间";
+            this.btn_getconf.Location = new System.Drawing.Point(18, 20);
+            this.btn_getconf.Name = "btn_getconf";
+            this.btn_getconf.Size = new System.Drawing.Size(109, 96);
+            this.btn_getconf.TabIndex = 3;
+            this.btn_getconf.Text = "GetConf";
+            this.btn_getconf.UseVisualStyleBackColor = true;
+            this.btn_getconf.Click += new System.EventHandler(this.btn_getconf_Click);
             // 
             // timer1
             // 
@@ -839,43 +879,15 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lab_localtime
+            // btn_GetData
             // 
-            this.lab_localtime.AutoSize = true;
-            this.lab_localtime.Location = new System.Drawing.Point(376, 23);
-            this.lab_localtime.Name = "lab_localtime";
-            this.lab_localtime.Size = new System.Drawing.Size(35, 12);
-            this.lab_localtime.TabIndex = 17;
-            this.lab_localtime.Text = ".0.0.";
-            // 
-            // lab_timstamp
-            // 
-            this.lab_timstamp.AutoSize = true;
-            this.lab_timstamp.Location = new System.Drawing.Point(376, 39);
-            this.lab_timstamp.Name = "lab_timstamp";
-            this.lab_timstamp.Size = new System.Drawing.Size(59, 12);
-            this.lab_timstamp.TabIndex = 18;
-            this.lab_timstamp.Text = "timestamp";
-            // 
-            // btn_getsn
-            // 
-            this.btn_getsn.Location = new System.Drawing.Point(369, 21);
-            this.btn_getsn.Name = "btn_getsn";
-            this.btn_getsn.Size = new System.Drawing.Size(75, 23);
-            this.btn_getsn.TabIndex = 3;
-            this.btn_getsn.Text = "Get";
-            this.btn_getsn.UseVisualStyleBackColor = true;
-            this.btn_getsn.Click += new System.EventHandler(this.btn_getsn_Click);
-            // 
-            // btn_setsn
-            // 
-            this.btn_setsn.Location = new System.Drawing.Point(451, 20);
-            this.btn_setsn.Name = "btn_setsn";
-            this.btn_setsn.Size = new System.Drawing.Size(75, 23);
-            this.btn_setsn.TabIndex = 4;
-            this.btn_setsn.Text = "Set";
-            this.btn_setsn.UseVisualStyleBackColor = true;
-            this.btn_setsn.Click += new System.EventHandler(this.btn_setsn_Click);
+            this.btn_GetData.Location = new System.Drawing.Point(240, 78);
+            this.btn_GetData.Name = "btn_GetData";
+            this.btn_GetData.Size = new System.Drawing.Size(339, 134);
+            this.btn_GetData.TabIndex = 5;
+            this.btn_GetData.Text = "GetData";
+            this.btn_GetData.UseVisualStyleBackColor = true;
+            this.btn_GetData.Click += new System.EventHandler(this.btn_GetData_Click);
             // 
             // Form1
             // 
@@ -887,7 +899,7 @@
             this.Controls.Add(this.Version);
             this.Controls.Add(this.Serial_Conf);
             this.Name = "Form1";
-            this.Text = "Lora_ConfTool_V1.0.0";
+            this.Text = "Lora_ConfTool_V1.0.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Serial_Conf.ResumeLayout(false);
             this.Serial_Conf.PerformLayout();
@@ -905,12 +917,12 @@
             this.groupBox5.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -997,6 +1009,7 @@
         private System.Windows.Forms.Label lab_timstamp;
         private System.Windows.Forms.Button btn_setsn;
         private System.Windows.Forms.Button btn_getsn;
+        private System.Windows.Forms.Button btn_GetData;
     }
 }
 

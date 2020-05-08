@@ -24,6 +24,7 @@
 #include "datasend_task.h"
 #include "app_datasend.h"
 #include "hal_task.h"
+#include "bsp_led.h"
 /**
  * @addtogroup    datasend_task_Modules 
  * @{  
@@ -137,9 +138,9 @@ void DataSend_Task(void * pvParameter)
 		if((event_flag & DATASEND_TASK_SEND_EVENT) != 0x00)
 		{
 			DEBUG("DATASEND_TASK_SEND_EVENT\r\n");
+
 			APP_DataSend_SendCharacteristic();
-			//DataSend_Task_StartTim(000);
-			Hal_Task_Event_Start(HAL_TASK_STANDBY_EVENT, EVENT_FROM_TASK);
+
 		}
 
 	}
@@ -168,7 +169,7 @@ void DataSend_Task_Tim_Init(void)
 {
 	datasend_task_tim = xTimerCreate(	"DataSendTim",			/*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 									pdMS_TO_TICKS(1000),
-									pdTRUE,
+									pdFALSE,
 									NULL,
 									datasend_task_tim_callback );
 }

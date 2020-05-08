@@ -24,6 +24,7 @@
 #include "bsp_lmt01.h"
 
 #include "app_conf.h"
+#include "bsp_led.h"
 /**
  * @addtogroup    temperature_task_Modules 
  * @{  
@@ -128,14 +129,13 @@ void Temperature_Task(void * pvParameter)
 	
 	while(1)
 	{
+		//Bsp_LedToggle(BSP_LED_TEST);
 		//DEBUG("Temperature Task Looping\r\n");
 		BSP_LMT01_StartGetValue();
 		vTaskDelay(pdMS_TO_TICKS(1000));
 		
 		rtc_data = BSP_RTC_Get();
-		
 		DEBUG("RTC: %d ",rtc_data.Sec);
-		APP_Conf_ReportData();
 		//snprintf(str_temp,30,"%0.3f",g_SystemParam_Param.pdate);
 		//DEBUG("Temperature:%s\r\n",str_temp);
 	}

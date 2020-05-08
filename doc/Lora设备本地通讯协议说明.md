@@ -38,7 +38,8 @@ typedef struct
 |4|0x04|获取配置参数 应答|CMD_GetConf_Resp|
 |5|0x80|获取软件版本 请求|CMD_GetVersion_Req|
 |6|0x81|获取软件版本 应答|CMD_GetVersion_Resp|
-|7|0xc8|上报数据|CMD_ReportData|
+|7|0xc7|请求上报数据 请求|CMD_GetData_Req|
+|8|0xc8|上报数据 应答|CMD_ReportData|
 
 
 ### 2.2 CMD说明
@@ -96,7 +97,7 @@ typedef struct
 ||||||
 #### 2.2.3 获取软件版本
 **请求**：CMD->CMD_GetVersion_Req(0x80)
-**Payload **：
+**Payload **：无
 
 无
 
@@ -114,10 +115,13 @@ uint32_t 为小端
 
 0x00010203 为1.2.3版本
 
-#### 2.2.4 上报数据
-**请求**：CMD->CMD_ReportData(0xc8)
-**Payload **：TLV
+#### 2.2.4 请求数据
+**请求**：CMD->CMD_GetData_Req(0xc7)
+**Payload **：无
 
+**应答**:CMD->CMD_ReportData(0xc8)
+
+**Payload**:TLV
 |序号|Tag|Len|Value|说明|
 |---|---|---|---|---|
 |1|1|4|float|X轴加速度|
@@ -137,11 +141,6 @@ uint32_t 为小端
 |15|15|4|float|Z轴包络|
 |16|16|4|float|温度|
 |17|17|4|float|电量|
-
-**应答**
-**Payload**:
-
-无
 
 
 

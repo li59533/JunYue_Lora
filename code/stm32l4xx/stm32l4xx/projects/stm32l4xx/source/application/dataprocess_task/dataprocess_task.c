@@ -147,7 +147,7 @@ void Dataprocess_Task(void * pvParameter)
 		
 		if((event_flag & DATAPEOCESS_TASK_FILTER_EVENT) != 0x00)
 		{
-			Bsp_LedToggle(BSP_LED_TEST);
+
 			//DEBUG("DATAPEOCESS_TASK_FILTER_EVENT\r\n");
 			APP_DataFilter_Process();
 			//vTaskDelay(pdMS_TO_TICKS(10000));			

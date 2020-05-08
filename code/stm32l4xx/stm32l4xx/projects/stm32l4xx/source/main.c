@@ -114,11 +114,6 @@ int main(void)
     
 	RTOS_Init();
 
-    while(1)
-	{
-		HAL_Delay(1000);
-		Bsp_LedToggle(BSP_LED_TEST);
-	}
 	return 0;
 }
 

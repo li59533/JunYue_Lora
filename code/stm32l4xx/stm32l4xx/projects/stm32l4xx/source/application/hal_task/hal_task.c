@@ -143,10 +143,13 @@ void Hal_Task(void * pvParameter)
 		Hal_Task_StartTim(60000);
 		//Hal_Task_StartTim(1000);
 		hal_pwr_flag = 0;
+		
+		RTOS_Delay_ms(15000);
+		Bsp_LedOpen(BSP_LED_TEST);
 	}
 	else
 	{
-		Hal_Task_StartTim(20000);
+		Hal_Task_StartTim(10000);
 		hal_pwr_flag = 1;
 	}
 	
@@ -160,7 +163,8 @@ void Hal_Task(void * pvParameter)
 			{
 				DEBUG("HAL_TASK_STANDBY_EVENT\r\n");
 				SystemParam_Save();
-				RTOS_Delay_ms(5000);
+				Bsp_LedOpen(BSP_LED_TEST);
+				RTOS_Delay_ms(2000);
 				APP_Power_EnterStandbyMode(g_SystemParam_Config.sleep_time);	
 							
 			}

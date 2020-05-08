@@ -97,6 +97,7 @@ static void app_lnswitch_cmd(uint8_t * buf,uint16_t len);
 static void app_setconfreq_process(uint8_t *payload,uint16_t len);
 static void app_getconfreq_process(uint8_t *payload,uint16_t len);
 static void app_getversionreq_process(uint8_t *payload,uint16_t len);
+static void app_getdata_process(uint8_t *payload,uint16_t len);
 /**
  * @}
  */
@@ -176,10 +177,14 @@ static void app_lnswitch_cmd(uint8_t * buf,uint16_t len)
 		case CMD_SetConf_Req:app_setconfreq_process(buf + 1, len -1 );break;
 		case CMD_GetConf_Req:app_getconfreq_process(buf + 1, len -1 ) ;break;
 		case CMD_GetVersion_Req: app_getversionreq_process(buf + 1, len -1 );break;
+		case CMD_GetData_Req: app_getdata_process(buf + 1, len -1 ); break;
 		default:break;
 	}
 }
-
+static void app_getdata_process(uint8_t *payload,uint16_t len)
+{
+	APP_Conf_ReportData();
+}
 static void app_setconfreq_process(uint8_t *payload,uint16_t len)
 {
 

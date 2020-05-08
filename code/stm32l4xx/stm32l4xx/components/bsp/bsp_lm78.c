@@ -25,6 +25,7 @@
 #include "app_power.h"
 #include "app_conf.h"
 #include "rtos_tools.h"
+#include "bsp_led.h"
 /**
  * @addtogroup    bsp_lm78_Modules 
  * @{  
@@ -280,7 +281,7 @@ void BSP_LM78_RespProcess(void)
 			if(strstr((const char *)rev_buf,"OK") != 0 )
 			{
 				bsp_lm78_statusDequeue();
-				
+				BSP_LED_BlinkStandard_3(BSP_LED_TEST,Blink_HighSpeed);
 				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
 				{
 					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
