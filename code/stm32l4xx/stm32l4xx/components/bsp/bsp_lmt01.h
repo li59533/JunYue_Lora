@@ -17,7 +17,7 @@
  * @addtogroup    XXX 
  * @{ 
  */
-
+#include "self_def.h"
 /**
  * @addtogroup    bsp_lmt01_Modules 
  * @{  
@@ -45,6 +45,14 @@
  * @defgroup      bsp_lmt01_Exported_Types 
  * @{  
  */
+typedef enum
+{
+	LMT01_Pulse_ON = 1,
+	LMT01_Pulse_OFF ,
+	LMT01_Pulse_Wait , 
+	LMT01_Updata_HasUp ,
+	LMT01_Updata_NoUp ,
+}bsp_lmt01_status_e;
 
 /**
  * @}
@@ -63,12 +71,17 @@
  * @defgroup      bsp_lmt01_Exported_Functions 
  * @{  
  */
-void BSP_LMT01_Init(void);
-void BSP_LMT01_StartGetValue(void);
-void BSP_LMT01_PowerEnable(void);
-void BSP_LMT01_PowerDisable(void);
-void BSP_LMT01_EXTI_IRQHandler(void);
-void BSP_LMT01_TIM4_IRQHandler(void);
+void BSP_LMT01_Power_ON(void);
+void BSP_LMT01_Power_OFF(void);
+void BSP_LMT01_CoreLoop(void);  //call this func in 20ms
+uint8_t BSP_LMT01_GetDataStatus(void);
+float BSP_LMT01_GetValue(void);
+float BSP_LMT01_GetMidValue(void);
+// ----------TestFunc ----------
+void BSP_LMT01_TestFunc(void);
+// -----------------------------
+
+
 /**
  * @}
  */

@@ -25,6 +25,8 @@
 #include "app_datasend.h"
 #include "hal_task.h"
 #include "bsp_led.h"
+#include "bsp_lm78.h"
+#include "rtos_tools.h"
 /**
  * @addtogroup    datasend_task_Modules 
  * @{  
@@ -140,6 +142,16 @@ void DataSend_Task(void * pvParameter)
 			DEBUG("DATASEND_TASK_SEND_EVENT\r\n");
 
 			APP_DataSend_SendCharacteristic();
+			RTOS_Delay_ms(2000);
+			
+			if(BSP_LM78_GetFlag() == 0)
+			{
+				DataSend_Task_StartTim(13000);
+			}
+			else
+			{
+				DataSend_Task_StartTim(1000);
+			}
 
 		}
 

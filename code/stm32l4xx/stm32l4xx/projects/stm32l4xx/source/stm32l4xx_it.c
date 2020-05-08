@@ -236,7 +236,7 @@ void EXTI9_5_IRQHandler(void)
 
 void TIM4_IRQHandler(void)
 {
-	BSP_LMT01_TIM4_IRQHandler();
+
 }
 
 void DMA1_Channel1_IRQHandler(void)

@@ -112,6 +112,10 @@ LM78_Sendbuf_t lm78_sendbuf =
 	.len = 0,
 };
 
+
+
+static uint8_t lm78_sendflag = 0;
+
 /**
  * @}
  */
@@ -280,8 +284,10 @@ void BSP_LM78_RespProcess(void)
 		{
 			if(strstr((const char *)rev_buf,"OK") != 0 )
 			{
-				bsp_lm78_statusDequeue();
 				BSP_LED_BlinkStandard_3(BSP_LED_TEST,Blink_HighSpeed);
+				BSP_LM78_ClearFlag();
+				bsp_lm78_statusDequeue();
+				
 				if(BSP_Queue_GetCount(BSP_QUEUE_UART1_REV) > 0)
 				{
 					Net_Task_Event_Start(NET_TASK_AT_PROCESS_EVENT, EVENT_FROM_TASK);
@@ -429,7 +435,7 @@ void BSP_LM78_ReqProcess(void)
 //				char test_lorabuf[] = "\r\nAT+SENDB=2:12345678123456781234567812345678123456781234567812345678123456781234567812341234567812345678123456178123FF\r\n";
 //				BSP_LM78_SendBytes((uint8_t *)test_lorabuf,sizeof(test_lorabuf));
 		
-				
+				BSP_LM78_SetFlag();
 				BSP_LM78_SendBytes(lm78_sendbuf.sendbuf , lm78_sendbuf.len );
 				DEBUG("REQ AT+SENDB=%s %d\r\n", lm78_sendbuf.sendbuf ,lm78_sendbuf.len);
 			}
@@ -520,7 +526,20 @@ static uint8_t bsp_lm78_getqueueCount(void)
 	return LM78_StatusQueue.count;
 }
 
+void BSP_LM78_SetFlag(void)
+{
+	lm78_sendflag = 1;
+}
 
+void BSP_LM78_ClearFlag(void)
+{
+	lm78_sendflag = 0;
+}
+
+uint8_t BSP_LM78_GetFlag(void)
+{
+	return lm78_sendflag;
+}
 
 
 

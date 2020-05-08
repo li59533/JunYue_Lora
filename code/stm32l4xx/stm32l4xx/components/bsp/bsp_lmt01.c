@@ -18,6 +18,7 @@
  */
 #include "clog.h"
 #include "system_param.h"
+#include "sort.h"
 /**
  * @addtogroup    bsp_lmt01_Modules 
  * @{  
@@ -39,6 +40,10 @@
  * @{  
  */
 
+#define LMT01_POWER_ON	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_SET)
+#define LMT01_POWER_OFF	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_RESET)
+
+
 /**
  * @}
  */
@@ -58,6 +63,21 @@
  * @brief         
  * @{  
  */
+typedef struct
+{
+	uint32_t lmt01_pulse_count ;
+	uint32_t lmt01_pulse_count_record ;
+	uint8_t lmt01_pulse_status;
+	uint8_t lmt01_updata_status;
+	float lmt01_value;
+	
+	float lmt01_midbuf[5];
+	float lmt01_midvalue ; 
+	
+}bsp_lmt01_data_t ;
+
+
+
 
 /**
  * @}
@@ -68,7 +88,15 @@
  * @brief         
  * @{  
  */
-TIM_HandleTypeDef htim4;
+
+static bsp_lmt01_data_t bsp_lmt01_data =
+{
+	.lmt01_pulse_count = 0,
+	.lmt01_pulse_count_record = 0,
+	.lmt01_pulse_status = LMT01_Pulse_OFF,
+	.lmt01_updata_status = LMT01_Updata_NoUp,
+};
+
 /**
  * @}
  */
@@ -89,7 +117,8 @@ TIM_HandleTypeDef htim4;
  * @{  
  */
 static void lmt01_gpio_init(void);
-static void lmt01_tim_init(void);
+static void lmt01_gpio_deinit(void);
+static void bsp_lmt01_entermidbuf(float value);
 /**
  * @}
  */
@@ -99,26 +128,14 @@ static void lmt01_tim_init(void);
  * @brief         
  * @{  
  */
- 
 
-uint32_t LMT01_RUN_COUNTER=0; //该变量用来计时LMT01运行时间，正常是54ms conv 50ms data ,所以放104ms一次转换
-#define LMT01_LIFE_TIME 106 //10600*1ms=106ms
-uint32_t LMT01_TEMP_CNT=0;
-uint32_t LMT01_TEMP_VALUE=0;
-uint32_t LMT01_PULSE_WIDTH=0;
-typedef enum {LMT01_ERR=0,LMT01_OK=1,} LMT01_Condition;
-LMT01_Condition LMT01_CURRENT_CONDITION;
 
- 
- 
-void BSP_LMT01_Init(void)
+void BSP_LMT01_Power_ON(void)
 {
 	lmt01_gpio_init();
-	lmt01_tim_init();
 	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  //外部中断使能
-	HAL_NVIC_EnableIRQ(TIM4_IRQn);           //TPM中断使能
+	LMT01_POWER_ON;
 }
-
 static void lmt01_gpio_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -145,110 +162,136 @@ static void lmt01_gpio_init(void)
 	//  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
+static void lmt01_gpio_deinit(void)
+{
+	HAL_GPIO_DeInit(GPIOC, GPIO_PIN_5);
+	HAL_GPIO_DeInit(GPIOB, GPIO_PIN_2);
+	__HAL_RCC_GPIOB_CLK_DISABLE();
+	__HAL_RCC_GPIOC_CLK_DISABLE();	
 
-static void lmt01_tim_init(void)
+}
+void BSP_LMT01_Power_OFF(void)
+{
+	LMT01_POWER_OFF;
+	
+	lmt01_gpio_deinit();
+}
+
+void BSP_LMT01_CoreLoop(void)  //call this func in 20ms
 {
 
-	/* USER CODE BEGIN TIM15_Init 0 */
-	__HAL_RCC_TIM4_CLK_ENABLE();
-	/* TIM4 interrupt Init */
-	HAL_NVIC_SetPriority(TIM4_IRQn, 5, 0);
-	HAL_NVIC_EnableIRQ(TIM4_IRQn);
-	//	HAL_NVIC_EnableIRQ(TIM1_BRK_TIM15_IRQn);
-	/* USER CODE END TIM15_Init 0 */
-
-	TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-	TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-	/* USER CODE BEGIN TIM4_Init 1 */
-
-	/* USER CODE END TIM4_Init 1 */
-	htim4.Instance = TIM4;
-	htim4.Init.Prescaler = 119;
-	htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim4.Init.Period = 999;
-	htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-	if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
+	switch(bsp_lmt01_data.lmt01_pulse_status)
 	{
+		case LMT01_Pulse_ON:
+		{
 
-	}
-	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-	if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
-	{
-
-	}
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
-	{
-
+			bsp_lmt01_data.lmt01_pulse_status = LMT01_Pulse_OFF;
+		}
+		break;
+		case LMT01_Pulse_OFF:
+		{
+			bsp_lmt01_data.lmt01_pulse_status = LMT01_Pulse_Wait;
+			bsp_lmt01_data.lmt01_pulse_count_record = bsp_lmt01_data.lmt01_pulse_count;
+			bsp_lmt01_data.lmt01_pulse_count  = 0;
+			bsp_lmt01_data.lmt01_value = ((float)bsp_lmt01_data.lmt01_pulse_count_record * 0.0625f - 50) + g_SystemParam_Config.tempCompensation*0.1f; //补偿值
+			bsp_lmt01_data.lmt01_updata_status = LMT01_Updata_HasUp;	
+			if(bsp_lmt01_data.lmt01_value < -48.0f)
+			{
+				
+			}
+			else
+			{
+				bsp_lmt01_entermidbuf(bsp_lmt01_data.lmt01_value);
+			}
+		}
+		break;
+		case LMT01_Pulse_Wait:
+		{
+			
+		}
+		break;
+		default:break;
 	}
 
 }
 
+uint8_t BSP_LMT01_GetDataStatus(void)
+{
+	return bsp_lmt01_data.lmt01_updata_status;
+}
+
+float BSP_LMT01_GetValue(void)
+{
+	bsp_lmt01_data.lmt01_updata_status = LMT01_Updata_NoUp;
+	return bsp_lmt01_data.lmt01_value;
+}
 
 
+static void bsp_lmt01_entermidbuf(float value)
+{
+	static uint8_t enter_ptr = 0;
+	bsp_lmt01_data.lmt01_midbuf[enter_ptr] = value ;  
+	enter_ptr ++ ;
+	
+	if(enter_ptr ==5)
+	{
+		enter_ptr = 0;
+	}
+}
+float BSP_LMT01_GetMidValue(void)
+{
+	float midbuf[5] ;
+	bsp_lmt01_data.lmt01_updata_status = LMT01_Updata_NoUp;
+	for(uint8_t i = 0 ; i < 5 ; i ++)
+	{
+		midbuf[i] = bsp_lmt01_data.lmt01_midbuf[i];
+	}
+	
+	Bubble_sort(midbuf , 5);
+	
+	
+	return midbuf[2];
+	
+}
+
+
+// -------------------IRQ-------------
 
 
 void BSP_LMT01_EXTI_IRQHandler(void)
 {
-	/* USER CODE BEGIN EXTI9_5_IRQn 0 */
-
-	/* USER CODE END EXTI9_5_IRQn 0 */
 	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
-	/* USER CODE BEGIN EXTI9_5_IRQn 1 */
-	LMT01_TEMP_CNT++;
-
-	/* USER CODE END EXTI9_5_IRQn 1 */
-}
-void BSP_LMT01_TIM4_IRQHandler(void)
-{
-	/* USER CODE BEGIN TIM4_IRQn 0 */
-
-	/* USER CODE END TIM4_IRQn 0 */
-	HAL_TIM_IRQHandler(&htim4);
-	/* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
-	//	bsp_LedToggle(1);
-	/* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
-
-	LMT01_RUN_COUNTER++;//
-	if(LMT01_RUN_COUNTER>LMT01_LIFE_TIME)
-	{
-		LMT01_TEMP_VALUE=LMT01_TEMP_CNT;
-		g_SystemParam_Param.pdate=((float)LMT01_TEMP_VALUE*0.0625f - 50) + g_SystemParam_Config.tempCompensation*0.1f; //补偿值
-		LMT01_RUN_COUNTER=0;
-		BSP_LMT01_PowerDisable();
-		HAL_TIM_Base_Stop_IT(&htim4);
-	}
+	bsp_lmt01_data.lmt01_pulse_count ++;
+	bsp_lmt01_data.lmt01_pulse_status = LMT01_Pulse_ON;	
 	
 }
 
-void  Init_temp_parameter(void)
+
+
+
+
+// ------------------Test ------------
+
+void BSP_LMT01_TestFunc(void)
 {
-	LMT01_TEMP_CNT=0;
-	LMT01_RUN_COUNTER=0;
-	LMT01_PULSE_WIDTH=0;	
+	if(BSP_LMT01_GetDataStatus() == LMT01_Updata_HasUp)
+	{
+		char test_c[50] = { 0 };
+		
+		sprintf(test_c , "LMT01:%f,PulseCount:%d\r\n" ,bsp_lmt01_data.lmt01_value ,bsp_lmt01_data.lmt01_pulse_count_record);
+		DEBUG("%s" , test_c);
+	}
+	else
+	{
+		DEBUG("LMT01 Value is NoUp\r\n");
+	}
 }
 
-
-void BSP_LMT01_StartGetValue(void)
-{
-	Init_temp_parameter();
-	BSP_LMT01_PowerEnable();     //打开电源		
-	HAL_TIM_Base_Start_IT(&htim4);
-}
+// -----------------------------------
 
 
-void BSP_LMT01_PowerEnable(void)
-{
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_SET);
-}
 
-void BSP_LMT01_PowerDisable(void)
-{
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2,GPIO_PIN_RESET);
-}
+
 
 
 

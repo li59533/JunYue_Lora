@@ -145,7 +145,7 @@ void Hal_Task(void * pvParameter)
 		hal_pwr_flag = 0;
 		
 		RTOS_Delay_ms(15000);
-		Bsp_LedOpen(BSP_LED_TEST);
+		BSP_Led_Blink(BSP_LED_TEST , 3 , 50 ,500);
 	}
 	else
 	{

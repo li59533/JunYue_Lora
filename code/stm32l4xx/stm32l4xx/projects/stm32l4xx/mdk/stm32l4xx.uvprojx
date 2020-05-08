@@ -751,6 +751,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\compoents\Utilities\version.c</FilePath>
             </File>
+            <File>
+              <FileName>sort.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\compoents\Utilities\sort.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

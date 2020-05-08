@@ -25,6 +25,8 @@
 
 #include "app_conf.h"
 #include "bsp_led.h"
+
+#include "rtos_tools.h"
 /**
  * @addtogroup    temperature_task_Modules 
  * @{  
@@ -95,7 +97,7 @@ TaskHandle_t  Temperature_Task_Handle = NULL;
  * @brief         
  * @{  
  */
-
+static void Temperature_Task_1s(void);
 /**
  * @}
  */
@@ -121,26 +123,50 @@ uint32_t Temperature_Task_Init(void)
 
 void Temperature_Task(void * pvParameter)
 {
-	BSP_LMT01_Init();
+	BSP_LMT01_Power_ON();
 	DEBUG("Temperature Task Enter\r\n");
-	
-	
-	RTC_T rtc_data ;
-	
 	while(1)
 	{
 		//Bsp_LedToggle(BSP_LED_TEST);
 		//DEBUG("Temperature Task Looping\r\n");
-		BSP_LMT01_StartGetValue();
-		vTaskDelay(pdMS_TO_TICKS(1000));
-		
-		rtc_data = BSP_RTC_Get();
-		DEBUG("RTC: %d ",rtc_data.Sec);
+
+		RTOS_Delay_ms(20);
+		BSP_LMT01_CoreLoop();
+		Temperature_Task_1s();
 		//snprintf(str_temp,30,"%0.3f",g_SystemParam_Param.pdate);
 		//DEBUG("Temperature:%s\r\n",str_temp);
 	}
 }
-							
+	
+static void Temperature_Task_1s(void)
+{
+	static uint8_t count = 0 ;
+	count ++ ; 
+	if(count == 50)
+	{
+		char str_temp[30];
+		count = 0;
+		
+		if(BSP_LMT01_GetDataStatus() != LMT01_Updata_HasUp && BSP_LMT01_GetMidValue() == 0)
+		{
+			g_SystemParam_Param.pdate = -50.0f;
+		}
+		else
+		{
+			g_SystemParam_Param.pdate = BSP_LMT01_GetMidValue();
+		}
+
+		if(g_SystemParam_Param.pdate < -40.0)
+		{
+			DEBUG("!!!!\r\n");
+		}
+		
+		snprintf(str_temp,30,"%0.3f",g_SystemParam_Param.pdate);
+		DEBUG("Temperature:%s\r\n",str_temp);
+		
+	}
+}
+
 
 /**
  * @}

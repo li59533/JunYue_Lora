@@ -73,6 +73,11 @@ void BSP_LM78_Init(void);
 void BSP_LM78_RespProcess(void);
 void BSP_LM78_ReqProcess(void);
 int8_t BSP_LM78_StartSend(uint8_t *buf, uint16_t len);
+
+void BSP_LM78_SetFlag(void);
+void BSP_LM78_ClearFlag(void);
+uint8_t BSP_LM78_GetFlag(void);
+
 /**
  * @}
  */
