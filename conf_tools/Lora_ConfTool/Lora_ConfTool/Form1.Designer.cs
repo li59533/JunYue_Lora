@@ -67,6 +67,7 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btn_GetData = new System.Windows.Forms.Button();
             this.btn_setsn = new System.Windows.Forms.Button();
             this.btn_getsn = new System.Windows.Forms.Button();
             this.tbx_sn = new System.Windows.Forms.TextBox();
@@ -108,7 +109,7 @@
             this.btn_setconfAll = new System.Windows.Forms.Button();
             this.btn_getconf = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btn_GetData = new System.Windows.Forms.Button();
+            this.btn_AutoReport = new System.Windows.Forms.Button();
             this.Serial_Conf.SuspendLayout();
             this.Version.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -479,6 +480,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "其他";
             // 
+            // btn_GetData
+            // 
+            this.btn_GetData.Location = new System.Drawing.Point(240, 78);
+            this.btn_GetData.Name = "btn_GetData";
+            this.btn_GetData.Size = new System.Drawing.Size(339, 134);
+            this.btn_GetData.TabIndex = 5;
+            this.btn_GetData.Text = "GetData";
+            this.btn_GetData.UseVisualStyleBackColor = true;
+            this.btn_GetData.Click += new System.EventHandler(this.btn_GetData_Click);
+            // 
             // btn_setsn
             // 
             this.btn_setsn.Location = new System.Drawing.Point(451, 20);
@@ -845,11 +856,12 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.btn_AutoReport);
             this.groupBox9.Controls.Add(this.btn_setconfAll);
             this.groupBox9.Controls.Add(this.btn_getconf);
             this.groupBox9.Location = new System.Drawing.Point(290, 130);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(293, 127);
+            this.groupBox9.Size = new System.Drawing.Size(596, 189);
             this.groupBox9.TabIndex = 3;
             this.groupBox9.TabStop = false;
             // 
@@ -879,15 +891,15 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btn_GetData
+            // btn_AutoReport
             // 
-            this.btn_GetData.Location = new System.Drawing.Point(240, 78);
-            this.btn_GetData.Name = "btn_GetData";
-            this.btn_GetData.Size = new System.Drawing.Size(339, 134);
-            this.btn_GetData.TabIndex = 5;
-            this.btn_GetData.Text = "GetData";
-            this.btn_GetData.UseVisualStyleBackColor = true;
-            this.btn_GetData.Click += new System.EventHandler(this.btn_GetData_Click);
+            this.btn_AutoReport.Location = new System.Drawing.Point(472, 13);
+            this.btn_AutoReport.Name = "btn_AutoReport";
+            this.btn_AutoReport.Size = new System.Drawing.Size(109, 38);
+            this.btn_AutoReport.TabIndex = 5;
+            this.btn_AutoReport.Text = "AutoReport";
+            this.btn_AutoReport.UseVisualStyleBackColor = true;
+            this.btn_AutoReport.Click += new System.EventHandler(this.btn_AutoReport_Click);
             // 
             // Form1
             // 
@@ -1010,6 +1022,7 @@
         private System.Windows.Forms.Button btn_setsn;
         private System.Windows.Forms.Button btn_getsn;
         private System.Windows.Forms.Button btn_GetData;
+        private System.Windows.Forms.Button btn_AutoReport;
     }
 }
 

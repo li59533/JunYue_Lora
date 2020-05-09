@@ -73,6 +73,7 @@
  */
 #define APP_CONF_DATASPACE_SIZE		200 
 static uint8_t  app_conf_dataspace[APP_CONF_DATASPACE_SIZE] = { 0 };
+static uint8_t app_conf_autoflag = 0;
 /**
  * @}
  */
@@ -98,6 +99,7 @@ static void app_setconfreq_process(uint8_t *payload,uint16_t len);
 static void app_getconfreq_process(uint8_t *payload,uint16_t len);
 static void app_getversionreq_process(uint8_t *payload,uint16_t len);
 static void app_getdata_process(uint8_t *payload,uint16_t len);
+static void app_autoreport_process(uint8_t *payload,uint16_t len);
 /**
  * @}
  */
@@ -178,6 +180,7 @@ static void app_lnswitch_cmd(uint8_t * buf,uint16_t len)
 		case CMD_GetConf_Req:app_getconfreq_process(buf + 1, len -1 ) ;break;
 		case CMD_GetVersion_Req: app_getversionreq_process(buf + 1, len -1 );break;
 		case CMD_GetData_Req: app_getdata_process(buf + 1, len -1 ); break;
+		case CMD_AutoReport :app_autoreport_process(buf + 1, len -1) ;break;
 		default:break;
 	}
 }
@@ -185,6 +188,27 @@ static void app_getdata_process(uint8_t *payload,uint16_t len)
 {
 	APP_Conf_ReportData();
 }
+
+
+static void app_autoreport_process(uint8_t *payload,uint16_t len)
+{
+	app_conf_autoflag = ~app_conf_autoflag;
+}
+
+void APP_Conf_AutoReport(void)
+{
+	if(app_conf_autoflag == 1)
+	{
+		APP_Conf_ReportData();
+	}
+	else
+	{
+		
+	}
+}
+
+
+
 static void app_setconfreq_process(uint8_t *payload,uint16_t len)
 {
 

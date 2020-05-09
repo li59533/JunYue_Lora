@@ -130,7 +130,7 @@ uint32_t DataSend_Task_Init(void)
 void DataSend_Task(void * pvParameter)
 {
 	uint32_t event_flag = 0;
-	DataSend_Task_StartTim(3000);
+	DataSend_Task_StartTim(4000);
 	DEBUG("DataSend Task Enter\r\n");
 
 	while(1)
@@ -146,11 +146,11 @@ void DataSend_Task(void * pvParameter)
 			
 			if(BSP_LM78_GetFlag() == 0)
 			{
-				DataSend_Task_StartTim(13000);
+				DataSend_Task_StartTim(12000);
 			}
 			else
 			{
-				DataSend_Task_StartTim(1000);
+				DataSend_Task_StartTim(5);
 			}
 
 		}

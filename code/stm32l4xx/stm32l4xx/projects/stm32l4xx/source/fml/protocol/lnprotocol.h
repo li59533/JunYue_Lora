@@ -109,6 +109,7 @@ typedef enum
 	CMD_GetVersion_Resp = 0x81,
 	CMD_GetData_Req = 0xc7,
 	CMD_ReportData	 = 0xc8,
+	CMD_AutoReport	 = 0xc9,
 }LN_Protocol_Cmd_e;
 
 

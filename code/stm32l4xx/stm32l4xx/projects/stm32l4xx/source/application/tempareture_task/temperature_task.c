@@ -147,6 +147,8 @@ static void Temperature_Task_1s(void)
 		char str_temp[30];
 		count = 0;
 		
+		APP_Conf_AutoReport();
+		
 		if(BSP_LMT01_GetDataStatus() != LMT01_Updata_HasUp && BSP_LMT01_GetMidValue() == 0)
 		{
 			g_SystemParam_Param.pdate = -50.0f;

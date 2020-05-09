@@ -40,6 +40,7 @@ typedef struct
 |6|0x81|获取软件版本 应答|CMD_GetVersion_Resp|
 |7|0xc7|请求上报数据 请求|CMD_GetData_Req|
 |8|0xc8|上报数据 应答|CMD_ReportData|
+|9|0xc9|自动上报数据 开关|CMD_AutoReport|
 
 
 ### 2.2 CMD说明
@@ -142,6 +143,14 @@ uint32_t 为小端
 |16|16|4|float|温度|
 |17|17|4|float|电量|
 
+#### 2.2.4 自动上报数据开关
+**请求**：CMD->CMD_AutoReport(0xc9)
+**Payload **：无
+
+**应答**:
+无
+
+**Payload**:
 
 
 
