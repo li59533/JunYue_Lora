@@ -142,6 +142,7 @@ void float_test(void)
 void Net_Task(void * pvParameter)
 {
 	uint32_t event_flag = 0;	
+	RTOS_Delay_ms(2000);
 	DEBUG("Net Task Enter\r\n");
 	APP_Power_LM78_ON();
 	BSP_LM78_Init();

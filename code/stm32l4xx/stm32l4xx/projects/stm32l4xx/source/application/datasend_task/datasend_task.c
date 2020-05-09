@@ -146,11 +146,11 @@ void DataSend_Task(void * pvParameter)
 			
 			if(BSP_LM78_GetFlag() == 0)
 			{
-				DataSend_Task_StartTim(12000);
+				DataSend_Task_StartTim(13000);
 			}
 			else
 			{
-				DataSend_Task_StartTim(5);
+				DataSend_Task_StartTim(2000);
 			}
 
 		}
