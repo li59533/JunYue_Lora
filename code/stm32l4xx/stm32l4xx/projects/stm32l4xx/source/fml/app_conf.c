@@ -197,7 +197,7 @@ static void app_autoreport_process(uint8_t *payload,uint16_t len)
 
 void APP_Conf_AutoReport(void)
 {
-	if(app_conf_autoflag == 1)
+	if(app_conf_autoflag != 0 )
 	{
 		APP_Conf_ReportData();
 	}
