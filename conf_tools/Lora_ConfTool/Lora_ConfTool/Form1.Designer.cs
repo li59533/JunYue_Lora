@@ -106,10 +106,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btn_AutoReport = new System.Windows.Forms.Button();
             this.btn_setconfAll = new System.Windows.Forms.Button();
             this.btn_getconf = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btn_AutoReport = new System.Windows.Forms.Button();
+            this.btn_AutoData2 = new System.Windows.Forms.Button();
             this.Serial_Conf.SuspendLayout();
             this.Version.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -467,6 +468,7 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.btn_AutoData2);
             this.groupBox5.Controls.Add(this.btn_GetData);
             this.groupBox5.Controls.Add(this.btn_setsn);
             this.groupBox5.Controls.Add(this.btn_getsn);
@@ -482,9 +484,9 @@
             // 
             // btn_GetData
             // 
-            this.btn_GetData.Location = new System.Drawing.Point(240, 78);
+            this.btn_GetData.Location = new System.Drawing.Point(451, 78);
             this.btn_GetData.Name = "btn_GetData";
-            this.btn_GetData.Size = new System.Drawing.Size(339, 134);
+            this.btn_GetData.Size = new System.Drawing.Size(128, 134);
             this.btn_GetData.TabIndex = 5;
             this.btn_GetData.Text = "GetData";
             this.btn_GetData.UseVisualStyleBackColor = true;
@@ -865,6 +867,16 @@
             this.groupBox9.TabIndex = 3;
             this.groupBox9.TabStop = false;
             // 
+            // btn_AutoReport
+            // 
+            this.btn_AutoReport.Location = new System.Drawing.Point(354, 58);
+            this.btn_AutoReport.Name = "btn_AutoReport";
+            this.btn_AutoReport.Size = new System.Drawing.Size(109, 38);
+            this.btn_AutoReport.TabIndex = 5;
+            this.btn_AutoReport.Text = "AutoReport";
+            this.btn_AutoReport.UseVisualStyleBackColor = true;
+            this.btn_AutoReport.Click += new System.EventHandler(this.btn_AutoReport_Click);
+            // 
             // btn_setconfAll
             // 
             this.btn_setconfAll.Location = new System.Drawing.Point(164, 21);
@@ -891,15 +903,15 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btn_AutoReport
+            // btn_AutoData2
             // 
-            this.btn_AutoReport.Location = new System.Drawing.Point(472, 13);
-            this.btn_AutoReport.Name = "btn_AutoReport";
-            this.btn_AutoReport.Size = new System.Drawing.Size(109, 38);
-            this.btn_AutoReport.TabIndex = 5;
-            this.btn_AutoReport.Text = "AutoReport";
-            this.btn_AutoReport.UseVisualStyleBackColor = true;
-            this.btn_AutoReport.Click += new System.EventHandler(this.btn_AutoReport_Click);
+            this.btn_AutoData2.Location = new System.Drawing.Point(282, 78);
+            this.btn_AutoData2.Name = "btn_AutoData2";
+            this.btn_AutoData2.Size = new System.Drawing.Size(128, 134);
+            this.btn_AutoData2.TabIndex = 6;
+            this.btn_AutoData2.Text = "AutoData";
+            this.btn_AutoData2.UseVisualStyleBackColor = true;
+            this.btn_AutoData2.Click += new System.EventHandler(this.btn_AutoData2_Click);
             // 
             // Form1
             // 
@@ -1023,6 +1035,7 @@
         private System.Windows.Forms.Button btn_getsn;
         private System.Windows.Forms.Button btn_GetData;
         private System.Windows.Forms.Button btn_AutoReport;
+        private System.Windows.Forms.Button btn_AutoData2;
     }
 }
 

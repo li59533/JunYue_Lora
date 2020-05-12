@@ -691,5 +691,33 @@ namespace Lora_ConfTool
 
             _serialPort.Write(setconf_buf, 0, 8);
         }
+
+        private void btn_AutoData2_Click(object sender, EventArgs e)
+        {
+            byte[] setconf_buf = new byte[100];
+            setconf_buf[0] = 0x7E;
+
+            setconf_buf[1] = 8;
+            setconf_buf[2] = 0;
+
+            setconf_buf[3] = 0;
+            setconf_buf[4] = 0;
+
+
+            setconf_buf[5] = 0xc9; //cmd
+
+            setconf_buf[6] = 0x7E;
+
+            byte check_sum = 0;
+
+            for (uint i = 0; i < 7; i++)
+            {
+                check_sum += setconf_buf[i];
+            }
+            setconf_buf[7] = check_sum;
+
+
+            _serialPort.Write(setconf_buf, 0, 8);
+        }
     }
 }

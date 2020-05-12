@@ -170,7 +170,7 @@ void Hal_Task(void * pvParameter)
 			}
 			else
 			{
-				
+				Hal_Task_StartTim(10000);
 			}
 		}
 	}
@@ -203,7 +203,7 @@ void Hal_Task_Tim_Init(void)
 {
 	hal_task_tim = xTimerCreate(	"HalTimOUT",			/*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 									pdMS_TO_TICKS(1000),
-									pdFALSE,   // pdTRUE is looping , pdFALSE is just one time 
+									pdTRUE,   // pdTRUE is looping , pdFALSE is just one time 
 									NULL,
 									hal_task_tim_callback );
 }
