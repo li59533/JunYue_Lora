@@ -322,16 +322,16 @@ static void app_dataemu_func(void)
 		
 		if(j == 0)
 		{
-			if(g_SystemParam_Param.EffectiveValue[j] >= 100)
+			if(g_SystemParam_Param.EffectiveValue[j] >= 500)
 			{
-				g_SystemParam_Param.EffectiveValue[j] = 100;
+				g_SystemParam_Param.EffectiveValue[j] = 500;
 			}				
 		}
 		else
 		{
-			if(g_SystemParam_Param.EffectiveValue[j] >= 500)
+			if(g_SystemParam_Param.EffectiveValue[j] >= 100)
 			{
-				g_SystemParam_Param.EffectiveValue[j] = 500;
+				g_SystemParam_Param.EffectiveValue[j] = 100;
 			}				
 		}
 
