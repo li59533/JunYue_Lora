@@ -67,6 +67,7 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btn_AutoData2 = new System.Windows.Forms.Button();
             this.btn_GetData = new System.Windows.Forms.Button();
             this.btn_setsn = new System.Windows.Forms.Button();
             this.btn_getsn = new System.Windows.Forms.Button();
@@ -110,7 +111,6 @@
             this.btn_setconfAll = new System.Windows.Forms.Button();
             this.btn_getconf = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btn_AutoData2 = new System.Windows.Forms.Button();
             this.Serial_Conf.SuspendLayout();
             this.Version.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -482,6 +482,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "其他";
             // 
+            // btn_AutoData2
+            // 
+            this.btn_AutoData2.Location = new System.Drawing.Point(282, 78);
+            this.btn_AutoData2.Name = "btn_AutoData2";
+            this.btn_AutoData2.Size = new System.Drawing.Size(128, 134);
+            this.btn_AutoData2.TabIndex = 6;
+            this.btn_AutoData2.Text = "AutoData";
+            this.btn_AutoData2.UseVisualStyleBackColor = true;
+            this.btn_AutoData2.Click += new System.EventHandler(this.btn_AutoData2_Click);
+            // 
             // btn_GetData
             // 
             this.btn_GetData.Location = new System.Drawing.Point(451, 78);
@@ -725,6 +735,7 @@
             this.btn_other.TabIndex = 15;
             this.btn_other.Text = "Set";
             this.btn_other.UseVisualStyleBackColor = true;
+            this.btn_other.Click += new System.EventHandler(this.btn_other_Click);
             // 
             // tbx_sleeptime
             // 
@@ -902,16 +913,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btn_AutoData2
-            // 
-            this.btn_AutoData2.Location = new System.Drawing.Point(282, 78);
-            this.btn_AutoData2.Name = "btn_AutoData2";
-            this.btn_AutoData2.Size = new System.Drawing.Size(128, 134);
-            this.btn_AutoData2.TabIndex = 6;
-            this.btn_AutoData2.Text = "AutoData";
-            this.btn_AutoData2.UseVisualStyleBackColor = true;
-            this.btn_AutoData2.Click += new System.EventHandler(this.btn_AutoData2_Click);
             // 
             // Form1
             // 

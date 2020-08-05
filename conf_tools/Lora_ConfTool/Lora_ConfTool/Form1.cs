@@ -719,5 +719,10 @@ namespace Lora_ConfTool
 
             _serialPort.Write(setconf_buf, 0, 8);
         }
+
+        private void btn_other_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

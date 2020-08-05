@@ -139,8 +139,8 @@ int8_t APP_DataSend_SendCharacteristic(void)
 		uint16_t Envelop[4];
 	}character_buf;
 	
-	battery_temp = (uint16_t )g_SystemParam_Config.battery * 10;
-	temperature_temp = (int16_t )g_SystemParam_Param.pdate * 10;
+	battery_temp = (uint16_t )(g_SystemParam_Config.battery * 10);
+	temperature_temp = (int16_t )(g_SystemParam_Param.pdate * 10);
 	for( uint8_t i = 0 ; i < 3 ; i ++)
 	{
 		if(g_SystemParam_Param.EffectiveValue[i] <= 6000.0f)

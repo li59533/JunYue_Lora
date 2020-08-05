@@ -1,8 +1,0 @@
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\bin\Release\Lora_ConfTool.exe
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\bin\Release\Lora_ConfTool.pdb
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\obj\Release\Lora_ConfTool.csprojAssemblyReference.cache
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\obj\Release\Lora_ConfTool.Form1.resources
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\obj\Release\Lora_ConfTool.Properties.Resources.resources
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\obj\Release\Lora_ConfTool.csproj.GenerateResource.cache
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\obj\Release\Lora_ConfTool.exe
-E:\github_project\JunYue_Lora\conf_tools\Lora_ConfTool\Lora_ConfTool\obj\Release\Lora_ConfTool.pdb

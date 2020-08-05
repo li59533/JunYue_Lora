@@ -10,14 +10,14 @@
       <TargetName>stm32l4xx</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L4R9ZIJx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L4xx_DFP.2.3.0</PackID>
-          <PackURL>https://www.keil.com/pack/</PackURL>
+          <PackID>Keil.STM32L4xx_DFP.2.4.0</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x000A0000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Listings\</OutputDirectory>
-          <OutputName>L100</OutputName>
+          <OutputName>L101</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -185,6 +185,7 @@
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
+            <RvdsCdeCp>0</RvdsCdeCp>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -351,7 +352,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
-            <uClangAs>0</uClangAs>
+            <ClangAsOpt>4</ClangAsOpt>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -440,7 +441,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
-                <uClangAs>2</uClangAs>
+                <ClangAsOpt>0</ClangAsOpt>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -793,7 +794,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -836,7 +837,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -879,7 +880,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -922,7 +923,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -965,7 +966,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1008,7 +1009,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1051,7 +1052,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1094,7 +1095,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1137,7 +1138,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1180,7 +1181,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1223,7 +1224,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1266,7 +1267,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1309,7 +1310,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1352,7 +1353,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1395,7 +1396,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1438,7 +1439,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1481,7 +1482,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1524,7 +1525,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1567,7 +1568,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1610,7 +1611,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1653,7 +1654,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1696,7 +1697,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1739,7 +1740,7 @@
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
                     <useXO>2</useXO>
-                    <uClangAs>2</uClangAs>
+                    <ClangAsOpt>0</ClangAsOpt>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -4682,7 +4683,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
-                <uClangAs>2</uClangAs>
+                <ClangAsOpt>0</ClangAsOpt>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -4770,5 +4771,20 @@
     </components>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>&lt;Project Info&gt;</LayName>
+        <LayDesc></LayDesc>
+        <LayUrl></LayUrl>
+        <LayKeys></LayKeys>
+        <LayCat></LayCat>
+        <LayLic></LayLic>
+        <LayTarg>0</LayTarg>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>
